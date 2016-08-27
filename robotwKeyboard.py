@@ -1,9 +1,14 @@
 import RPi.GPIO as GPIO
 import sys, tty, termios, time
 import pygame
+import os
 
 #Initialize GPIO Board
 GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BCM)
+
+# Map of drives to pins
+lDrives = [DRIVE_1, DRIVE_2, DRIVE_3, DRIVE_4]
 
 #Initialize pygame
 pygame.init()
@@ -11,19 +16,18 @@ pygame.display.set_mode((100,100))
 #pygame.display.set_mode()
 pygame.display.set_caption('RPI3 Control Center')
 
-#Initialize Motor 1
-motor1_in1_pin=32
-motor1_in2_pin=36
-GPIO.setup(motor1_in1_pin, GPIO.OUT)
-GPIO.setup(motor1_in2_pin, GPIO.OUT)
-motor1 = GPIO.PWM(32,100)
+rightMotor_in1_pin=36
+rightMotor_in2_pin=32
+leftMotor_in1_pin=38
+leftMotor_in2_pin=40
 
-#Initialize Motor 1
-motor2_in1_pin=40
-motor2_in2_pin=38
-GPIO.setup(motor2_in1_pin, GPIO.OUT)
-GPIO.setup(motor2_in2_pin, GPIO.OUT)
-motor2 = GPIO.PWM(38,100)
+GPIO.setup(rightMotor_in1_pin, GPIO.OUT)
+GPIO.setup(rightMotor_in2_pin, GPIO.OUT)
+GPIO.setup(leftMotor_in1_pin, GPIO.OUT)
+GPIO.setup(leftMotor_in2_pin, GPIO.OUT)
+
+rightMotor = GPIO.PWM(32,100)
+leftMotor = GPIO.PWM(38,100)
 
 #Initialize Camera Horz Servo
 #set GPIO pin 7 to 50hertz
@@ -35,70 +39,87 @@ horz_servo_pin=12
 GPIO.setup(horz_servo_pin,GPIO.OUT)
 horzServo = GPIO.PWM(horz_servo_pin,50)
 
+# Settings for the RemoteKeyBorg server
+portListen = 9038                       # What messages to listen for (LEDB on an LCD)
+
+# Function to set all drives off
+def MotorOff():
+    GPIO.output(rightMotor_in1_pin, GPIO.LOW)
+    GPIO.output(rightMotor_in2_pin, GPIO.LOW)
+    GPIO.output(leftMotor_in1_pin, GPIO.LOW)
+    GPIO.output(leftMotor_in2_pin, GPIO.LOW)
+
 # Motor Driving Methods
-def motor1_forward():
-    GPIO.output(motor1_in1_pin, True)
-    GPIO.output(motor1_in2_pin, False)
+def rightMotor_forward():
+    GPIO.output(rightMotor_in1_pin, False)
+    GPIO.output(rightMotor_in2_pin, True)
 
-def motor1_reverse():
-    GPIO.output(motor1_in1_pin, False)
-    GPIO.output(motor1_in2_pin, True)
+def rightMotor_reverse():
+    GPIO.output(rightMotor_in1_pin, True)
+    GPIO.output(rightMotor_in2_pin, False)
 
-def motor1_stop():
-    GPIO.output(motor1_in1_pin, False)
-    GPIO.output(motor1_in2_pin, False)
+def rightMotor_stop():
+    GPIO.output(rightMotor_in1_pin, False)
+    GPIO.output(rightMotor_in2_pin, False)
 
-def motor2_forward():
-    GPIO.output(motor2_in1_pin, True)
-    GPIO.output(motor2_in2_pin, False)
+def leftMotor_forward():
+    GPIO.output(leftMotor_in1_pin, False)
+    GPIO.output(leftMotor_in2_pin, True)
 
-def motor2_reverse():
-    GPIO.output(motor2_in1_pin, False)
-    GPIO.output(motor2_in2_pin, True)
+def leftMotor_reverse():
+    GPIO.output(leftMotor_in1_pin, True)
+    GPIO.output(leftMotor_in2_pin, False)
 
-def motor2_stop():
-    GPIO.output(motor2_in1_pin, False)
-    GPIO.output(motor2_in2_pin, False)
+def leftMotor_stop():
+    GPIO.output(leftMotor_in1_pin, False)
+    GPIO.output(leftMotor_in2_pin, False)
 
 def turn_left():
     all_stop()
-    motor1_reverse()
-    motor1.ChangeDutyCycle(50)
-    motor2.ChangeDutyCycle(50)
+    rightMotor_forward()
+    leftMotor_reverse()
+    rightMotor.ChangeDutyCycle(100)
+    leftMotor.ChangeDutyCycle(100)
 
-def turn_right():
+def turn_right(forwardMotion):
     all_stop()
-    motor2_reverse()
-    motor1.ChangeDutyCycle(50)
-    motor2.ChangeDutyCycle(50)
+    leftMotor_forward()
+    rightMotor_reverse()
+    rightMotor.ChangeDutyCycle(0)
+    leftMotor.ChangeDutyCycle(100)
+    print("NO Forward Motion")
 
 def all_forward():
-    motor1_forward()
-    motor2_forward()
-    motor1.ChangeDutyCycle(75)
-    motor2.ChangeDutyCycle(75)
+    rightMotor_forward()
+    leftMotor_forward()
+    rightMotor.ChangeDutyCycle(100)
+    leftMotor.ChangeDutyCycle(100)
     
 def all_reverse():
-    motor1_reverse()
-    motor2_reverse()
-    motor1.ChangeDutyCycle(50)
-    motor2.ChangeDutyCycle(50)
+    rightMotor_reverse()
+    leftMotor_reverse()
+    rightMotor.ChangeDutyCycle(75)
+    leftMotor.ChangeDutyCycle(75)
     
 def all_stop():
-    motor2_stop()
-    motor1_stop()
-    motor1.ChangeDutyCycle(0)
-    motor2.ChangeDutyCycle(0)
+    leftMotor_stop()
+    rightMotor_stop()
+    rightMotor.ChangeDutyCycle(0)
+    leftMotor.ChangeDutyCycle(0)
 
 def toggleSteering(direction):
     global wheelStatus
 
+    forwardMotion = False
+    if(wheelStatus == "forward"):
+        forwardMotion = True
+    print(wheelStatus)
     if direction == wheelStatus:
         all_stop()
         wheelStatus="stopped"
     else:
         if direction == "right":
-            turn_right()
+            turn_right(forwardMotion)
             wheelStatus="right"
         elif direction == "left":
             turn_left()
@@ -135,10 +156,10 @@ def cameraRotate(direction, start):
 cameraRotate("right", True)
 
 # SETTING MOTORS TO OFF -until user presses keys
-GPIO.output(motor1_in1_pin, False)
-GPIO.output(motor1_in2_pin, False)
-GPIO.output(motor2_in1_pin, False)
-GPIO.output(motor2_in2_pin, False)
+GPIO.output(rightMotor_in1_pin, False)
+GPIO.output(rightMotor_in2_pin, False)
+GPIO.output(leftMotor_in1_pin, False)
+GPIO.output(leftMotor_in2_pin, False)
 
 wheelStatus="stopped"
 
@@ -158,25 +179,30 @@ while not gameExit:
             gameExit = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                toggleSteering("reverse")
-            if event.key == pygame.K_s:
                 toggleSteering("forward")
+            if event.key == pygame.K_s:
+                toggleSteering("reverse")
             if event.key == pygame.K_a:
                 toggleSteering("left")
+                print("left")
             if event.key == pygame.K_d:
                 toggleSteering("right")
+                print("right")
+                os.system('espeak("right")')
             if event.key == pygame.K_q:
                 cameraRotate("left", False)
             if event.key == pygame.K_e:
                 cameraRotate("right", False)
             if event.key == pygame.K_x:
                 gameExit = True
+                os.system('espeak("program ended.  Shutdown")')
                 pygame.quit();
                 break
+        
     # At the end of each loop the acceleration motor will stop
     # and wait for its next command
-    motor2.ChangeDutyCycle(0)
-    motor1.ChangeDutyCycle(0)
+    leftMotor.ChangeDutyCycle(0)
+    rightMotor.ChangeDutyCycle(0)
 GPIO.cleanup()
 horzServo.stop()
 pygame.quit()
