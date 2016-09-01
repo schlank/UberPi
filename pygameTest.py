@@ -7,7 +7,7 @@ import time
 import pygame
 
 # Settings for the RemoteKeyBorg client
-broadcastIP = "10.215.50.46"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+broadcastIP = "10.215.50.255"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
 rightDrive = 1                          # Drive number for right motor
@@ -112,38 +112,50 @@ try:
             # Keys have changed, generate the command list based on keys
             hadEvent = False
             driveCommands = ['X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
+
+            LEFT_DRIVE_REVERSE = leftDrive - 2;
+            LEFT_DRIVE_FORWARD = leftDrive - 1;
+            RIGHT_DRIVE_FORWARD = rightDrive - 1;
+            RIGHT_DRIVE_REVERSE = rightDrive;
+
             if moveQuit:
                 break
             elif moveLeft:
                 if moveUp:
+                    driveCommands[LEFT_DRIVE_FORWARD] = 'MEDIUM'
+                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
                     print("moving up and left")
-                driveCommands[leftDrive - 2] = 'ON'  # Left Drive Reverse
-                driveCommands[rightDrive - 1] = 'ON' # Right Drive Forward
+                else:
+                    driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
+                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
             elif moveRight:
                 if moveUp:
                     print("moving up and right")
-                driveCommands[leftDrive - 1] = 'ON'
-                driveCommands[rightDrive] = 'ON'
+                    driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                    driveCommands[RIGHT_DRIVE_FORWARD] = 'MEDIUM'
+                else:
+                    driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                    driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
             elif moveUp:
                 print("moving up")
-                driveCommands[leftDrive - 1] = 'ON'
-                driveCommands[rightDrive - 1] = 'ON'
-                driveCommands[leftDrive - 2] = 'OFF'
-                driveCommands[rightDrive] = 'OFF'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveDown:
-                driveCommands[leftDrive - 2] = 'ON' #Left Drive Reverse
-                driveCommands[rightDrive] = 'ON'    #Right Drive Reverse
-                driveCommands[leftDrive - 1] = 'OFF'
-                driveCommands[rightDrive - 1] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'ON' #Left Drive Reverse
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'    #Right Drive Reverse
+                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
             elif say != "":
                 driveCommands[sayDrive] = say
                 say = ""
             else:
                 # None of our expected keys, stop
-                driveCommands[leftDrive - 1] = 'OFF'
-                driveCommands[rightDrive - 1] = 'OFF'
-                driveCommands[leftDrive - 2] = 'OFF'
-                driveCommands[rightDrive] = 'OFF'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             # Send the drive commands
             command = ''
             for driveCommand in driveCommands:
