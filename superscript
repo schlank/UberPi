@@ -1,5 +1,6 @@
 sleep 10
 cd /home/pi/UberPi
+git pull
 ./RemoteKeyBorgS.py &
 sleep 5
 espeak "Stream Starting"
