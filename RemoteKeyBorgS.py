@@ -40,8 +40,6 @@ def say(something):
 def play(something):
     print('playing sound file') 
 
-say("Robot Online.")
-
 # Function to set all drives off
 def MotorOff():
     GPIO.output(MOTOR_RIGHT_FORWARD, GPIO.LOW)
@@ -115,6 +113,7 @@ try:
     MotorOff()
     #raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
+    say("Controls Initialized")
     remoteKeyBorgServer = SocketServer.UDPServer(('', portListen), PicoBorgHandler)
     # Loop until terminated remotely
     isRunning = True
