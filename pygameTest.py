@@ -8,7 +8,7 @@ import pygame
 import os
 
 # Settings for the RemoteKeyBorg client
-gstreamIP = "10.215.50.46"
+gstreamIP = "10.215.50.45"
 broadcastIP = "10.215.50.255"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
