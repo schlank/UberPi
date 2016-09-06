@@ -5,8 +5,10 @@
 import socket
 import time
 import pygame
+import os
 
 # Settings for the RemoteKeyBorg client
+gstreamIP = "10.215.50.46"
 broadcastIP = "10.215.50.255"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
@@ -41,6 +43,10 @@ play = ""
 pygame.init()
 screen = pygame.display.set_mode([300,300])
 pygame.display.set_caption("RemoteKeyBorg - Press [ESC] to quit")
+systemCommand = "./startGstreamViewer.sh %s &" % gstreamIP
+print systemCommand
+
+os.system(systemCommand)
 
 # Function to handle pygame events
 def PygameHandler(events):
@@ -86,7 +92,9 @@ def PygameHandler(events):
             elif event.key == pygame.K_6:
                 say = "oh. Good.  That is nice."
             elif event.key == pygame.K_7:
-                say = "Mellisa.  I have a delivery for you."
+                say = "Mellisa.  Down here. Mellisa.  I have a delivery for you."
+            elif event.key == pygame.K_8:
+                say = "The number 8. is for Sophia to add her words.  Most likely ending up in poop words."
         elif event.type == pygame.KEYUP:
             # A key has been released, see if it is one we want
             hadEvent = True
