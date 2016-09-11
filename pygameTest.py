@@ -8,8 +8,8 @@ import pygame
 import os
 
 # Settings for the RemoteKeyBorg client
-gstreamIP = "172.16.3.235"
-gstreamPort = 9039
+gstreamIP = "172.16.2.235"
+gstreamPort = 9036
 broadcastIP = "172.16.2.235"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
@@ -44,9 +44,9 @@ play = ""
 pygame.init()
 screen = pygame.display.set_mode([300,300])
 pygame.display.set_caption("RemoteKeyBorg - Press [ESC] to quit")
-systemCommand = "./startGstreamViewer.sh {0} {1} &".format(gstreamIP, gstreamPort)
-print(systemCommand)
-os.system(systemCommand)
+#systemCommand = "./startGstreamViewer.sh {0} {1} &".format(gstreamIP, gstreamPort)
+#print(systemCommand)
+#os.system(systemCommand)
 
 # Function to handle pygame events
 def PygameHandler(events):
