@@ -5,4 +5,5 @@
 
 
 IP_ADDRESS=$1
-gst-launch-1.0 -v tcpclientsrc host=$IP_ADDRESS port=5000 ! gdpdepay !  rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
+GS_PORT=$2
+gst-launch-1.0 -v tcpclientsrc host=$IP_ADDRESS port=$GS_PORT ! gdpdepay !  rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false

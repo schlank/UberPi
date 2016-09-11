@@ -8,8 +8,9 @@ import pygame
 import os
 
 # Settings for the RemoteKeyBorg client
-gstreamIP = "10.215.50.45"
-broadcastIP = "10.215.50.255"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+gstreamIP = "172.16.3.235"
+gstreamPort = 9039
+broadcastIP = "172.16.2.235"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
 rightDrive = 1                          # Drive number for right motor
@@ -43,9 +44,8 @@ play = ""
 pygame.init()
 screen = pygame.display.set_mode([300,300])
 pygame.display.set_caption("RemoteKeyBorg - Press [ESC] to quit")
-systemCommand = "./startGstreamViewer.sh %s &" % gstreamIP
-print systemCommand
-
+systemCommand = "./startGstreamViewer.sh {0} {1} &".format(gstreamIP, gstreamPort)
+print(systemCommand)
 os.system(systemCommand)
 
 # Function to handle pygame events
@@ -69,7 +69,7 @@ def PygameHandler(events):
             # A key has been pressed, see if it is one we want
             hadEvent = True
             if event.key == pygame.K_UP:
-                print "UP"
+                print("UP")
                 moveUp = True
             elif event.key == pygame.K_DOWN:
                 moveDown = True
@@ -99,7 +99,7 @@ def PygameHandler(events):
             # A key has been released, see if it is one we want
             hadEvent = True
             if event.key == pygame.K_UP:
-                print "UP KEYUP"
+                #print("UP KEYUP")
                 moveUp = False
             elif event.key == pygame.K_DOWN:
                 moveDown = False
@@ -111,7 +111,7 @@ def PygameHandler(events):
                 moveQuit = False
 
 try:
-    print 'Press [ESC] to quit'
+    print('Press [ESC] to quit')
     # Loop indefinitely
     while True:
         # Get the currently pressed keys on the keyboard
@@ -121,10 +121,10 @@ try:
             hadEvent = False
             driveCommands = ['X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
 
-            LEFT_DRIVE_REVERSE = leftDrive - 2;
-            LEFT_DRIVE_FORWARD = leftDrive - 1;
-            RIGHT_DRIVE_FORWARD = rightDrive - 1;
-            RIGHT_DRIVE_REVERSE = rightDrive;
+            LEFT_DRIVE_REVERSE = leftDrive - 2
+            LEFT_DRIVE_FORWARD = leftDrive - 1
+            RIGHT_DRIVE_FORWARD = rightDrive - 1
+            RIGHT_DRIVE_REVERSE = rightDrive
 
             if moveQuit:
                 break
@@ -151,7 +151,7 @@ try:
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveDown:
-                driveCommands[LEFT_DRIVE_REVERSE] = 'ON' #Left Drive Reverse
+                driveCommands[LEFT_DRIVE_REVERSE] = 'ON'     #Left Drive Reverse
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'    #Right Drive Reverse
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
@@ -169,7 +169,7 @@ try:
             for driveCommand in driveCommands:
                 command += driveCommand + ','
             command = command[:-1]                                  # Strip the trailing comma
-            sender.sendto(command, (broadcastIP, broadcastPort))
+            sender.sendto(command.encode(), (broadcastIP, broadcastPort))
         # Wait for the interval period
         time.sleep(interval)
     # Inform the server to stop
