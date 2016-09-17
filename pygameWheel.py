@@ -13,9 +13,9 @@ WHEEL = "G27 Racing Wheel"
 USE_WHEEL = True
 axis_mode = 1
 
-
 gstreamIP = "10.215.50.49"
-START_GSTREAM = False
+GSTREAM_PORT = "5000"
+START_GSTREAM = True
 broadcastIP = "10.215.50.49"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
@@ -30,7 +30,7 @@ sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)   
 sender.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)                        # Enable broadcasting (sending to many IPs based on wild-cards)
 sender.bind(('0.0.0.0', 0))                                                         # Set the IP and port number to use locally, IP 0.0.0.0 means all connections and port 0 means assign a number for us (do not care)
 # make sure pygame doesn't try to open an output window
-# os.environ["SDL_VIDEODRIVER"] = "dummy"
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 # Setup pygame and key states
 global hadEvent
 global moveUp
@@ -48,11 +48,12 @@ moveRight = False
 moveQuit = False
 say = ""
 play = ""
+STEERING_THRESHOLD = .05
 pygame.init()
 screen = pygame.display.set_mode([300,300])
 if START_GSTREAM:
     pygame.display.set_caption("RemoteKeyBorg - Press [ESC] to quit")
-    systemCommand = "./startGstreamViewer.sh %s &" % gstreamIP
+    systemCommand = "./startGstreamViewer.sh %s %s &" % (gstreamIP, GSTREAM_PORT)
     print systemCommand
     os.system(systemCommand)
 
@@ -72,6 +73,9 @@ def checkwheel():
         return usewheel
     except Exception as e:
         print e
+
+def saysomething(something):
+    os.system('espeak -ven+f3 "{0}"'.format(something))
 
 def pedal_value(value):
     '''Steering Wheel returns pedal reading as value
@@ -95,79 +99,56 @@ def PygameHandler():
       if DEBUG:
         print "Motion on axis: ", event.axis
       if event.axis == 0:
-        print("steering")
+        if event.value > 0 and event.value * 100 > 30:
+            print(event.value)
+            print("steer RIGHT")
+            moveRight = True
+        elif event.value * -100 > 30:
+            print(event.value)
+            print("steer LEFT")
+            moveLeft = True
+        else:
+            moveLeft = False
+            moveRight = False
         #send_data("angle", event.value * 600)
       elif event.axis == 1 and axis_mode == 1:
-        if event.value < 0:
-          moveUp = True
-          #send_data("accelerator", event.value * -100)
+        print(event.value)
+        if event.value * -100 > 40:
+            print("START accelerator")
+            accel_value = event.value * -100
+            print(accel_value)
+            moveUp = True
+            moveDown = True
+            #send_data("accelerator", event.value * -100)
+        elif event.value * 100 > 80:
+            print("BACKWARDS")
+            de_accel_value = event.value * 100
+            print(de_accel_value)
+            moveUp = False
+            moveDown = True
         else:
-          print("Break")
-          #send_data("brake", event.value * 100)
+            moveUp = False
+            moveDown = False
+            #send_data("brake", event.value * 100)
       elif event.axis == 1 and axis_mode == 2:
+        print(event.value)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sAxis_mode 2")
         #send_data("accelerator", pedal_value(event.value))
-        moveUp = True
-      elif event.axis == 2 and axis_mode == 2:
-          print("Break")
-      elif event.axics == 3:
+        moveUp = False
+      elif event.axis == 2:
+          print("Brake Pedal")
+          if event.value < 0:
+              print("BRAKE ON")
+              moveDown = True
+          else:
+              print("BRAKE OFF")
+      elif event.axis == 3:
           print("Clutch")
-    events = pygame.event.get();
-    for event in events:
-        print(event)
-    # events = pygame.event.get();
-    # # Handle each event individually
-    # for event in events:
-    #     if event.type == pygame.QUIT:
-    #         # User exit
-    #         hadEvent = True
-    #         moveQuit = True
-    #     elif event.type == pygame.KEYDOWN:
-    #         # A key has been pressed, see if it is one we want
-    #         hadEvent = True
-    #         if event.key == pygame.K_UP:
-    #             print "UP"
-    #             moveUp = True
-    #         elif event.key == pygame.K_DOWN:
-    #             moveDown = True
-    #         elif event.key == pygame.K_LEFT:
-    #             moveLeft = True
-    #         elif event.key == pygame.K_RIGHT:
-    #             moveRight = True
-    #         elif event.key == pygame.K_ESCAPE:
-    #             moveQuit = True
-    #         elif event.key == pygame.K_1:
-    #             say = "Hello. Human.  May I please have assistance."
-    #         elif event.key == pygame.K_2:
-    #             say = "Floor 11 please.  I have a delivery to make.  Time.  Is Money."
-    #         elif event.key == pygame.K_3:
-    #             say = "Floor 10 please."
-    #         elif event.key == pygame.K_4:
-    #             say = "Thank You.  Human. You will be spared in the coming war.  Have a good day."
-    #         elif event.key == pygame.K_5:
-    #             say = "How is your day going? Human.  Nice weather we are having."
-    #         elif event.key == pygame.K_6:
-    #             say = "oh. Good.  That is nice."
-    #         elif event.key == pygame.K_7:
-    #             say = "Mellisa.  Down here. Mellisa.  I have a delivery for you."
-    #         elif event.key == pygame.K_8:
-    #             say = "The number 8. is for Sophia to add her words.  Most likely ending up in poop words."
-    #     elif event.type == pygame.KEYUP:
-    #         # A key has been released, see if it is one we want
-    #         hadEvent = True
-    #         if event.key == pygame.K_UP:
-    #             print "UP KEYUP"
-    #             moveUp = False
-    #         elif event.key == pygame.K_DOWN:
-    #             moveDown = False
-    #         elif event.key == pygame.K_LEFT:
-    #             moveLeft = False
-    #         elif event.key == pygame.K_RIGHT:
-    #             moveRight = False
-    #         elif event.key == pygame.K_ESCAPE:
-    #             moveQuit = False
+          print(event.value)
 
 try:
     print 'Press [ESC] to quit'
+    checkwheel()
     # Loop indefinitely
     while True:
         # Get the currently pressed keys on the keyboard
@@ -178,37 +159,37 @@ try:
             hadEvent = False
             driveCommands = ['X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
 
-            LEFT_DRIVE_REVERSE = leftDrive - 2;
-            LEFT_DRIVE_FORWARD = leftDrive - 1;
-            RIGHT_DRIVE_FORWARD = rightDrive - 1;
-            RIGHT_DRIVE_REVERSE = rightDrive;
+            LEFT_DRIVE_REVERSE = leftDrive - 2
+            LEFT_DRIVE_FORWARD = leftDrive - 1
+            RIGHT_DRIVE_FORWARD = rightDrive - 1
+            RIGHT_DRIVE_REVERSE = rightDrive
 
             if moveQuit:
                 break
             elif moveLeft:
-                if moveUp:
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'MEDIUM'
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
-                    print("moving up and left")
-                else:
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                # if moveUp:
+                #     driveCommands[LEFT_DRIVE_FORWARD] = 'MEDIUM'
+                #     driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                #     print("moving up and left")
+                # else:
+                driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
             elif moveRight:
-                if moveUp:
-                    print("moving up and right")
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'MEDIUM'
-                else:
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+                # if moveUp:
+                #     print("moving up and right")
+                #     driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                #     driveCommands[RIGHT_DRIVE_FORWARD] = 'MEDIUM'
+                # else:
+                driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
             elif moveUp:
-                print("moving up")
+                #print("moving up")
                 driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveDown:
-                driveCommands[LEFT_DRIVE_REVERSE] = 'ON' #Left Drive Reverse
+                driveCommands[LEFT_DRIVE_REVERSE] = 'ON'     #Left Drive Reverse
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'    #Right Drive Reverse
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
