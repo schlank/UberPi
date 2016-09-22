@@ -56,13 +56,13 @@ def cameraRotate(direction, start):
         camerServoPos = STARTING_ROTATION
         cameraServo.start(camerServoPos)
     else:
-        if direction == "UP":
+        if direction == "DOWN":
             if (camerServoPos + ROTATION_STEP) >= LEFT_MAX_ROTATION:
                 camerServoPos = LEFT_MAX_ROTATION
             else:
                 camerServoPos += ROTATION_STEP
             cameraServo.ChangeDutyCycle(camerServoPos)
-        elif direction == "DOWN":
+        elif direction == "UP":
             if (camerServoPos - ROTATION_STEP) <= RIGHT_MIN_ROTATION:
                 camerServoPos = RIGHT_MIN_ROTATION
             else:
