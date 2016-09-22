@@ -14,7 +14,7 @@ USE_WHEEL = True
 axis_mode = 1
 gstreamIP = "10.215.50.51"
 GSTREAM_PORT = "5000"
-START_GSTREAM = False
+START_GSTREAM = True
 broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
@@ -181,8 +181,14 @@ try:
                 break
             elif moveLeft:
                 driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveRight:
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveUp:
                 print("moving up")
                 driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
