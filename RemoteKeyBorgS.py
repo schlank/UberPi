@@ -48,8 +48,8 @@ leftMotor = GPIO.PWM(MOTOR_LEFT_FORWARD,100)
 # leftMotor.ChangeDutyCycle(40)
 # rightMotor.ChangeDutyCycle(40)
 
-leftMotor.start(20)
-rightMotor.start(20)
+#leftMotor.start(20)
+#rightMotor.start(20)
 
 # Map of drives to pins
 lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
