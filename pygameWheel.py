@@ -19,7 +19,8 @@ broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or m
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
 rightDrive = 1                          # Drive number for right motor
-sayDrive = 5
+sayIndex = 4
+cameraServoDrive = 6
 playDrive = 6
 interval = 0.1                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
@@ -48,7 +49,7 @@ moveDown = False
 moveLeft = False
 moveRight = False
 moveQuit = False
-cameraMove = False
+cameraMove = ""
 say = ""
 play = ""
 pygame.init()
@@ -96,6 +97,15 @@ def PygameHandler():
     global moveQuit
     global say
     global play
+    global cameraMove
+
+    for event in pygame.event.get(pygame.JOYBUTTONDOWN):
+        if DEBUG:
+            print "Joystick Button Event: ", event
+        elif event.button == 6:
+            cameraMove = "UP"
+        elif event.button == 7:
+            cameraMove = "DOWN"
 
     for event in pygame.event.get(pygame.JOYAXISMOTION):
       if DEBUG:
@@ -148,6 +158,7 @@ def PygameHandler():
           print("Clutch")
           print(event.value)
 
+
 try:
     print 'Press [ESC] to quit'
     checkwheel()
@@ -159,7 +170,7 @@ try:
         if hadEvent or regularUpdate:
             # Keys have changed, generate the command list based on keys
             hadEvent = False
-            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
+            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
 
             LEFT_DRIVE_REVERSE = leftDrive - 1
             LEFT_DRIVE_FORWARD = leftDrive - 2
@@ -184,10 +195,13 @@ try:
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
             elif say != "":
-                driveCommands[sayDrive] = say
+                driveCommands[sayIndex] = say
                 say = ""
-            elif cameraMove:
-                print("camera up")
+            elif cameraMove != "":
+                print("camera move")
+                print("camera ", cameraMove)
+                driveCommands[cameraServoDrive] = cameraMove
+                cameraMove = ""
             else:
                 # None of our expected keys, stop
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'

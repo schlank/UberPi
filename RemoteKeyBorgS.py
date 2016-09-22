@@ -20,8 +20,9 @@ MOTOR_LEFT_FORWARD = 38
 #Camera Servo GPIO
 CAMERA_SERVO_PIN = 7
 
-SAY_INDEX = 5
-PLAY_INDEX = 6
+SAY_INDEX = 4
+PLAY_INDEX = 5
+CAMERA_SERVO_INDEX = 6
 
 # Set all of the drive pins as output pins
 GPIO.setup(MOTOR_RIGHT_FORWARD, GPIO.OUT)
@@ -47,32 +48,32 @@ leftMotor.ChangeDutyCycle(100)
 rightMotor.ChangeDutyCycle(100)
 
 # Map of drives to pins
-lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_PIN]
+lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
 def cameraRotate(direction, start):
-    global horzServoPos
+    global camerServoPos
     if start == True:
-        horzServoPos = STARTING_ROTATION
-        cameraServo.start(horzServoPos)
+        camerServoPos = STARTING_ROTATION
+        cameraServo.start(camerServoPos)
     else:
-        if direction == "left":
-            if (horzServoPos + ROTATION_STEP) >= LEFT_MAX_ROTATION:
-                horzServoPos = LEFT_MAX_ROTATION
+        if direction == "UP":
+            if (camerServoPos + ROTATION_STEP) >= LEFT_MAX_ROTATION:
+                camerServoPos = LEFT_MAX_ROTATION
             else:
-                horzServoPos += ROTATION_STEP
-            cameraServo.ChangeDutyCycle(horzServoPos)
-        elif direction == "right":
-            if (horzServoPos - ROTATION_STEP) <= RIGHT_MIN_ROTATION:
-                horzServoPos = RIGHT_MIN_ROTATION
+                camerServoPos += ROTATION_STEP
+            cameraServo.ChangeDutyCycle(camerServoPos)
+        elif direction == "DOWN":
+            if (camerServoPos - ROTATION_STEP) <= RIGHT_MIN_ROTATION:
+                camerServoPos = RIGHT_MIN_ROTATION
             else:
-                horzServoPos -= ROTATION_STEP
-            cameraServo.ChangeDutyCycle(horzServoPos)
-    print(horzServoPos)
+                camerServoPos -= ROTATION_STEP
+            cameraServo.ChangeDutyCycle(camerServoPos)
+    print(camerServoPos)
     time.sleep(1)
     cameraServo.ChangeDutyCycle(0)
 
 
-cameraRotate("right", True)
+cameraRotate("UP", True)
 
 def say(something):
     os.system('espeak -ven+f3 "{0}"'.format(something))
