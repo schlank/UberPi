@@ -185,21 +185,31 @@ try:
                     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                     driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
                     driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+                elif moveUp:
+                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
                 else:
                     driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
                     driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                     driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+                    driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
             elif moveRight:
                 if moveDown:
                     driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                     driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                     driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+                elif moveUp:
+                    driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                 else:
                     driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
                     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                    driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
                     driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
             elif moveUp:
                 print("moving up")
