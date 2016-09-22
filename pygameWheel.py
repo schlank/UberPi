@@ -48,8 +48,7 @@ moveDown = False
 moveLeft = False
 moveRight = False
 moveQuit = False
-cameraUp = False
-cameraDown = False
+cameraMove = False
 say = ""
 play = ""
 pygame.init()
@@ -187,10 +186,8 @@ try:
             elif say != "":
                 driveCommands[sayDrive] = say
                 say = ""
-            elif cameraUp:
+            elif cameraMove:
                 print("camera up")
-            elif cameraDown:
-                print("camera down")
             else:
                 # None of our expected keys, stop
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
