@@ -44,8 +44,8 @@ cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
 rightMotor = GPIO.PWM(MOTOR_RIGHT_FORWARD,100)
 leftMotor = GPIO.PWM(MOTOR_LEFT_FORWARD,100)
 
-leftMotor.ChangeDutyCycle(100)
-rightMotor.ChangeDutyCycle(100)
+leftMotor.ChangeDutyCycle(40)
+rightMotor.ChangeDutyCycle(40)
 
 # Map of drives to pins
 lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
