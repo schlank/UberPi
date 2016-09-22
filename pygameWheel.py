@@ -12,11 +12,10 @@ DEBUG = False
 WHEEL = "G27 Racing Wheel"
 USE_WHEEL = True
 axis_mode = 1
-
-gstreamIP = "10.215.50.49"
+gstreamIP = "10.215.50.51"
 GSTREAM_PORT = "5000"
-START_GSTREAM = True
-broadcastIP = "10.215.50.49"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+START_GSTREAM = False
+broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 leftDrive = 4                           # Drive number for left motor
 rightDrive = 1                          # Drive number for right motor
@@ -24,6 +23,9 @@ sayDrive = 5
 playDrive = 6
 interval = 0.1                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
+
+# STEERING_THRESHOLD = .05
+STEERING_DEAD_ZONE = 15
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket
@@ -46,9 +48,10 @@ moveDown = False
 moveLeft = False
 moveRight = False
 moveQuit = False
+cameraUp = False
+cameraDown = False
 say = ""
 play = ""
-STEERING_THRESHOLD = .05
 pygame.init()
 screen = pygame.display.set_mode([300,300])
 if START_GSTREAM:
@@ -99,11 +102,11 @@ def PygameHandler():
       if DEBUG:
         print "Motion on axis: ", event.axis
       if event.axis == 0:
-        if event.value > 0 and event.value * 100 > 30:
+        if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer RIGHT")
             moveRight = True
-        elif event.value * -100 > 30:
+        elif event.value * -100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer LEFT")
             moveLeft = True
@@ -115,14 +118,14 @@ def PygameHandler():
         print(event.value)
         if event.value * -100 > 40:
             print("START accelerator")
-            accel_value = event.value * -100
+            accel_value = event.value * 100
             print(accel_value)
             moveUp = True
-            moveDown = True
+            moveDown = False
             #send_data("accelerator", event.value * -100)
         elif event.value * 100 > 80:
             print("BACKWARDS")
-            de_accel_value = event.value * 100
+            de_accel_value = event.value * -100
             print(de_accel_value)
             moveUp = False
             moveDown = True
@@ -157,33 +160,21 @@ try:
         if hadEvent or regularUpdate:
             # Keys have changed, generate the command list based on keys
             hadEvent = False
-            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
+            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
 
-            LEFT_DRIVE_REVERSE = leftDrive - 2
-            LEFT_DRIVE_FORWARD = leftDrive - 1
-            RIGHT_DRIVE_FORWARD = rightDrive - 1
-            RIGHT_DRIVE_REVERSE = rightDrive
+            LEFT_DRIVE_REVERSE = leftDrive - 1
+            LEFT_DRIVE_FORWARD = leftDrive - 2
+            RIGHT_DRIVE_FORWARD = rightDrive
+            RIGHT_DRIVE_REVERSE = rightDrive - 1
 
             if moveQuit:
                 break
             elif moveLeft:
-                # if moveUp:
-                #     driveCommands[LEFT_DRIVE_FORWARD] = 'MEDIUM'
-                #     driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
-                #     print("moving up and left")
-                # else:
-                driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
-                driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
-            elif moveRight:
-                # if moveUp:
-                #     print("moving up and right")
-                #     driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
-                #     driveCommands[RIGHT_DRIVE_FORWARD] = 'MEDIUM'
-                # else:
                 driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
-                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+            elif moveRight:
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
             elif moveUp:
-                #print("moving up")
+                print("moving up")
                 driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
@@ -196,6 +187,10 @@ try:
             elif say != "":
                 driveCommands[sayDrive] = say
                 say = ""
+            elif cameraUp:
+                print("camera up")
+            elif cameraDown:
+                print("camera down")
             else:
                 # None of our expected keys, stop
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'

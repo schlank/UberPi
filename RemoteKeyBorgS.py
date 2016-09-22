@@ -19,6 +19,8 @@ MOTOR_LEFT_FORWARD = 38
 
 SAY_INDEX = 5
 PLAY_INDEX = 6
+CAMERA_UP_INDEX = 7
+CAMERA_UP_INDEX = 8
 
 # Set all of the drive pins as output pins
 GPIO.setup(MOTOR_RIGHT_FORWARD, GPIO.OUT)
@@ -75,7 +77,6 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
             if driveCommands[SAY_INDEX] != "X":
                 say(driveCommands[SAY_INDEX])
             else:
-
                 # For each drive we check the command
                 for driveNo in range(len(driveCommands)):
                     command = driveCommands[driveNo]
@@ -84,8 +85,6 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                         GPIO.output(lDrives[driveNo], GPIO.HIGH)
                         print("drive :")
                         print(lDrives[driveNo])
-                    elif command == 'MEDIUM':
-                        rightMotor.ChangeDutyCycle(50)
                     elif command == 'OFF':
                         # Set drive off
                         GPIO.output(lDrives[driveNo], GPIO.LOW)
