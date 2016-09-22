@@ -4,7 +4,7 @@
 # Load library functions we want
 import SocketServer
 import RPi.GPIO as GPIO
-import os
+import os, time
 GPIO.setmode(GPIO.BOARD)
 
 # Set which GPIO pins the drive outputs are connected to
@@ -17,16 +17,28 @@ MOTOR_RIGHT_REVERSE = 32
 MOTOR_LEFT_REVERSE = 40
 MOTOR_LEFT_FORWARD = 38
 
+#Camera Servo GPIO
+CAMERA_SERVO_PIN = 7
+
 SAY_INDEX = 5
 PLAY_INDEX = 6
-CAMERA_UP_INDEX = 7
-CAMERA_UP_INDEX = 8
 
 # Set all of the drive pins as output pins
 GPIO.setup(MOTOR_RIGHT_FORWARD, GPIO.OUT)
 GPIO.setup(MOTOR_RIGHT_REVERSE, GPIO.OUT)
 GPIO.setup(MOTOR_LEFT_REVERSE, GPIO.OUT)
 GPIO.setup(MOTOR_LEFT_FORWARD, GPIO.OUT)
+
+# Camera servo
+#Initialize Camera Horz Servo
+#set GPIO pin 7 to 50hertz
+LEFT_MAX_ROTATION = 12.5
+RIGHT_MIN_ROTATION = 7.5
+ROTATION_STEP = 1.5
+STARTING_ROTATION=11.5
+horz_servo_pin=12
+GPIO.setup(CAMERA_SERVO_PIN, GPIO.OUT)
+cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
 
 rightMotor = GPIO.PWM(MOTOR_RIGHT_FORWARD,100)
 leftMotor = GPIO.PWM(MOTOR_LEFT_FORWARD,100)
@@ -35,7 +47,32 @@ leftMotor.ChangeDutyCycle(100)
 rightMotor.ChangeDutyCycle(100)
 
 # Map of drives to pins
-lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX]
+lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_PIN]
+
+def cameraRotate(direction, start):
+    global horzServoPos
+    if start == True:
+        horzServoPos = STARTING_ROTATION
+        cameraServo.start(horzServoPos)
+    else:
+        if direction == "left":
+            if (horzServoPos + ROTATION_STEP) >= LEFT_MAX_ROTATION:
+                horzServoPos = LEFT_MAX_ROTATION
+            else:
+                horzServoPos += ROTATION_STEP
+            cameraServo.ChangeDutyCycle(horzServoPos)
+        elif direction == "right":
+            if (horzServoPos - ROTATION_STEP) <= RIGHT_MIN_ROTATION:
+                horzServoPos = RIGHT_MIN_ROTATION
+            else:
+                horzServoPos -= ROTATION_STEP
+            cameraServo.ChangeDutyCycle(horzServoPos)
+    print(horzServoPos)
+    time.sleep(1)
+    cameraServo.ChangeDutyCycle(0)
+
+
+cameraRotate("right", True)
 
 def say(something):
     os.system('espeak -ven+f3 "{0}"'.format(something))
@@ -96,6 +133,8 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                             say(command)
                         elif lDrives[driveNo] == PLAY_INDEX:
                             play(command)
+                        elif lDrives[driveNo] == CAMERA_SERVO_PIN:
+                            cameraRotate(command, False)
                         else:
                             print('missing command')
                     else:
