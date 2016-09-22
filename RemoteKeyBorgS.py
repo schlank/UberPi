@@ -134,7 +134,7 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                             say(command)
                         elif lDrives[driveNo] == PLAY_INDEX:
                             play(command)
-                        elif lDrives[driveNo] == CAMERA_SERVO_PIN:
+                        elif lDrives[driveNo] == CAMERA_SERVO_INDEX:
                             say("camera Rotate")
                             say(command)
                             cameraRotate(command, False)
