@@ -103,9 +103,9 @@ def PygameHandler():
         if DEBUG:
             print "Joystick Button Event: ", event
         elif event.button == 6:
-            cameraMove = "UP"
-        elif event.button == 7:
             cameraMove = "DOWN"
+        elif event.button == 7:
+            cameraMove = "UP"
 
     for event in pygame.event.get(pygame.JOYAXISMOTION):
       if DEBUG:
