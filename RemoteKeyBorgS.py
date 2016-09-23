@@ -10,25 +10,64 @@ GPIO.setmode(GPIO.BOARD)
 # Set which GPIO pins the drive outputs are connected to
 
 #Right Motor
-MOTOR_RIGHT_FORWARD = 36
-MOTOR_RIGHT_REVERSE = 32
+MOTOR_RIGHT_FORWARD_PIN = 36
+MOTOR_RIGHT_REVERSE_PIN = 32
 
 #Left Motor
-MOTOR_LEFT_REVERSE = 40
-MOTOR_LEFT_FORWARD = 38
+MOTOR_LEFT_REVERSE_PIN = 40
+MOTOR_LEFT_FORWARD_PIN = 38
 
 #Camera Servo GPIO
 CAMERA_SERVO_PIN = 7
 
+#Extended arguments that are not drives
 SAY_INDEX = 4
 PLAY_INDEX = 5
 CAMERA_SERVO_INDEX = 6
 
 # Set all of the drive pins as output pins
-GPIO.setup(MOTOR_RIGHT_FORWARD, GPIO.OUT)
-GPIO.setup(MOTOR_RIGHT_REVERSE, GPIO.OUT)
-GPIO.setup(MOTOR_LEFT_REVERSE, GPIO.OUT)
-GPIO.setup(MOTOR_LEFT_FORWARD, GPIO.OUT)
+GPIO.setup(MOTOR_RIGHT_FORWARD_PIN, GPIO.OUT)
+GPIO.setup(MOTOR_RIGHT_REVERSE_PIN, GPIO.OUT)
+GPIO.setup(MOTOR_LEFT_REVERSE_PIN, GPIO.OUT)
+GPIO.setup(MOTOR_LEFT_FORWARD_PIN, GPIO.OUT)
+
+# Starting positions!
+rightMotorForward = GPIO.PWM(MOTOR_RIGHT_FORWARD_PIN, 100)
+leftMotorForward = GPIO.PWM(MOTOR_LEFT_FORWARD_PIN, 100)
+
+rightMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
+leftMotorReverse = GPIO.PWM(MOTOR_RIGHT_REVERSE_PIN, 100)
+
+# # Does nothing so far
+# leftMotor.ChangeDutyCycle(40)
+# rightMotor.ChangeDutyCycle(40)
+
+#leftMotor.start(20)
+#rightMotor.start(20)
+
+# Map of drives to pins
+lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
+
+def startDrive(driveNumber, powerValue):
+    if driveNumber == 0:
+        rightMotorForward.start(powerValue)
+    elif driveNumber == 1:
+        rightMotorReverse.start(powerValue)
+    elif driveNumber == 2:
+        leftMotorReverse.start(powerValue)
+    elif driveNumber == 3:
+        leftMotorForward.start(powerValue)
+
+def stopDrive(driveNumber):
+    if driveNumber == 0:
+        rightMotorForward.stop()
+    elif driveNumber == 1:
+        rightMotorReverse.stop()
+    elif driveNumber == 2:
+        leftMotorReverse.stop()
+    elif driveNumber == 3:
+        leftMotorForward.stop()
+
 
 # Camera servo
 #Initialize Camera Horz Servo
@@ -40,19 +79,6 @@ STARTING_ROTATION=11.5
 horz_servo_pin=12
 GPIO.setup(CAMERA_SERVO_PIN, GPIO.OUT)
 cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
-
-rightMotor = GPIO.PWM(MOTOR_RIGHT_FORWARD,100)
-leftMotor = GPIO.PWM(MOTOR_LEFT_FORWARD,100)
-
-# # Does nothing so far
-# leftMotor.ChangeDutyCycle(40)
-# rightMotor.ChangeDutyCycle(40)
-
-#leftMotor.start(20)
-#rightMotor.start(20)
-
-# Map of drives to pins
-lDrives = [MOTOR_RIGHT_FORWARD, MOTOR_RIGHT_REVERSE, MOTOR_LEFT_REVERSE, MOTOR_LEFT_FORWARD, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
 def cameraRotate(direction, start):
     global camerServoPos
@@ -86,10 +112,10 @@ def play(something):
 
 # Function to set all drives off
 def MotorOff():
-    GPIO.output(MOTOR_RIGHT_FORWARD, GPIO.LOW)
-    GPIO.output(MOTOR_RIGHT_REVERSE, GPIO.LOW)
-    GPIO.output(MOTOR_LEFT_REVERSE, GPIO.LOW)
-    GPIO.output(MOTOR_LEFT_FORWARD, GPIO.LOW)
+    GPIO.output(MOTOR_RIGHT_FORWARD_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_RIGHT_REVERSE_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_LEFT_REVERSE_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_LEFT_FORWARD_PIN, GPIO.LOW)
 
 # Settings for the RemoteKeyBorg server
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
@@ -122,14 +148,15 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                 # For each drive we check the command
                 for driveNo in range(len(driveCommands)):
                     command = driveCommands[driveNo]
-                    if command == 'ON':
+                    if command != 'OFF':
                         # Set drive on
-                        GPIO.output(lDrives[driveNo], GPIO.HIGH)
-                        print("drive :")
-                        print(lDrives[driveNo])
+                        # GPIO.output(lDrives[driveNo], GPIO.HIGH)
+                        startDrive(driveNo, command)
+
                     elif command == 'OFF':
                         # Set drive off
-                        GPIO.output(lDrives[driveNo], GPIO.LOW)
+                        # GPIO.output(lDrives[driveNo], GPIO.LOW)
+                        stopDrive(driveNo)
                     elif command == 'X':
                         # No command for this drive
                         pass
