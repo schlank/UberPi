@@ -150,13 +150,13 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                     command = driveCommands[driveNo]
                     if command != 'OFF':
                         # Set drive on
-                        # GPIO.output(lDrives[driveNo], GPIO.HIGH)
-                        startDrive(driveNo, command)
+                        GPIO.output(lDrives[driveNo], GPIO.HIGH)
+                        #startDrive(driveNo, command)
 
                     elif command == 'OFF':
                         # Set drive off
-                        # GPIO.output(lDrives[driveNo], GPIO.LOW)
-                        stopDrive(driveNo)
+                        GPIO.output(lDrives[driveNo], GPIO.LOW)
+                        #stopDrive(driveNo)
                     elif command == 'X':
                         # No command for this drive
                         pass

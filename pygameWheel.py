@@ -114,11 +114,11 @@ def PygameHandler():
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer RIGHT")
-            moveRight = event.value * 100
+            moveRight = str(event.value * 100)
         elif event.value * -100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer LEFT")
-            moveLeft = event.value * -100
+            moveLeft = str(event.value * -100)
         else:
             moveLeft = ""
             moveRight = ""
@@ -126,13 +126,13 @@ def PygameHandler():
       elif event.axis == 1 and axis_mode == 1:
         if event.value * -100 > 40:
             print("START accelerator")
-            accel_value = event.value * 100
+            accel_value = str(event.value * 100)
             moveUp = accel_value
             moveDown = ""
             #send_data("accelerator", event.value * -100)
         elif event.value * 100 > 80:
             print("BACKWARDS")
-            de_accel_value = event.value * -100
+            de_accel_value = str(event.value * -100)
             print(de_accel_value)
             moveUp = ""
             moveDown = de_accel_value
@@ -167,7 +167,7 @@ try:
         if hadEvent or regularUpdate:
             # Keys have changed, generate the command list based on keys
             hadEvent = False
-            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
+            driveCommands = ['X', 'X', 'X', 'X', 'X', 'X', 'X'] # Default to do not change
 
             LEFT_DRIVE_REVERSE = leftDrive - 1
             LEFT_DRIVE_FORWARD = leftDrive - 2
