@@ -38,21 +38,14 @@ leftMotorForward = GPIO.PWM(MOTOR_LEFT_FORWARD_PIN, 100)
 rightMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
 leftMotorReverse = GPIO.PWM(MOTOR_RIGHT_REVERSE_PIN, 100)
 
-# # Does nothing so far
-# leftMotor.ChangeDutyCycle(40)
-# rightMotor.ChangeDutyCycle(40)
-
-#leftMotor.start(20)
-#rightMotor.start(20)
-
 # Map of drives to pins
 lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
 def startDrive(driveNumber, powerValueArg):
-    print("PETAL VALUE %s", powerValueArg)
     powerValue = int(float(powerValueArg))
     if(powerValue<0):
         powerValue = powerValue * -1
+    print("POWER VALUE %s", powerValue)
     if driveNumber == 0:
         rightMotorForward.start(powerValue)
     elif driveNumber == 1:

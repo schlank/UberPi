@@ -27,6 +27,7 @@ regularUpdate = True                    # If True we send a command at a regular
 
 # STEERING_THRESHOLD = .05
 STEERING_DEAD_ZONE = 10
+PEDAL_THRESHOLD = 20
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket
@@ -124,13 +125,13 @@ def PygameHandler():
             moveRight = ""
         #send_data("angle", event.value * 600)
       elif event.axis == 1 and axis_mode == 1:
-        if event.value * -100 > 40:
+        if event.value * -100 > PEDAL_THRESHOLD:
             print("START accelerator")
             accel_value = str(event.value * 100)
             moveUp = accel_value
             moveDown = ""
             #send_data("accelerator", event.value * -100)
-        elif event.value * 100 > 80:
+        elif event.value * 100 > PEDAL_THRESHOLD:
             print("BACKWARDS")
             de_accel_value = str(event.value * 100)
             print(de_accel_value)
