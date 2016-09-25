@@ -145,10 +145,10 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                 # For each drive we check the command
                 for driveNo in range(len(driveCommands)):
                     command = driveCommands[driveNo]
-                    if command == 'X':
-                        # No command for this drive
-                        pass
-                    elif command != 'OFF':
+
+                    if command == "UP" or command == "DOWN":
+                        cameraRotate(command, False)
+                    if command != '0' and command != 'X':
                         # Set drive on
                         # GPIO.output(lDrives[driveNo], GPIO.HIGH)
                         startDrive(driveNo, command)
@@ -156,9 +156,6 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                         # Set drive off
                         # GPIO.output(lDrives[driveNo], GPIO.LOW)
                         stopDrive(driveNo)
-                    elif command == 'X':
-                        # No command for this drive
-                        pass
                     elif command !='X':
                         if lDrives[driveNo] == SAY_INDEX:
                             say(command)
