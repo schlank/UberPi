@@ -51,6 +51,8 @@ lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_
 def startDrive(driveNumber, powerValueArg):
     print("PETAL VALUE %s", powerValueArg)
     powerValue = int(float(powerValueArg))
+    if(powerValue<0):
+        powerValue = powerValue * -1
     if driveNumber == 0:
         rightMotorForward.start(powerValue)
     elif driveNumber == 1:
