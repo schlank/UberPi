@@ -165,6 +165,8 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                             cameraRotate(command, False)
                         else:
                             print('missing command')
+                    elif command == 'X':
+                        pass
                     else:
                         # Unknown command
                         print('Drive %d command "%s" not recognised!' % (driveNo, command))
