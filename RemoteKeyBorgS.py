@@ -45,7 +45,7 @@ def startDrive(driveNumber, powerValueArg):
     powerValue = int(float(powerValueArg))
     if(powerValue<0):
         powerValue = powerValue * -1
-    print("POWER VALUE %s", powerValue)
+    print("POWER VALUE", powerValue)
     if driveNumber == 0:
         rightMotorForward.start(powerValue)
     elif driveNumber == 1:

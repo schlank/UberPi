@@ -115,11 +115,11 @@ def PygameHandler():
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer RIGHT")
-            moveRight = str(event.value * 100)
+            moveRight = str(event.value * 200)
         elif event.value * -100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer LEFT")
-            moveLeft = str(event.value * 100)
+            moveLeft = str(event.value * 200)
         else:
             moveLeft = ""
             moveRight = ""
