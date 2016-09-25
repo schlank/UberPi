@@ -26,7 +26,7 @@ interval = 0.1                          # Time between keyboard updates in secon
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
 
 # STEERING_THRESHOLD = .05
-STEERING_DEAD_ZONE = 10
+STEERING_DEAD_ZONE = 8
 PEDAL_THRESHOLD = 20
 
 # Setup the connection for sending on
@@ -115,12 +115,13 @@ def PygameHandler():
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer RIGHT")
-            # moveRight = str(event.value * 200)
-            moveRight = "100"
+            moveRight = str(event.value * 200)
+            # moveRight = "100"
         elif event.value * -100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer LEFT")
-            # moveLeft = str(event.value * 200)
+            moveLeft = str(event.value * 200)
+            # moveLeft = "100"
         else:
             moveLeft = ""
             moveRight = ""
