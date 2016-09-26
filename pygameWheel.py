@@ -28,6 +28,7 @@ regularUpdate = True                    # If True we send a command at a regular
 # STEERING_THRESHOLD = .05
 STEERING_DEAD_ZONE = 8
 PEDAL_THRESHOLD = 20
+STEERING_TURBO = 300
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket
@@ -115,13 +116,15 @@ def PygameHandler():
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer RIGHT")
-            moveRight = str(event.value * 200)
-            # moveRight = "100"
+            # moveRight = str(event.value * STEERING_TURBO)
+            print(moveRight)
+            moveRight = "100"
         elif event.value * -100 > STEERING_DEAD_ZONE:
             print(event.value)
             print("steer LEFT")
-            moveLeft = str(event.value * 200)
-            # moveLeft = "100"
+            # moveLeft = str(event.value * STEERING_TURBO)
+            print(moveLeft)
+            moveLeft = "100"
         else:
             moveLeft = ""
             moveRight = ""
@@ -183,7 +186,7 @@ try:
                 if moveDown != "":
                     driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = moveLeft
+                    driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
                     driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
                 elif moveUp != "":
                     driveCommands[RIGHT_DRIVE_FORWARD] = moveLeft

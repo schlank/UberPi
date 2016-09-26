@@ -147,6 +147,8 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                     command = driveCommands[driveNo]
                     if command == "UP" or command == "DOWN":
                         cameraRotate(command, False)
+                    if command == 'ON':
+                        startDrive(driveNo, '100')
                     elif command != '0' and command != 'X' and command != 'OFF':
                         # Set drive on
                         # GPIO.output(lDrives[driveNo], GPIO.HIGH)
