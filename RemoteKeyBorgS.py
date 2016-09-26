@@ -42,12 +42,12 @@ leftMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
 lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
 def startDrive(driveNumber, powerValueArg):
-    powerValue = int(float(powerValueArg))
-    if(powerValue<0):
-        powerValue = powerValue * -1
-    #print("POWER VALUE", powerValue, driveNumber)
+    powerValue = float(powerValueArg)
+    powerValue = abs(powerValue)
+
     if driveNumber == 0:
         rightMotorForward.start(powerValue)
+        rightMotorForward.changeDutyCycle(powerValue)
     elif driveNumber == 1:
         rightMotorReverse.start(powerValue)
     elif driveNumber == 2:
@@ -148,13 +148,14 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                     if command == "UP" or command == "DOWN":
                         cameraRotate(command, False)
                     if command == 'ON':
-                        # startDrive(driveNo, '100')
-                        GPIO.output(lDrives[driveNo], GPIO.HIGH)
+                        startDrive(driveNo, '100')
+                        # GPIO.output(lDrives[driveNo], GPIO.HIGH)
                     elif command != '0' and command != 'X' and command != 'OFF':
                         # Set drive on
                         # GPIO.output(lDrives[driveNo], GPIO.HIGH)
                         #print(driveNo, command)
-                        startDrive(driveNo, command)
+                        # startDrive(driveNo, command)
+                        startDrive(driveNo, '100')
                     elif command == 'OFF':
                         # Set drive off
                         # GPIO.output(lDrives[driveNo], GPIO.LOW)
