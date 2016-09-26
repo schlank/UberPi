@@ -17,18 +17,22 @@ GSTREAM_PORT = "5000"
 START_GSTREAM = True
 broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
-leftDrive = 4                           # Drive number for left motor
-rightDrive = 1                          # Drive number for right motor
+
+LEFT_DRIVE_REVERSE = 3
+LEFT_DRIVE_FORWARD = 2
+RIGHT_DRIVE_FORWARD = 1
+RIGHT_DRIVE_REVERSE = 0
 sayIndex = 4
 cameraServoDrive = 6
-playDrive = 6
+playIndex = 5
+
 interval = 0.1                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
 
 # STEERING_THRESHOLD = .05
 STEERING_DEAD_ZONE = 8
 PEDAL_THRESHOLD = 20
-STEERING_TURBO = 300
+STEERING_TURBO = 20
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket
@@ -46,10 +50,10 @@ global moveQuit
 global say
 global play
 hadEvent = True
-moveUp = ""
-moveDown = ""
-moveLeft = ""
-moveRight = ""
+moveUp = 0
+moveDown = 0
+moveLeft = 0
+moveRight = 0
 moveQuit = False
 cameraMove = ""
 say = ""
@@ -114,48 +118,47 @@ def PygameHandler():
         print "Motion on axis: ", event.axis
       if event.axis == 0:
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
-            print(event.value)
-            print("steer RIGHT")
-            # moveRight = str(event.value * STEERING_TURBO)
-            print(moveRight)
-            moveRight = "100"
+            moveRight = abs(event.value)
+            if moveRight >= 1:
+                moveRight = 100
+            else:
+                moveRight = (moveRight * 100) + STEERING_TURBO
+            print("moveRight", moveRight)
         elif event.value * -100 > STEERING_DEAD_ZONE:
-            print(event.value)
-            print("steer LEFT")
-            # moveLeft = str(event.value * STEERING_TURBO)
-            print(moveLeft)
-            moveLeft = "100"
+            moveLeft = abs(event.value)
+            if moveLeft >= 1:
+                moveLeft = 100
+            else:
+                moveLeft = (moveLeft * 100) + STEERING_TURBO
+                print("moveLeft", moveLeft)
         else:
-            moveLeft = ""
-            moveRight = ""
-        #send_data("angle", event.value * 600)
+            moveLeft = 0
+            moveRight = 0
       elif event.axis == 1 and axis_mode == 1:
         if event.value * -100 > PEDAL_THRESHOLD:
             print("START accelerator")
-            accel_value = str(event.value * 100)
-            moveUp = accel_value
-            moveDown = ""
-            #send_data("accelerator", event.value * -100)
+            accel_value = event.value * 100
+            moveUp = abs(accel_value)
+            moveDown = 0
+            print("moveUp", moveUp)
         elif event.value * 100 > PEDAL_THRESHOLD:
             print("BACKWARDS")
-            de_accel_value = str(event.value * 100)
+            de_accel_value = event.value * 100
             print(de_accel_value)
-            moveUp = ""
-            moveDown = de_accel_value
+            moveUp = 0
+            moveDown = abs(de_accel_value)
         else:
-            moveUp = ""
-            moveDown = ""
-            #send_data("brake", event.value * 100)
+            moveUp = 0
+            moveDown = 0
       elif event.axis == 1 and axis_mode == 2:
         print(event.value)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sAxis_mode 2")
-        #send_data("accelerator", pedal_value(event.value))
-        moveUp = ""
+        moveUp = 0
       elif event.axis == 2:
           print("Brake Pedal")
           if event.value < 0:
               print("BRAKE ON")
-              moveDown = ""
+              moveDown = 0
           else:
               print("BRAKE OFF")
       elif event.axis == 3:
@@ -175,56 +178,47 @@ try:
             hadEvent = False
             driveCommands = ['0', '0', '0', '0', 'X', 'X', 'X'] # Default to do not change
 
-            LEFT_DRIVE_REVERSE = leftDrive - 1
-            LEFT_DRIVE_FORWARD = leftDrive - 2
-            RIGHT_DRIVE_FORWARD = rightDrive
-            RIGHT_DRIVE_REVERSE = rightDrive - 1
+            LEFT_DRIVE_REVERSE = 3
+            RIGHT_DRIVE_FORWARD = 2
+            LEFT_DRIVE_FORWARD = 1
+            RIGHT_DRIVE_REVERSE = 0
 
             if moveQuit:
                 break
-            elif moveLeft != "":
-                if moveDown != "":
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
-                elif moveUp != "":
-                    driveCommands[RIGHT_DRIVE_FORWARD] = moveLeft
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
-                else:
-                    driveCommands[LEFT_DRIVE_FORWARD] = moveLeft
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = moveLeft
-            elif moveRight != "":
-                if moveDown != "":
-                    driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = moveRight
-                elif moveUp != "":
-                    driveCommands[RIGHT_DRIVE_FORWARD] = moveRight
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
-                else:
-                    driveCommands[RIGHT_DRIVE_FORWARD] = moveRight
-                    driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
-                    driveCommands[LEFT_DRIVE_REVERSE] = moveRight
-                    driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
-            elif moveUp != "":
-                print("moving up")
-                driveCommands[LEFT_DRIVE_FORWARD] = moveUp
-                driveCommands[RIGHT_DRIVE_FORWARD] = moveUp
+            elif (moveUp > 0 and moveLeft > 0):
+                driveCommands[RIGHT_DRIVE_FORWARD] = str(moveUp)
+                driveCommands[LEFT_DRIVE_FORWARD] = str(moveUp - moveLeft)
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
-            elif moveDown != "":
-                driveCommands[LEFT_DRIVE_REVERSE] = moveDown     #Left Drive Reverse
-                driveCommands[RIGHT_DRIVE_REVERSE] = moveDown    #Right Drive Reverse
-                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            elif (moveUp > 0 and moveRight > 0):
+                driveCommands[RIGHT_DRIVE_FORWARD] = str(moveUp - moveRight)
+                driveCommands[LEFT_DRIVE_FORWARD] = str(moveUp)
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            elif (moveDown > 0 and moveLeft > 0):
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = str(moveDown - moveLeft)
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+            elif (moveDown > 0 and moveRight > 0):
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = str(moveDown)
+                driveCommands[RIGHT_DRIVE_REVERSE] = str(moveDown - moveRight)
+            elif moveUp > 0:
+                driveCommands[RIGHT_DRIVE_FORWARD] = str(moveUp)
+                driveCommands[LEFT_DRIVE_FORWARD] = str(moveUp)
+            elif moveDown > 0:
+                driveCommands[LEFT_DRIVE_REVERSE] = str(moveDown)
+                driveCommands[RIGHT_DRIVE_REVERSE] = str(moveDown)
+            elif moveLeft > 0:
+                driveCommands[LEFT_DRIVE_REVERSE] = str(moveLeft)
+                driveCommands[RIGHT_DRIVE_FORWARD] = str(moveLeft)
+            elif moveRight > 0:
+                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+                driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+                driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
             elif say != "":
                 driveCommands[sayIndex] = say
                 say = ""
@@ -239,6 +233,65 @@ try:
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
                 driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            #
+            # elif moveLeft > 0:
+            #     if moveDown > 0:
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            #     elif moveUp > 0:
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = str(moveUp)
+            #         driveCommands[LEFT_DRIVE_FORWARD] = str(moveUp - moveLeft)
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            #     else:
+            #         driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+            # elif moveRight > 0:
+            #     if moveDown > 0:
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+            #     elif moveUp > 0:
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+            #         driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #     else:
+            #         driveCommands[RIGHT_DRIVE_FORWARD] = 'ON'
+            #         driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #         driveCommands[LEFT_DRIVE_REVERSE] = 'ON'
+            #         driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            # elif moveUp > 0:
+            #     print("moving up")
+            #     driveCommands[LEFT_DRIVE_FORWARD] = str(moveUp)
+            #     driveCommands[RIGHT_DRIVE_FORWARD] = str(moveUp)
+            #     driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #     driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+            # elif moveDown > 0:
+            #     driveCommands[LEFT_DRIVE_REVERSE] = str(moveDown)     #Left Drive Reverse
+            #     driveCommands[RIGHT_DRIVE_REVERSE] = str(moveDown)    #Right Drive Reverse
+            #     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #     driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+            # elif say != "":
+            #     driveCommands[sayIndex] = say
+            #     say = ""
+            # elif cameraMove != "":
+            #     print("camera move")
+            #     print("camera ", cameraMove)
+            #     driveCommands[cameraServoDrive] = cameraMove
+            #     cameraMove = ""
+            # else:
+            #     # None of our expected keys, stop
+            #     driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
+            #     driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
+            #     driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
+            #     driveCommands[RIGHT_DRIVE_REVERSE] = 'OFF'
+
             # Send the drive commands
             command = ''
             for driveCommand in driveCommands:
