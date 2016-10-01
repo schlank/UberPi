@@ -12,10 +12,10 @@ DEBUG = False
 WHEEL = "G27 Racing Wheel"
 USE_WHEEL = True
 axis_mode = 1
-gstreamIP = "10.215.50.51"
+gstreamIP = "10.215.50.49"
 GSTREAM_PORT = "5000"
 START_GSTREAM = True
-broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+broadcastIP = "10.215.50.49"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 
 LEFT_DRIVE_REVERSE = 3
@@ -35,7 +35,7 @@ PEDAL_THRESHOLD = 20
 STEERING_TURBO = 20
 
 # Setup the connection for sending on
-sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket
+sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket3
 sender.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)                        # Enable broadcasting (sending to many IPs based on wild-cards)
 sender.bind(('0.0.0.0', 0))                                                         # Set the IP and port number to use locally, IP 0.0.0.0 means all connections and port 0 means assign a number for us (do not care)
 # make sure pygame doesn't try to open an output window

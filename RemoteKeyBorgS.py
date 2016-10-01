@@ -154,8 +154,8 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                         # Set drive on
                         # GPIO.output(lDrives[driveNo], GPIO.HIGH)
                         #print(driveNo, command)
-                        # startDrive(driveNo, command)
-                        startDrive(driveNo, '100')
+                        startDrive(driveNo, command)
+                        # startDrive(driveNo, '100')
                     elif command == 'OFF':
                         # Set drive off
                         # GPIO.output(lDrives[driveNo], GPIO.LOW)
