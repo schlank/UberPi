@@ -47,7 +47,7 @@ def startDrive(driveNumber, powerValueArg):
 
     if driveNumber == 0:
         rightMotorForward.start(powerValue)
-        rightMotorForward.changeDutyCycle(powerValue)
+        #rightMotorForward.changeDutyCycle(powerValue)
     elif driveNumber == 1:
         rightMotorReverse.start(powerValue)
     elif driveNumber == 2:
@@ -149,6 +149,7 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
                         cameraRotate(command, False)
                     if command == 'ON':
                         startDrive(driveNo, '100')
+                        print("DRIVE ON",driveNo)
                         # GPIO.output(lDrives[driveNo], GPIO.HIGH)
                     elif command != '0' and command != 'X' and command != 'OFF':
                         # Set drive on
