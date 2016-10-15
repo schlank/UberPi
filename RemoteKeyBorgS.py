@@ -2,34 +2,35 @@
 # coding: Latin-1
 
 # Load library functions we want
-import SocketServer
+import socketserver
 import RPi.GPIO as GPIO
 import os, time
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # Set which GPIO pins the drive outputs are connected to
 
 #Right Motor
-MOTOR_RIGHT_FORWARD_PIN = 36
-MOTOR_RIGHT_REVERSE_PIN = 32
+MOTOR_RIGHT_FORWARD_PIN = 12
+MOTOR_RIGHT_REVERSE_PIN = 16
 
 #Left Motor
-MOTOR_LEFT_REVERSE_PIN = 40
-MOTOR_LEFT_FORWARD_PIN = 38
+MOTOR_LEFT_REVERSE_PIN = 20
+MOTOR_LEFT_FORWARD_PIN = 21
 
 #Camera Servo GPIO
-CAMERA_SERVO_PIN = 7
+CAMERA_SERVO_PIN = 4
 
 #Extended arguments that are not drives
 SAY_INDEX = 4
 PLAY_INDEX = 5
 CAMERA_SERVO_INDEX = 6
 
-# Set all of the drive pins as output pins
-GPIO.setup(MOTOR_RIGHT_FORWARD_PIN, GPIO.OUT)
-GPIO.setup(MOTOR_RIGHT_REVERSE_PIN, GPIO.OUT)
-GPIO.setup(MOTOR_LEFT_REVERSE_PIN, GPIO.OUT)
-GPIO.setup(MOTOR_LEFT_FORWARD_PIN, GPIO.OUT)
+# Map of drives to pins
+lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN]
+
+for drive in lDrives:
+        GPIO.setup(drive, GPIO.OUT)
+        GPIO.output(drive, False)
 
 # Starting positions!
 rightMotorForward = GPIO.PWM(MOTOR_RIGHT_FORWARD_PIN, 100)
@@ -37,9 +38,6 @@ leftMotorForward = GPIO.PWM(MOTOR_LEFT_FORWARD_PIN, 100)
 
 rightMotorReverse = GPIO.PWM(MOTOR_RIGHT_REVERSE_PIN, 100)
 leftMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
-
-# Map of drives to pins
-lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN, SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
 def startDrive(driveNumber, powerValueArg):
     powerValue = float(powerValueArg)
@@ -118,7 +116,7 @@ def MotorOff():
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
 
 # Class used to handle UDP messages
-class PicoBorgHandler(SocketServer.BaseRequestHandler):
+class PicoBorgHandler(socketserver.BaseRequestHandler):
     # Function called when a new message has been received
     def handle(self):
         global isRunning
@@ -187,7 +185,7 @@ try:
     #raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
     say("Controls Initialized")
-    remoteKeyBorgServer = SocketServer.UDPServer(('', portListen), PicoBorgHandler)
+    remoteKeyBorgServer = socketserver.UDPServer(('', portListen), PicoBorgHandler)
     # Loop until terminated remotely
     isRunning = True
     while isRunning:
@@ -203,5 +201,5 @@ except KeyboardInterrupt:
     print('Terminated')
     say("Robot Terminated. Keyboard Interrupt")
     MotorOff()
-    raw_input('Turn the power off now, press ENTER to continue')
+    #raw_input('Turn the power off now, press ENTER to continue')
     GPIO.cleanup()
