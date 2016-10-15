@@ -12,10 +12,10 @@ DEBUG = False
 WHEEL = "G27 Racing Wheel"
 USE_WHEEL = True
 axis_mode = 1
-gstreamIP = "10.215.50.49"
+gstreamIP = "10.215.50.51"
 GSTREAM_PORT = "5000"
 START_GSTREAM = True
-broadcastIP = "10.215.50.49"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 
 LEFT_DRIVE_REVERSE = 3
@@ -32,7 +32,7 @@ regularUpdate = True                    # If True we send a command at a regular
 # STEERING_THRESHOLD = .05
 STEERING_DEAD_ZONE = 8
 PEDAL_THRESHOLD = 20
-STEERING_TURBO = 20
+STEERING_TURBO = 50
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket3
@@ -136,17 +136,17 @@ def PygameHandler():
             moveRight = 0
       elif event.axis == 1 and axis_mode == 1:
         if event.value * -100 > PEDAL_THRESHOLD:
+            print("BACKWARDS")
+            de_accel_value = event.value * 100
+            moveUp = 0
+            print(de_accel_value)
+            moveDown = abs(de_accel_value)
+            print("moveUp", moveUp)
+        elif event.value * 100 > PEDAL_THRESHOLD:
             print("START accelerator")
             accel_value = event.value * 100
             moveUp = abs(accel_value)
             moveDown = 0
-            print("moveUp", moveUp)
-        elif event.value * 100 > PEDAL_THRESHOLD:
-            print("BACKWARDS")
-            de_accel_value = event.value * 100
-            print(de_accel_value)
-            moveUp = 0
-            moveDown = abs(de_accel_value)
         else:
             moveUp = 0
             moveDown = 0
@@ -174,14 +174,26 @@ try:
         PygameHandler()
 
         if hadEvent or regularUpdate:
+
             # Keys have changed, generate the command list based on keys
             hadEvent = False
             driveCommands = ['0', '0', '0', '0', 'X', 'X', 'X'] # Default to do not change
+            # lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN,
+            #            SAY_INDEX, PLAY_INDEX, CAMERA_SERVO_INDEX]
 
-            LEFT_DRIVE_REVERSE = 3
-            RIGHT_DRIVE_FORWARD = 2
-            LEFT_DRIVE_FORWARD = 1
-            RIGHT_DRIVE_REVERSE = 0
+            LEFT_DRIVE_REVERSE = 2
+            RIGHT_DRIVE_FORWARD = 0
+            LEFT_DRIVE_FORWARD = 3
+            RIGHT_DRIVE_REVERSE = 1
+
+            if moveUp > 100:
+                moveUp = 100
+            if moveDown > 100:
+                moveDown = 100
+            if moveRight > 100:
+                moveRight = 100
+            if moveLeft > 100:
+                moveLeft = 100;
 
             if moveQuit:
                 break
@@ -199,7 +211,7 @@ try:
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[LEFT_DRIVE_REVERSE] = str(moveDown - moveLeft)
-                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
+                driveCommands[RIGHT_DRIVE_REVERSE] = str(moveDown)
             elif (moveDown > 0 and moveRight > 0):
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[LEFT_DRIVE_FORWARD] = 'OFF'
@@ -215,8 +227,8 @@ try:
                 driveCommands[LEFT_DRIVE_REVERSE] = str(moveLeft)
                 driveCommands[RIGHT_DRIVE_FORWARD] = str(moveLeft)
             elif moveRight > 0:
-                driveCommands[RIGHT_DRIVE_REVERSE] = 'ON'
-                driveCommands[LEFT_DRIVE_FORWARD] = 'ON'
+                driveCommands[RIGHT_DRIVE_REVERSE] = str(moveRight)
+                driveCommands[LEFT_DRIVE_FORWARD] = str(moveRight)
                 driveCommands[RIGHT_DRIVE_FORWARD] = 'OFF'
                 driveCommands[LEFT_DRIVE_REVERSE] = 'OFF'
             elif say != "":
