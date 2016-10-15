@@ -72,9 +72,9 @@ pygame.init()
 try:
   res = urllib2.urlopen("http://localhost:50000/")
 except urllib2.HTTPError, e:
-    print e.code
+    print(e.code)
 except urllib2.URLError, e:
-    print e.args
+    print(e.args)
 
 try: 
 

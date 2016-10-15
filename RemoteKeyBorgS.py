@@ -112,8 +112,8 @@ def MotorOff():
     GPIO.output(MOTOR_LEFT_REVERSE_PIN, GPIO.LOW)
     GPIO.output(MOTOR_LEFT_FORWARD_PIN, GPIO.LOW)
 
-# Settings for the RemoteKeyBorg server
-portListen = 9038 # What messages to listen for (LEDB on an LCD)
+# Settings for the RemoteK# Settings for the RemoteKeyBorg server
+portListen = 9038 # What messages to listen for (LEDB on an LCD)eyBorg server
 
 # Class used to handle UDP messages
 class PicoBorgHandler(socketserver.BaseRequestHandler):

@@ -1,5 +1,10 @@
-import os, time, socketserver
+import socketserver
 
+from robot.Controls import *
+from robot.Speech import *
+
+# Settings for the RemoteKeyBorg server
+portListen = 9038 # What messages to listen for (LEDB on an LCD)
 
 try:
     global isRunning
@@ -8,7 +13,7 @@ try:
     MotorOff()
     # raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
-    say("Controls Initialized")
+    Say("Controls Initialized")
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), PicoBorgHandler)
     # Loop until terminated remotely
     isRunning = True
@@ -16,15 +21,15 @@ try:
         remoteKeyBorgServer.handle_request()
     # Turn off the drives and release the GPIO pins
     print('Finished')
-    say("System controls offline.")
+    Say("System controls offline.")
     MotorOff()
-    raw_input('Turn the power off now, press ENTER to continue')
-    GPIO.cleanup()
+    #raw_input('Turn the power off now, press ENTER to continue')
+    GPIOCleanup()
 
 except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
     print('Terminated')
-    say("Robot Terminated. Keyboard Interrupt")
+    Say("Robot Terminated. Keyboard Interrupt")
     MotorOff()
     # raw_input('Turn the power off now, press ENTER to continue')
-    GPIO.cleanup()
+    GPIOCleanup()

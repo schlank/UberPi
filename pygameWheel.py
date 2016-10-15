@@ -63,7 +63,7 @@ screen = pygame.display.set_mode([300,300])
 if START_GSTREAM:
     pygame.display.set_caption("RemoteKeyBorg - Press [ESC] to quit")
     systemCommand = "./startGstreamViewer.sh %s %s &" % (gstreamIP, GSTREAM_PORT)
-    print systemCommand
+    print(systemCommand)
     os.system(systemCommand)
 
 def checkwheel():
@@ -74,14 +74,14 @@ def checkwheel():
             if pygame.joystick.Joystick(j).get_name() == WHEEL:
                 wheel = pygame.joystick.Joystick(j)
                 wheel.init()
-                print "Found", wheel.get_name()
+                print ("Found", wheel.get_name())
                 usewheel = True
 
         if not wheel:
-            print "No G27 steering wheel found"
+            print ("No G27 steering wheel found")
         return usewheel
     except Exception as e:
-        print e
+        print(e)
 
 def saysomething(something):
     os.system('espeak -ven+f3 "{0}"'.format(something))
@@ -107,7 +107,7 @@ def PygameHandler():
 
     for event in pygame.event.get(pygame.JOYBUTTONDOWN):
         if DEBUG:
-            print "Joystick Button Event: ", event
+            print("Joystick Button Event: ", event)
         elif event.button == 6:
             cameraMove = "DOWN"
         elif event.button == 7:
@@ -115,7 +115,7 @@ def PygameHandler():
 
     for event in pygame.event.get(pygame.JOYAXISMOTION):
       if DEBUG:
-        print "Motion on axis: ", event.axis
+        print("Motion on axis: ", event.axis);
       if event.axis == 0:
         if event.value > 0 and event.value * 100 > STEERING_DEAD_ZONE:
             moveRight = abs(event.value)
@@ -166,7 +166,7 @@ def PygameHandler():
 
 
 try:
-    print 'Press [ESC] to quit'
+    print('Press [ESC] to quit')
     checkwheel()
     # Loop indefinitely
     while True:
