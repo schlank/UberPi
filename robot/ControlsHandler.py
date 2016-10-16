@@ -1,6 +1,5 @@
 import pickle
 
-from client import RobotWheels
 from robot.Motors import *
 
 

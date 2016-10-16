@@ -7,3 +7,7 @@ class Wheel:
 
     def getStatus(self):
         return self.status
+
+    def reset(self):
+        self.status = "X"
+        self.power = 0

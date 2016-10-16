@@ -7,10 +7,6 @@ class RobotWheels:
     def __init__(self):
         self.leftWheel = Wheel()
         self.rightWheel = Wheel()
-
-        def updateStatus(self):
-            pass
-
         super().__init__()
 
     def moveRight(self, power):
@@ -53,5 +49,10 @@ class RobotWheels:
         self.leftWheel.power = power
         print("moveBack", power)
 
+    def stop(self):
+        self.leftWheel.reset()
+        self.rightWheel.reset()
+
+
     def hasCommands(self):
-        return self.leftWheel.status != "X" or self.rightWheel != "X"
+        return self.leftWheel.status != "X" or self.rightWheel.status != "X"
