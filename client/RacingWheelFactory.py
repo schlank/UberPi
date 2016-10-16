@@ -56,4 +56,5 @@ class RacingWheelFactory:
                 print("Clutch")
             else:
                 print(event)
+                wheels.stop()
         return wheels

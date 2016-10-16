@@ -53,6 +53,5 @@ class RobotWheels:
         self.leftWheel.reset()
         self.rightWheel.reset()
 
-
-    def hasCommands(self):
+    def has_commands(self):
         return self.leftWheel.status != "X" or self.rightWheel.status != "X"
