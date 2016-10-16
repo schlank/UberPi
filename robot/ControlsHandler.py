@@ -1,6 +1,6 @@
 import pickle
 
-from robot.Motors import *
+from robot.Motors import Motors
 
 
 # Class used to handle UDP messages
@@ -11,4 +11,4 @@ class ControlsHandler(socketserver.BaseRequestHandler):
 
         request, socket = self.request  # Read who spoke to us and what they said
         robot_wheels = pickle.loads(request)
-        print(robot_wheels.has_commands())
+        Motors.commands(robot_wheels)

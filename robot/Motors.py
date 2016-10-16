@@ -64,3 +64,12 @@ def stop_drive(drive_number):
         leftMotorForward.stop()
 
 
+class Motors:
+
+    @staticmethod
+    def command(robotWheels):
+        if robotWheels.has_commands():
+            print("has commands")
+        else:
+            print("no commands")
+
