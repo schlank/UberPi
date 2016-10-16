@@ -46,7 +46,8 @@ def GPIOCleanup():
 def start_drive(drive_number, power_value_arg):
     power_value = float(power_value_arg)
     power_value = abs(power_value)
-
+    if power_value > 100:
+        power_value = 100
     if drive_number == 0:
         rightMotorForward.start(power_value)
     elif drive_number == 1:
