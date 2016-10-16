@@ -11,7 +11,7 @@ try:
     MotorOff()
     # raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
-    Say("Controls Initialized")
+    # Say("Controls Initialized")
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
     # Loop until terminated remotely
     isRunning = True
