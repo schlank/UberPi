@@ -28,14 +28,13 @@ sayIndex = 4
 cameraServoDrive = 6
 playIndex = 5
 
-interval = 0.1                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
+interval = 0.3                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
 
 # Setup the connection for sending on
 sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)       # Create the socket3
 sender.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)                        # Enable broadcasting (sending to many IPs based on wild-cards)
 sender.bind(('0.0.0.0', 0))                                                         # Set the IP and port number to use locally, IP 0.0.0.0 means all connections and port 0 means assign a number for us (do not care)
-
 
 def sendWheels(robotWheels):
     if robotWheels is None:
@@ -49,6 +48,8 @@ def allStop():
 
 try:
 
+    global motorsStopped
+    motorsStopped = False
     print('Press [ESC] to quit')
     # Is the racing wheel connected?
     if checkwheel(WHEEL_NAME):
@@ -61,7 +62,6 @@ try:
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
         robotWheels = RacingWheelFactory.createRobotWheels()
-
         if regularUpdate or robotWheels.has_commands():
             pickedWheels = pickle.dumps(robotWheels, -1)
             sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
