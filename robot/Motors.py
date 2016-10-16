@@ -26,6 +26,7 @@ leftMotorForward = GPIO.PWM(MOTOR_LEFT_FORWARD_PIN, 100)
 rightMotorReverse = GPIO.PWM(MOTOR_RIGHT_REVERSE_PIN, 100)
 leftMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
 
+
 # Function to set all drives off
 def MotorOff():
     GPIO.output(MOTOR_RIGHT_FORWARD_PIN, GPIO.LOW)
@@ -33,31 +34,33 @@ def MotorOff():
     GPIO.output(MOTOR_LEFT_REVERSE_PIN, GPIO.LOW)
     GPIO.output(MOTOR_LEFT_FORWARD_PIN, GPIO.LOW)
 
+
 def GPIOCleanup():
     GPIO.cleanup()
 
-def startDrive(driveNumber, powerValueArg):
-    powerValue = float(powerValueArg)
-    powerValue = abs(powerValue)
 
-    if driveNumber == 0:
-        rightMotorForward.start(powerValue)
-        #rightMotorForward.changeDutyCycle(powerValue)
-    elif driveNumber == 1:
-        rightMotorReverse.start(powerValue)
-    elif driveNumber == 2:
-        leftMotorReverse.start(powerValue)
-    elif driveNumber == 3:
-        leftMotorForward.start(powerValue)
+def start_drive(drive_number, power_value_arg):
+    power_value = float(power_value_arg)
+    power_value = abs(power_value)
 
-def stopDrive(driveNumber):
-    if driveNumber == 0:
+    if drive_number == 0:
+        rightMotorForward.start(power_value)
+    elif drive_number == 1:
+        rightMotorReverse.start(power_value)
+    elif drive_number == 2:
+        leftMotorReverse.start(power_value)
+    elif drive_number == 3:
+        leftMotorForward.start(power_value)
+
+
+def stop_drive(drive_number):
+    if drive_number == 0:
         rightMotorForward.stop()
-    elif driveNumber == 1:
+    elif drive_number == 1:
         rightMotorReverse.stop()
-    elif driveNumber == 2:
+    elif drive_number == 2:
         leftMotorReverse.stop()
-    elif driveNumber == 3:
+    elif drive_number == 3:
         leftMotorForward.stop()
 
 
