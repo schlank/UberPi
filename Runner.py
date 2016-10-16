@@ -1,7 +1,10 @@
+from robot.Motors import GPIOCleanup
 from robot.Speech import *
 from robot.ControlsHandler import *
 
 # Settings for the RemoteKeyBorg server
+from robotwKeyboard import MotorOff
+
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
 
 try:
