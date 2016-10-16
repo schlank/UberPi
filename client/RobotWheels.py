@@ -57,4 +57,4 @@ class RobotWheels:
         return self.leftWheel.has_command() or self.rightWheel.has_command()
 
     def log(self):
-        return self.leftWheel.log() + "\n" + self.rightWheel.log()
+        return "LEFT: " + self.leftWheel.log() + "\nRIGHT:" + self.rightWheel.log()
