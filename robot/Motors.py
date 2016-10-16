@@ -87,7 +87,7 @@ class Motors:
         if robotWheels.has_commands():
             if robotWheels.leftWheel.has_command():
                 start_motor(robotWheels.leftWheel, MOTOR_LEFT)
-            elif robotWheels.rightWheel.has_command()
+            elif robotWheels.rightWheel.has_command():
                 start_motor(robotWheels.rightWheel, MOTOR_RIGHT)
         else:
             print("no commands")
