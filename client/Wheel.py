@@ -1,5 +1,4 @@
 class Wheel:
-
     def __init__(self):
         self.status = "X"
         self.power = 0
@@ -14,3 +13,9 @@ class Wheel:
 
     def has_command(self):
         return self.status != "X"
+
+    def log(self):
+        return "Status:" + \
+               self.status + "\n" + \
+               "Power: " + \
+               str(self.power)

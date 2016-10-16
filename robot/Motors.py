@@ -90,6 +90,7 @@ class Motors:
                 start_motor(robotWheels.leftWheel, MOTOR_LEFT)
             elif robotWheels.rightWheel.has_command():
                 start_motor(robotWheels.rightWheel, MOTOR_RIGHT)
+            print(robotWheels.log())
         else:
             print("no commands")
 
