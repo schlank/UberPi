@@ -11,6 +11,5 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         global isRunning
 
         request, socket = self.request  # Read who spoke to us and what they said
-
-        robot_wheels = pickle.unpack(request)
+        robot_wheels = pickle.loads(request)
         print(robot_wheels)
