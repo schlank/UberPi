@@ -3,7 +3,6 @@ from robot.ControlsHandler import *
 
 # Settings for the RemoteKeyBorg server
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
-isRunning = False
 
 try:
     global isRunning
