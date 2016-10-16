@@ -1,4 +1,4 @@
-from robot import ControlsHandler
+from robot.ControlsHandler import ControlsHandler
 from robot.Motors import *
 from robot.Speech import *
 
