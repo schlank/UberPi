@@ -1,4 +1,3 @@
-from robot.Motors import *
 from robot.Speech import *
 from robot.ControlsHandler import *
 
