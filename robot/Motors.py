@@ -2,7 +2,6 @@
 
 # Load library functions we want
 import RPi.GPIO as GPIO
-import socketserver
 GPIO.setmode(GPIO.BCM)
 
 #Right Motor
@@ -12,6 +11,11 @@ MOTOR_RIGHT_REVERSE_PIN = 16
 #Left Motor
 MOTOR_LEFT_REVERSE_PIN = 20
 MOTOR_LEFT_FORWARD_PIN = 21
+
+FORWARD = "F"
+BACK = "B"
+MOTOR_LEFT = "LEFT"
+MOTOR_RIGHT = "RIGHT"
 
 # Map of drives to pins
 lDrives = [MOTOR_RIGHT_FORWARD_PIN, MOTOR_RIGHT_REVERSE_PIN, MOTOR_LEFT_REVERSE_PIN, MOTOR_LEFT_FORWARD_PIN]
@@ -52,6 +56,19 @@ def start_drive(drive_number, power_value_arg):
     elif drive_number == 3:
         leftMotorForward.start(power_value)
 
+def start_motor(wheel, motor):
+    if motor == MOTOR_RIGHT:
+        if wheel.getStatus() == FORWARD:
+            start_drive(0, wheel.power)
+        else:
+            start_drive(1, wheel.power)
+    else:
+        if wheel.getStatus() == FORWARD:
+            start_drive(3, wheel.power)
+        else:
+            start_drive(2, wheel.power)
+
+
 
 def stop_drive(drive_number):
     if drive_number == 0:
@@ -63,13 +80,15 @@ def stop_drive(drive_number):
     elif drive_number == 3:
         leftMotorForward.stop()
 
-
 class Motors:
 
     @staticmethod
     def command(robotWheels):
         if robotWheels.has_commands():
-            print("has commands")
+            if robotWheels.leftWheel.has_command():
+                start_motor(robotWheels.leftWheel, MOTOR_LEFT)
+            elif robotWheels.rightWheel.has_command()
+                start_motor(robotWheels.rightWheel, MOTOR_RIGHT)
         else:
             print("no commands")
 

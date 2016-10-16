@@ -11,3 +11,6 @@ class Wheel:
     def reset(self):
         self.status = "X"
         self.power = 0
+
+    def has_command(self):
+        return self.status != "X"
