@@ -19,7 +19,7 @@ try:
         remoteKeyBorgServer.handle_request()
     # Turn off the drives and release the GPIO pins
     print('Finished')
-    Say("System controls offline.")
+    # Say("System controls offline.")
     MotorOff()
     #raw_input('Turn the power off now, press ENTER to continue')
     GPIOCleanup()
@@ -27,7 +27,7 @@ try:
 except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
     print('Terminated')
-    Say("Robot Terminated. Keyboard Interrupt")
+    # Say("Robot Terminated. Keyboard Interrupt")
     MotorOff()
     # raw_input('Turn the power off now, press ENTER to continue')
     GPIOCleanup()
