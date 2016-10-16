@@ -16,7 +16,7 @@ USE_WHEEL = True
 axis_mode = 1
 gstreamIP = "10.215.50.51"
 GSTREAM_PORT = "5000"
-START_GSTREAM = True
+START_GSTREAM = False
 broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 
