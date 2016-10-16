@@ -66,22 +66,22 @@ if START_GSTREAM:
     print(systemCommand)
     os.system(systemCommand)
 
-def checkwheel():
-    usewheel = False
-    try:
-        wheel = None
-        for j in range(0, pygame.joystick.get_count()):
-            if pygame.joystick.Joystick(j).get_name() == WHEEL:
-                wheel = pygame.joystick.Joystick(j)
-                wheel.init()
-                print ("Found", wheel.get_name())
-                usewheel = True
-
-        if not wheel:
-            print ("No G27 steering wheel found")
-        return usewheel
-    except Exception as e:
-        print(e)
+# def checkwheel():
+#     usewheel = False
+#     try:
+#         wheel = None
+#         for j in range(0, pygame.joystick.get_count()):
+#             if pygame.joystick.Joystick(j).get_name() == WHEEL:
+#                 wheel = pygame.joystick.Joystick(j)
+#                 wheel.init()
+#                 print ("Found", wheel.get_name())
+#                 usewheel = True
+#
+#         if not wheel:
+#             print ("No G27 steering wheel found")
+#         return usewheel
+#     except Exception as e:
+#         print(e)
 
 def saysomething(something):
     os.system('espeak -ven+f3 "{0}"'.format(something))
@@ -167,7 +167,7 @@ def PygameHandler():
 
 try:
     print('Press [ESC] to quit')
-    checkwheel()
+    # checkwheel()
     # Loop indefinitely
     while True:
         # Get the currently pressed keys on the keyboard
@@ -193,7 +193,7 @@ try:
             if moveRight > 100:
                 moveRight = 100
             if moveLeft > 100:
-                moveLeft = 100;
+                moveLeft = 100
 
             if moveQuit:
                 break

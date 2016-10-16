@@ -194,7 +194,7 @@ try:
     print('Finished')
     say("System controls offline.")
     MotorOff()
-    raw_input('Turn the power off now, press ENTER to continue')
+    # raw_input('Turn the power off now, press ENTER to continue')
     GPIO.cleanup()
 except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
