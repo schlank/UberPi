@@ -1,6 +1,6 @@
-from robot.ControlsHandler import ControlsHandler
 from robot.Motors import *
 from robot.Speech import *
+from robot.ControlsHandler import *
 
 # Settings for the RemoteKeyBorg server
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
