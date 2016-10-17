@@ -3,7 +3,7 @@
 # Load library functions we want
 import RPi.GPIO as GPIO
 
-DEBUG=False
+DEBUG = True
 
 GPIO.setmode(GPIO.BCM)
 
@@ -67,6 +67,11 @@ def start_motor(status, power_value_arg, motor_side):
     power_value = abs(power_value)
     if power_value > 100:
         power_value = 100
+
+    if DEBUG:
+        print(motor_side)
+        print(status)
+        print(power_value)
 
     # RIGHT MOTOR
     if motor_side == MOTOR_RIGHT:
