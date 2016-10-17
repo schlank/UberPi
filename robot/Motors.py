@@ -46,20 +46,20 @@ def gpio_cleanup():
     GPIO.cleanup()
 
 
-def start_drive(drive_number, power_value_arg):
-    power_value = float(power_value_arg)
-    power_value = abs(power_value)
-    if power_value > 100:
-        power_value = 100
-
-    if drive_number == 0:
-        rightMotorForward.start(power_value)
-    elif drive_number == 1:
-        rightMotorReverse.start(power_value)
-    elif drive_number == 2:
-        leftMotorReverse.start(power_value)
-    elif drive_number == 3:
-        leftMotorForward.start(power_value)
+# def start_drive(drive_number, power_value_arg):
+#     power_value = float(power_value_arg)
+#     power_value = abs(power_value)
+#     if power_value > 100:
+#         power_value = 100
+#
+#     if drive_number == 0:
+#         rightMotorForward.start(power_value)
+#     elif drive_number == 1:
+#         rightMotorReverse.start(power_value)
+#     elif drive_number == 2:
+#         leftMotorReverse.start(power_value)
+#     elif drive_number == 3:
+#         leftMotorForward.start(power_value)
 
 
 def start_motor(status, power_value_arg, motor_side):
@@ -76,8 +76,12 @@ def start_motor(status, power_value_arg, motor_side):
     if motor_side == MOTOR_RIGHT:
         if status == FORWARD:
             rightMotorForward.start(power_value)
+            if DEBUG:
+                print("rightMotorForward")
         elif status == BACK:
             rightMotorReverse.start(power_value)
+            if DEBUG:
+                print("rightMotorReverse")
         else:
             stop_drive(0)
             stop_drive(1)
@@ -85,8 +89,12 @@ def start_motor(status, power_value_arg, motor_side):
     else:
         if status == FORWARD:
             leftMotorForward.start(power_value)
+            if DEBUG:
+                print("leftMotorForward")
         elif status == BACK: # BACK
             leftMotorReverse.start(power_value)
+            if DEBUG:
+                print("leftMotorReverse")
         else:
             stop_drive(2)
             stop_drive(3)
