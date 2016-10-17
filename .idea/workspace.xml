@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6978719d-5d45-494a-8899-35bce8e748ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/RobotWheels.py" afterPath="$PROJECT_DIR$/client/RobotWheels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/Wheel.py" afterPath="$PROJECT_DIR$/client/Wheel.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/Motors.py" afterPath="$PROJECT_DIR$/robot/Motors.py" />
     </list>
     <ignored path="UberPi.iws" />
@@ -98,8 +96,8 @@
           <file leaf-file-name="Motors.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/robot/Motors.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="674">
-                  <caret line="105" column="86" selection-start-line="105" selection-start-column="78" selection-end-line="105" selection-end-column="86" />
+                <state relative-caret-position="614">
+                  <caret line="101" column="86" selection-start-line="101" selection-start-column="86" selection-end-line="101" selection-end-column="86" />
                   <folding />
                 </state>
               </provider>
@@ -194,9 +192,9 @@
         <option value="$PROJECT_DIR$/client/Client.py" />
         <option value="$PROJECT_DIR$/Runner.py" />
         <option value="$PROJECT_DIR$/client/RacingWheelFactory.py" />
-        <option value="$PROJECT_DIR$/robot/Motors.py" />
         <option value="$PROJECT_DIR$/client/RobotWheels.py" />
         <option value="$PROJECT_DIR$/client/Wheel.py" />
+        <option value="$PROJECT_DIR$/robot/Motors.py" />
       </list>
     </option>
   </component>
@@ -717,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476673020515</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="ficing motors">
+      <created>1476673219683</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1476673219683</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1028,8 +1033,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robot/Motors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="105" column="86" selection-start-line="105" selection-start-column="78" selection-end-line="105" selection-end-column="86" />
+        <state relative-caret-position="614">
+          <caret line="101" column="86" selection-start-line="101" selection-start-column="86" selection-end-line="101" selection-end-column="86" />
           <folding />
         </state>
       </provider>
