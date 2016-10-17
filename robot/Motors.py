@@ -3,6 +3,8 @@
 # Load library functions we want
 import RPi.GPIO as GPIO
 
+DEBUG=False
+
 GPIO.setmode(GPIO.BCM)
 
 # Right Motor
@@ -105,6 +107,7 @@ class Motors:
             if robot_wheels.rightWheel.has_command():
                 start_motor(robot_wheels.rightWheel.getStatus(), robot_wheels.rightWheel.getPower(), MOTOR_RIGHT)
 
-            print(robot_wheels.log())
+            if DEBUG:
+                print(robot_wheels.log())
         else:
             print("no commands")
