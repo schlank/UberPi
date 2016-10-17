@@ -1,9 +1,0 @@
-sleep 10
-cd /home/pi/UberPi
-./RemoteKeyBorgS.py &
-echo 'script started'
-sleep 5
-
-#No Video
-#./startGtream.sh &
-
