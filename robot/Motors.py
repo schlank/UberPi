@@ -99,11 +99,11 @@ class Motors:
         if robot_wheels.has_commands():
             # Left Motor
             if robot_wheels.leftWheel.has_command():
-                start_motor(robot_wheels.leftWheel.getStatus(), MOTOR_LEFT)
+                start_motor(robot_wheels.leftWheel.getStatus(), robot_wheels.getPower(), MOTOR_LEFT)
 
             # Right Motor
             if robot_wheels.rightWheel.has_command():
-                start_motor(robot_wheels.rightWheel.getStatus(), MOTOR_RIGHT)
+                start_motor(robot_wheels.rightWheel.getStatus(), robot_wheels.getPower(), MOTOR_RIGHT)
 
             print(robot_wheels.log())
         else:
