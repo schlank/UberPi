@@ -69,9 +69,7 @@ def start_motor(status, power_value_arg, motor_side):
         power_value = 100
 
     if DEBUG:
-        print(motor_side)
-        print(status)
-        print(power_value)
+        print(motor_side, status, power_value)
 
     # RIGHT MOTOR
     if motor_side == MOTOR_RIGHT:

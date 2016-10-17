@@ -20,5 +20,5 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         robot_wheels = pickle.loads(request)
         Motors.command(robot_wheels)
         cpu_temp = getCPUtemperature()
-        print(cpu_temp)
+        print("CPU", cpu_temp)
 
