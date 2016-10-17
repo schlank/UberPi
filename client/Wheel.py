@@ -19,6 +19,6 @@ class Wheel:
 
     def log(self):
         return "Status:" + \
-               self.status + "\n" + \
+               self.status + \
                "Power: " + \
                str(self.power)

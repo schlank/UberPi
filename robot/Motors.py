@@ -108,7 +108,7 @@ class Motors:
             if robot_wheels.rightWheel.has_command():
                 start_motor(robot_wheels.rightWheel.getStatus(), robot_wheels.rightWheel.getPower(), MOTOR_RIGHT)
 
-            if DEBUG:
-                print(robot_wheels.log())
-        else:
-            print("no commands")
+            # if DEBUG:
+            #     print(robot_wheels.log())
+        # else:
+        #     print("no commands")
