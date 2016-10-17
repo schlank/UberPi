@@ -61,7 +61,6 @@ def motor_all_off():
 def gpio_cleanup():
     GPIO.cleanup()
 
-
 def start_motor(status, power_value_arg, motor_side):
     # Clean up power value
     power_value = float(power_value_arg)
@@ -73,7 +72,7 @@ def start_motor(status, power_value_arg, motor_side):
         print(motor_side, status, power_value)
 
     if status == BACK:
-        if power_value < .4:
+        if power_value == 0:
             motor_all_off()
             return None
         else:
@@ -81,7 +80,7 @@ def start_motor(status, power_value_arg, motor_side):
             leftMotorForward.stop()
 
     if status == FORWARD:
-        if power_value < .4:
+        if power_value == 0:
             motor_all_off()
             return None
         else:
