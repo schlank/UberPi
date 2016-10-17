@@ -29,7 +29,6 @@ class RobotWheels:
         print("moveLeft", power)
 
     def moveUp(self, power):
-        print("moveUp")
         power *= 100
         power = abs(power)
         self.rightWheel.status = "F"
@@ -39,7 +38,6 @@ class RobotWheels:
         print("moveUp", power)
 
     def moveBack(self, power):
-        print("moveBack")
         power *= 100
         power = abs(power)
         self.rightWheel.status = "B"

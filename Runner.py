@@ -1,4 +1,4 @@
-from robot.Motors import GPIOCleanup, MotorOff
+from robot.Motors import GPIOCleanup, motor_off
 from robot.Speech import *
 from robot.ControlsHandler import *
 
@@ -8,7 +8,7 @@ try:
     global isRunning
 
     # Start by turning all drives off
-    MotorOff()
+    motor_off()
     # raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
     # Say("Controls Initialized")
@@ -20,7 +20,7 @@ try:
     # Turn off the drives and release the GPIO pins
     print('Finished')
     # Say("System controls offline.")
-    MotorOff()
+    motor_off()
     #raw_input('Turn the power off now, press ENTER to continue')
     GPIOCleanup()
 
@@ -28,6 +28,6 @@ except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
     print('Terminated')
     # Say("Robot Terminated. Keyboard Interrupt")
-    MotorOff()
+    motor_off()
     # raw_input('Turn the power off now, press ENTER to continue')
     GPIOCleanup()

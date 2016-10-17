@@ -32,7 +32,7 @@ leftMotorReverse = GPIO.PWM(MOTOR_LEFT_REVERSE_PIN, 100)
 
 
 # Function to set all drives off
-def MotorOff():
+def motor_off():
     GPIO.output(MOTOR_RIGHT_FORWARD_PIN, GPIO.LOW)
     GPIO.output(MOTOR_RIGHT_REVERSE_PIN, GPIO.LOW)
     GPIO.output(MOTOR_LEFT_REVERSE_PIN, GPIO.LOW)
@@ -57,6 +57,7 @@ def start_drive(drive_number, power_value_arg):
     elif drive_number == 3:
         leftMotorForward.start(power_value)
 
+
 def start_motor(wheel, motor):
     if motor == MOTOR_RIGHT:
         if wheel.getStatus() == FORWARD:
@@ -70,7 +71,6 @@ def start_motor(wheel, motor):
             start_drive(2, wheel.power)
 
 
-
 def stop_drive(drive_number):
     if drive_number == 0:
         rightMotorForward.stop()
@@ -81,16 +81,21 @@ def stop_drive(drive_number):
     elif drive_number == 3:
         leftMotorForward.stop()
 
+
 class Motors:
 
     @staticmethod
-    def command(robotWheels):
-        if robotWheels.has_commands():
-            if robotWheels.leftWheel.has_command():
-                start_motor(robotWheels.leftWheel, MOTOR_LEFT)
-            elif robotWheels.rightWheel.has_command():
-                start_motor(robotWheels.rightWheel, MOTOR_RIGHT)
-            print(robotWheels.log())
+    def command(robot_wheels):
+        if robot_wheels.has_commands():
+            #Left Motor
+            if robot_wheels.leftWheel.has_command():
+                start_motor(robot_wheels.leftWheel.getStatus(), MOTOR_LEFT)
+
+            #Right Motor
+            if robot_wheels.rightWheel.has_command():
+                start_motor(robot_wheels.rightWheel.getStatus(), MOTOR_RIGHT)
+
+            print(robot_wheels.log())
         else:
             print("no commands")
 

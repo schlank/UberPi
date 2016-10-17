@@ -37,9 +37,9 @@ class RacingWheelFactory:
             # GAS PEDAL
             elif event.axis == 1 and axis_mode == 1:
                 if event.value * -100 > PEDAL_THRESHOLD:
-                    wheels.moveBack(event.value)
-                elif event.value * 100 > PEDAL_THRESHOLD:
                     wheels.moveUp(event.value)
+                elif event.value * 100 > PEDAL_THRESHOLD:
+                    wheels.moveBack(event.value)
             elif event.axis == 1 and axis_mode == 2:
                 print(event.value)
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sAxis_mode 2")
