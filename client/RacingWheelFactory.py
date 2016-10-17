@@ -12,7 +12,7 @@ pygame.init()
 WHEEL = "G27 Racing Wheel"
 
 STEERING_DEAD_ZONE = 8
-PEDAL_THRESHOLD = 20
+PEDAL_THRESHOLD = 0
 DEBUG = False
 axis_mode = 1
 
