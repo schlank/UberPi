@@ -11,7 +11,7 @@ pygame.init()
 
 WHEEL = "G27 Racing Wheel"
 
-STEERING_DEAD_ZONE = 8
+STEERING_DEAD_ZONE = 0
 PEDAL_THRESHOLD = 0
 DEBUG = False
 axis_mode = 1
@@ -34,6 +34,7 @@ class RacingWheelFactory:
                     wheels.moveRight(event.value)
                 elif event.value * -100 > STEERING_DEAD_ZONE:
                     wheels.moveLeft(event.value)
+                print(event.value)
             # GAS PEDAL
             elif event.axis == 1 and axis_mode == 1:
                 if event.value * -100 > PEDAL_THRESHOLD:

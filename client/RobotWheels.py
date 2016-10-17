@@ -1,6 +1,6 @@
 from client.Wheel import Wheel
 
-STEERING_TURBO = 20
+STEERING_TURBO = 0
 
 
 class RobotWheels:
