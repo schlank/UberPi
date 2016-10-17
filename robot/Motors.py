@@ -76,14 +76,21 @@ def start_motor(status, power_value_arg, motor_side):
     if motor_side == MOTOR_RIGHT:
         if status == FORWARD:
             rightMotorForward.start(power_value)
-        else:  # BACK
+        elif status == BACK:
             rightMotorReverse.start(power_value)
+        else:
+            stop_drive(0)
+            stop_drive(1)
     # LEFT MOTOR
     else:
         if status == FORWARD:
             leftMotorForward.start(power_value)
-        else:  # BACK
+        elif status == BACK: # BACK
             leftMotorReverse.start(power_value)
+        else:
+            stop_drive(2)
+            stop_drive(3)
+
 
 def stop_drive(drive_number):
     if drive_number == 0:
