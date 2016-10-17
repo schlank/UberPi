@@ -50,6 +50,12 @@ def motor_off():
     GPIO.output(MOTOR_LEFT_FORWARD_PIN, GPIO.LOW)
 
 
+def motor_all_off():
+    rightMotorForward.stop()
+    leftMotorForward.stop()
+    rightMotorReverse.stop()
+    leftMotorReverse.stop()
+
 def gpio_cleanup():
     GPIO.cleanup()
 
@@ -64,13 +70,22 @@ def start_motor(status, power_value_arg, motor_side):
     if DEBUG:
         print(motor_side, status, power_value)
 
+
+
     if status == BACK:
-        rightMotorForward.stop()
-        leftMotorForward.stop()
+        if power_value < .4:
+            motor_all_off()
+        else:
+            rightMotorForward.stop()
+            leftMotorForward.stop()
+
 
     if status == FORWARD:
-        rightMotorReverse.stop()
-        leftMotorReverse.stop()
+        if power_value < .4:
+            motor_all_off()
+        else:
+            rightMotorReverse.stop()
+            leftMotorReverse.stop()
 
     # RIGHT MOTOR
     if motor_side == MOTOR_RIGHT:

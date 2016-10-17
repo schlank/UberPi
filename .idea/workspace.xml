@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6978719d-5d45-494a-8899-35bce8e748ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/RacingWheelFactory.py" afterPath="$PROJECT_DIR$/client/RacingWheelFactory.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/Motors.py" afterPath="$PROJECT_DIR$/robot/Motors.py" />
     </list>
     <ignored path="UberPi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,21 +93,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Motors.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Motors.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/robot/Motors.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
+                <state relative-caret-position="390">
+                  <caret line="83" column="28" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RacingWheelFactory.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="RacingWheelFactory.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+                <state relative-caret-position="360">
+                  <caret line="38" column="55" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="55" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -118,7 +118,7 @@
           <file leaf-file-name="RobotWheels.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/RobotWheels.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="41">
+                <state relative-caret-position="-173">
                   <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
                   <folding />
                 </state>
@@ -193,8 +193,8 @@
         <option value="$PROJECT_DIR$/client/RobotWheels.py" />
         <option value="$PROJECT_DIR$/robot/ControlsHandler.py" />
         <option value="$PROJECT_DIR$/client/Wheel.py" />
-        <option value="$PROJECT_DIR$/robot/Motors.py" />
         <option value="$PROJECT_DIR$/client/RacingWheelFactory.py" />
+        <option value="$PROJECT_DIR$/robot/Motors.py" />
       </list>
     </option>
   </component>
@@ -813,7 +813,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476676223141</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="fixing motors">
+      <created>1476676367388</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1476676367388</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1105,9 +1112,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="38" column="55" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/RobotWheels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
+        <state relative-caret-position="-173">
           <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding />
         </state>
@@ -1115,19 +1132,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robot/Motors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
+        <state relative-caret-position="390">
+          <caret line="83" column="28" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
