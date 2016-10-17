@@ -58,17 +58,17 @@ def start_drive(drive_number, power_value_arg):
         leftMotorForward.start(power_value)
 
 
-def start_motor(wheel, motor):
+def start_motor(status, power, motor):
     if motor == MOTOR_RIGHT:
-        if wheel.getStatus() == FORWARD:
-            start_drive(0, wheel.power)
+        if status == FORWARD:
+            start_drive(0, power)
         else:
-            start_drive(1, wheel.power)
+            start_drive(1, power)
     else:
-        if wheel.getStatus() == FORWARD:
-            start_drive(3, wheel.power)
+        if status == FORWARD:
+            start_drive(3, power)
         else:
-            start_drive(2, wheel.power)
+            start_drive(2, power)
 
 
 def stop_drive(drive_number):

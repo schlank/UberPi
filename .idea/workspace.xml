@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6978719d-5d45-494a-8899-35bce8e748ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Runner.py" afterPath="$PROJECT_DIR$/Runner.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/RacingWheelFactory.py" afterPath="$PROJECT_DIR$/client/RacingWheelFactory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/RobotWheels.py" afterPath="$PROJECT_DIR$/client/RobotWheels.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/Motors.py" afterPath="$PROJECT_DIR$/robot/Motors.py" />
     </list>
     <ignored path="UberPi.iws" />
@@ -99,8 +96,8 @@
           <file leaf-file-name="Motors.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/robot/Motors.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="581">
-                  <caret line="88" column="39" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
+                <state relative-caret-position="641">
+                  <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -669,14 +666,21 @@
       <option name="project" value="LOCAL" />
       <updated>1476595111147</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="ficing motors">
+      <created>1476672397216</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1476672397216</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="986" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1348078" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1348078" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24608502" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -727,7 +731,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fun with the client" />
     <MESSAGE value="Updates to everything" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to everything" />
+    <MESSAGE value="ficing motors" />
+    <option name="LAST_COMMIT_MESSAGE" value="ficing motors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -979,8 +984,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robot/Motors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="88" column="39" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
+        <state relative-caret-position="641">
+          <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
           <folding />
         </state>
       </provider>
