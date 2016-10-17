@@ -54,22 +54,6 @@ def gpio_cleanup():
     GPIO.cleanup()
 
 
-# def start_drive(drive_number, power_value_arg):
-#     power_value = float(power_value_arg)
-#     power_value = abs(power_value)
-#     if power_value > 100:
-#         power_value = 100
-#
-#     if drive_number == 0:
-#         rightMotorForward.start(power_value)
-#     elif drive_number == 1:
-#         rightMotorReverse.start(power_value)
-#     elif drive_number == 2:
-#         leftMotorReverse.start(power_value)
-#     elif drive_number == 3:
-#         leftMotorForward.start(power_value)
-
-
 def start_motor(status, power_value_arg, motor_side):
     # Clean up power value
     power_value = float(power_value_arg)
@@ -79,6 +63,14 @@ def start_motor(status, power_value_arg, motor_side):
 
     if DEBUG:
         print(motor_side, status, power_value)
+
+    if status == BACK:
+        rightMotorForward.stop()
+        leftMotorForward.stop()
+
+    if status == FORWARD:
+        rightMotorReverse.stop()
+        leftMotorReverse.stop()
 
     # RIGHT MOTOR
     if motor_side == MOTOR_RIGHT:
