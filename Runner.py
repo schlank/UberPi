@@ -1,4 +1,4 @@
-from robot.Motors import GPIOCleanup, motor_off
+from robot.Motors import gpio_cleanup, motor_off
 from robot.Speech import *
 from robot.ControlsHandler import *
 
@@ -22,7 +22,7 @@ try:
     # Say("System controls offline.")
     motor_off()
     #raw_input('Turn the power off now, press ENTER to continue')
-    GPIOCleanup()
+    gpio_cleanup()
 
 except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
@@ -30,4 +30,4 @@ except KeyboardInterrupt:
     # Say("Robot Terminated. Keyboard Interrupt")
     motor_off()
     # raw_input('Turn the power off now, press ENTER to continue')
-    GPIOCleanup()
+    gpio_cleanup()

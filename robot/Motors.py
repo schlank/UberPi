@@ -2,13 +2,14 @@
 
 # Load library functions we want
 import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 
-#Right Motor
+# Right Motor
 MOTOR_RIGHT_FORWARD_PIN = 12
 MOTOR_RIGHT_REVERSE_PIN = 16
 
-#Left Motor
+# Left Motor
 MOTOR_LEFT_REVERSE_PIN = 20
 MOTOR_LEFT_FORWARD_PIN = 21
 
@@ -39,7 +40,7 @@ def motor_off():
     GPIO.output(MOTOR_LEFT_FORWARD_PIN, GPIO.LOW)
 
 
-def GPIOCleanup():
+def gpio_cleanup():
     GPIO.cleanup()
 
 
@@ -58,17 +59,27 @@ def start_drive(drive_number, power_value_arg):
         leftMotorForward.start(power_value)
 
 
-def start_motor(status, power, motor):
-    if motor == MOTOR_RIGHT:
+def start_motor(status, power_value_arg, motor_side):
+    # Clean up power value
+    power_value = float(power_value_arg)
+    power_value = abs(power_value)
+    if power_value > 100:
+        power_value = 100
+
+    # RIGHT MOTOR
+    if motor_side == MOTOR_RIGHT:
         if status == FORWARD:
-            start_drive(0, power)
-        else:
-            start_drive(1, power)
+            rightMotorForward.start(power_value)
+        else:  # BACK
+            rightMotorReverse.start(power_value)
+    # LEFT MOTOR
     else:
         if status == FORWARD:
-            start_drive(3, power)
-        else:
-            start_drive(2, power)
+            leftMotorForward.start(power_value)
+        else:  # BACK
+            leftMotorReverse.start(power_value)
+
+    start_drive(2, power_value)
 
 
 def stop_drive(drive_number):
@@ -83,19 +94,17 @@ def stop_drive(drive_number):
 
 
 class Motors:
-
     @staticmethod
     def command(robot_wheels):
         if robot_wheels.has_commands():
-            #Left Motor
+            # Left Motor
             if robot_wheels.leftWheel.has_command():
                 start_motor(robot_wheels.leftWheel.getStatus(), MOTOR_LEFT)
 
-            #Right Motor
+            # Right Motor
             if robot_wheels.rightWheel.has_command():
                 start_motor(robot_wheels.rightWheel.getStatus(), MOTOR_RIGHT)
 
             print(robot_wheels.log())
         else:
             print("no commands")
-
