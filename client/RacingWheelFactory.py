@@ -16,7 +16,7 @@ DEBUG = False
 axis_mode = 1
 
 PEDAL_DEADZONE = .4
-STEERING_DEADZONE = 7
+STEERING_DEADZONE = 20
 
 class RacingWheelFactory:
 

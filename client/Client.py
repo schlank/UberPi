@@ -9,6 +9,7 @@ import pickle
 
 from client import checkwheel
 from client.RacingWheelFactory import RacingWheelFactory
+from robot.Lights import LightsFactory
 
 DEBUG = True
 WHEEL_NAME = "G27 Racing Wheel"
@@ -62,8 +63,13 @@ try:
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
         robotWheels = RacingWheelFactory.createRobotWheels()
+
+        lights = LightsFactory.createLights()
+
+        pickles = [robotWheels, lights]
+
         if regularUpdate or robotWheels.has_commands():
-            pickedWheels = pickle.dumps(robotWheels, -1)
+            pickedWheels = pickle.dumps(pickles, -1)
             sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
             # Wait for the interval period
             time.sleep(interval)

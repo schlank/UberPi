@@ -2,6 +2,7 @@ import pickle
 import socketserver
 import os
 
+from robot.Lights import Lights
 from robot.Motors import Motors
 
 
@@ -17,8 +18,17 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         global isRunning
 
         request, socket = self.request  # Read who spoke to us and what they said
-        robot_wheels = pickle.loads(request)
+
+        pickles = pickle.loads(request)
+        robot_wheels = pickles[0]
         Motors.command(robot_wheels)
+
+        light_status = pickles[1]
+        lights = Lights()
+        lights.command(light_status)
+
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)
+
+
 
