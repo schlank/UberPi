@@ -8,8 +8,8 @@ import time
 import pickle
 
 from client import checkwheel
+from client.LightStatus import LightStatusFactory
 from client.RacingWheelFactory import RacingWheelFactory
-from robot.Lights import LightsFactory
 
 DEBUG = True
 WHEEL_NAME = "G27 Racing Wheel"
@@ -64,7 +64,7 @@ try:
         # Handle Inputs from G27 Racing Wheel and pedal
         robotWheels = RacingWheelFactory.createRobotWheels()
 
-        lights = LightsFactory.createLights()
+        lights = LightStatusFactory.create_lights()
 
         pickles = [robotWheels, lights]
 

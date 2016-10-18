@@ -18,6 +18,7 @@ axis_mode = 1
 PEDAL_DEADZONE = .4
 STEERING_DEADZONE = 20
 
+
 class RacingWheelFactory:
 
     @staticmethod
