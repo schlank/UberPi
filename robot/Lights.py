@@ -1,7 +1,8 @@
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(4, GPIO.OUT)
+LED_HEAD_LIGHT = 22
+GPIO.setup(LED_HEAD_LIGHT, GPIO.OUT)
 
 class Lights:
 
@@ -13,10 +14,10 @@ class Lights:
 
     def turn_on_lights(self):
         print("LED on")
-        GPIO.output(4, GPIO.HIGH)
+        GPIO.output(LED_HEAD_LIGHT, GPIO.HIGH)
 
     def turn_off_lights(self):
         print("LED off")
-        GPIO.output(4, GPIO.LOW)
+        GPIO.output(LED_HEAD_LIGHT, GPIO.LOW)
 
 
