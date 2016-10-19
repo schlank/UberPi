@@ -11,10 +11,13 @@ class Lights(object):
 
     @staticmethod
     def command(light_status):
-        if light_status.on:
-            Lights.turn_on_lights()
-        else:
-            Lights.turn_off_lights()
+        if light_status is not None:
+            if light_status.on:
+                Lights.turn_on_lights()
+            else:
+                Lights.turn_off_lights()
+
+
 
     @staticmethod
     def turn_on_lights():
