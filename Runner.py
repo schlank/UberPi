@@ -1,6 +1,11 @@
+import threading
+import socketserver
+from http import server
+
 from robot.Buttons import Buttons
 from robot.Motors import gpio_cleanup, motor_off
 from robot.ControlsHandler import *
+# import asyncore
 
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
 
@@ -13,11 +18,15 @@ try:
     # Setup the UDP listener
     # Say("Controls Initialized")
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
+    remoteKeyBorgServer.server_activate()
+
+    th = threading.Thread(remoteKeyBorgServer.serve_forever)
+    th.daemon = True
+    th.start()
+
     # Loop until terminated remotely
     isRunning = True
     # Infinite loop that will not end until the user presses the exit key
-
-    remoteKeyBorgServer.handle_request()
 
     while isRunning:
         buttonsPressed = Buttons.pressed_buttons()
