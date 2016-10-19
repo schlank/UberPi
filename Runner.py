@@ -18,6 +18,7 @@ def local_controls():
             print("Pin: ", pressedPin)
             if pressedPin == 27:
                 isRunning = False
+                print("OFF Button Pressed.")
 
 try:
     global isRunning
