@@ -39,7 +39,7 @@ sender.bind(('0.0.0.0', 0))                                                     
 
 def sendWheels(robotWheels):
     if robotWheels is None:
-        robotWheels = RacingWheelFactory.createRobotWheels()
+        robotWheels = RacingWheelFactory.createRacingWheel()
     pickedWheels = pickle.dumps(robotWheels, -1)
     sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
 
@@ -62,12 +62,10 @@ try:
     while True:
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
-        robotWheels = RacingWheelFactory.createRobotWheels()
+        robotWheels = RacingWheelFactory.createRacingWheel()
 
         lights = LightStatusFactory.create_light_status()
         pickles = [robotWheels, lights]
-
-
 
         if regularUpdate or robotWheels.has_commands():
             pickedWheels = pickle.dumps(pickles, -1)

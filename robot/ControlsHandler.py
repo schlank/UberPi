@@ -20,8 +20,8 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         request, socket = self.request  # Read who spoke to us and what they said
 
         pickles = pickle.loads(request)
-        robot_wheels = pickles[0]
-        Motors.command(robot_wheels)
+        racing_wheel = pickles[0]
+        Motors.command(racing_wheel)
 
         light_status = pickles[1]
         Lights.command(light_status)

@@ -23,9 +23,11 @@ def local_controls():
         buttons_pressed = Buttons.pressed_buttons()
         for pressedPin in buttons_pressed:
             # print("Pin: ", pressedPin)
-            if pressedPin == 27:
-                print("OFF Button Pressed.")
+            if pressedPin == 23:
+                print(pressedPin)
                 # isRunning = False
+            elif pressedPin == 24:
+                print(pressedPin)
 
 try:
     global isRunning

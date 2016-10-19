@@ -3,7 +3,7 @@ import os
 # make sure pygame doesn't try to open an output window
 import pygame
 
-from client.RobotWheels import RobotWheels
+from client.RacingWheel import RacingWheel
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 # Setup pygame and key states
@@ -12,7 +12,7 @@ pygame.init()
 WHEEL = "G27 Racing Wheel"
 
 PEDAL_THRESHOLD = 0
-DEBUG = False
+DEBUG = True
 axis_mode = 1
 
 PEDAL_DEADZONE = .4
@@ -22,8 +22,8 @@ STEERING_DEADZONE = 20
 class RacingWheelFactory:
 
     @staticmethod
-    def createRobotWheels():
-        wheels = RobotWheels()
+    def createRacingWheel():
+        wheels = RacingWheel()
 
         for event in pygame.event.get(pygame.JOYAXISMOTION):
             if DEBUG:
@@ -44,7 +44,6 @@ class RacingWheelFactory:
                     else:
                         wheels.moveLeft(event.value)
 
-                print(event.value)
             # GAS PEDAL
             elif event.axis == 1 and axis_mode == 1:
                 if event.value * -100 > PEDAL_THRESHOLD:
@@ -66,6 +65,17 @@ class RacingWheelFactory:
             elif event.axis == 3:
                 print("Clutch")
             else:
-                print(event)
+                print("Event", event)
                 wheels.stop()
+        for event in pygame.event.get(pygame.JOYBUTTONDOWN):
+            if DEBUG:
+                print("Pressed button is", event.button)
+            if event.button == 0:
+                print("pressed button 0 - bye...")
+                exit(0)
+            elif event.button == 6:
+                print("Button", 6)
+            elif event.button == 7:
+                print("Button", 7)
+
         return wheels

@@ -130,15 +130,15 @@ def stop_drive(drive_number):
 
 class Motors:
     @staticmethod
-    def command(robot_wheels):
-        if robot_wheels.has_commands():
+    def command(racing_wheel):
+        if racing_wheel.has_commands():
             # Left Motor
-            if robot_wheels.leftWheel.has_command():
-                start_motor(robot_wheels.leftWheel.getStatus(), robot_wheels.leftWheel.getPower(), MOTOR_LEFT)
+            if racing_wheel.leftWheel.has_command():
+                start_motor(racing_wheel.leftWheel.getStatus(), racing_wheel.leftWheel.getPower(), MOTOR_LEFT)
 
             # Right Motor
-            if robot_wheels.rightWheel.has_command():
-                start_motor(robot_wheels.rightWheel.getStatus(), robot_wheels.rightWheel.getPower(), MOTOR_RIGHT)
+            if racing_wheel.rightWheel.has_command():
+                start_motor(racing_wheel.rightWheel.getStatus(), racing_wheel.rightWheel.getPower(), MOTOR_RIGHT)
 
     @staticmethod
     def all_off():
