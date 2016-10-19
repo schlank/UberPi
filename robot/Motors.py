@@ -58,8 +58,10 @@ def motor_all_off():
     if DEBUG:
         print("motor_all_off")
 
+
 def gpio_cleanup():
     GPIO.cleanup()
+
 
 def start_motor(status, power_value_arg, motor_side):
     # Clean up power value

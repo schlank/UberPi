@@ -22,10 +22,9 @@ def local_controls():
         buttons_pressed = Buttons.pressed_buttons()
         for pressedPin in buttons_pressed:
             print("Pin: ", pressedPin)
-            if pressedPin == 27:
-                print("OFF Button Pressed.")
-                isRunning = False
-
+            # if pressedPin == 27:
+            #     print("OFF Button Pressed.")
+                # isRunning = False
 
 try:
     global isRunning
@@ -35,6 +34,8 @@ try:
     # raw_input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
     # Say("Controls Initialized")
+
+    Fan.startFan()
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
 
     remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
@@ -57,4 +58,5 @@ except KeyboardInterrupt:
     # Say("Robot Terminated. Keyboard Interrupt")
     all_off()
     input('Turn the power off now, press ENTER to continue')
-    gpio_cleanup() 
+    gpio_cleanup()
+    exit()

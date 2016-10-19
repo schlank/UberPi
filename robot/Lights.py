@@ -4,6 +4,8 @@ GPIO.setwarnings(False)
 LED_HEAD_LIGHT = 22
 GPIO.setup(LED_HEAD_LIGHT, GPIO.OUT)
 
+DEBUG = False
+
 
 class Lights:
 
@@ -16,12 +18,14 @@ class Lights:
 
     @staticmethod
     def turn_on_lights():
-        print("LED on")
+        if DEBUG:
+            print("LED on")
         GPIO.output(LED_HEAD_LIGHT, GPIO.HIGH)
 
     @staticmethod
     def turn_off_lights():
-        print("LED off")
+        if DEBUG:
+            print("LED off")
         GPIO.output(LED_HEAD_LIGHT, GPIO.LOW)
 
     @staticmethod
