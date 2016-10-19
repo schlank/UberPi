@@ -7,6 +7,11 @@ from robot.ControlsHandler import *
 # What messages to listen for (LEDB on an LCD)
 portListen = 9038
 
+
+def all_off():
+    Motors.all_off()
+    Lights.all_off()
+
 def local_controls():
     global isRunning
     # Loop until terminated remotely
@@ -45,13 +50,13 @@ try:
     input('threads running')
 
     # Turn off the drives and release the GPIO pins
-    motor_off()
+    all_off()
     gpio_cleanup()
 
 except KeyboardInterrupt:
     # CTRL+C exit, turn off the drives and release the GPIO pins
     print('Terminated')
     # Say("Robot Terminated. Keyboard Interrupt")
-    motor_off()
+    all_off()
     input('Turn the power off now, press ENTER to continue')
     gpio_cleanup() 

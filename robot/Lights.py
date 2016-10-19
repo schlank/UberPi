@@ -24,4 +24,8 @@ class Lights:
         print("LED off")
         GPIO.output(LED_HEAD_LIGHT, GPIO.LOW)
 
+    @staticmethod
+    def all_off():
+        Lights.turn_off_lights()
+
 
