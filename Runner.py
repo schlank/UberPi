@@ -9,6 +9,19 @@ from robot.ControlsHandler import *
 
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
 
+
+def local_controls():
+    # Loop until terminated remotely
+    is_running = True
+    # Infinite loop that will not end until the user presses the exit key
+
+    while is_running:
+        buttonsPressed = Buttons.pressed_buttons()
+        for pressedPin in buttonsPressed:
+            if pressedPin == 23:
+                is_running = False
+                # print("Pin: ", pressedPin)
+
 try:
     global isRunning
 
@@ -24,16 +37,11 @@ try:
     th.daemon = True
     th.start()
 
-    # Loop until terminated remotely
-    isRunning = True
-    # Infinite loop that will not end until the user presses the exit key
+    local_controls_thread = threading.Thread(None, local_controls)
+    local_controls_thread.daemon = True
+    local_controls_thread.start()
 
-    while isRunning:
-        buttonsPressed = Buttons.pressed_buttons()
-        for pressedPin in buttonsPressed:
-            if pressedPin == 23:
-                isRunning = False
-            # print("Pin: ", pressedPin)
+
 
     # Turn off the drives and release the GPIO pins
     print('Finished')
