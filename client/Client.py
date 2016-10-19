@@ -15,10 +15,10 @@ DEBUG = True
 WHEEL_NAME = "G27 Racing Wheel"
 USE_WHEEL = True
 axis_mode = 1
-gstreamIP = "10.215.50.51"
+gstreamIP = "10.215.50.46"
 GSTREAM_PORT = "5000"
 START_GSTREAM = False
-broadcastIP = "10.215.50.51"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+broadcastIP = "10.215.50.46"            # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038                    # What message number to send with (LEDB on an LCD)
 
 LEFT_DRIVE_REVERSE = 3
@@ -65,8 +65,9 @@ try:
         robotWheels = RacingWheelFactory.createRobotWheels()
 
         lights = LightStatusFactory.create_lights()
-
         pickles = [robotWheels, lights]
+
+
 
         if regularUpdate or robotWheels.has_commands():
             pickedWheels = pickle.dumps(pickles, -1)
