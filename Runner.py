@@ -12,6 +12,7 @@ portListen = 9038
 def all_off():
     Motors.all_off()
     Lights.all_off()
+    remoteThread.stop()
 
 
 def local_controls():
@@ -28,9 +29,11 @@ def local_controls():
                 # isRunning = False
             elif pressedPin == 24:
                 isRunning = False
+                print(pressedPin)
 
 try:
     global isRunning
+    global remoteThread
     isRunning = True
     # Start by turning all drives off
     motor_off()
@@ -45,7 +48,7 @@ try:
     remoteThread.daemon = True
     remoteThread.start()
 
-    local_controls_thread = threading.Thread(None, local_controls)
+    local_controls_thread = threading.Thread(None, local_controls, "local_controls")
     local_controls_thread.daemon = True
     local_controls_thread.start()
 
