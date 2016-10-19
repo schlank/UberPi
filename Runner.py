@@ -16,7 +16,7 @@ try:
     # Loop until terminated remotely
     isRunning = True
     while isRunning:
-
+        print("Running")
         buttonsPressed = Buttons().pressed_buttons()
         for pressedPin in buttonsPressed:
             print("Pin: ", pressedPin)
