@@ -20,9 +20,10 @@ try:
     remoteKeyBorgServer.handle_request()
 
     while isRunning:
-        print("Running")
         buttonsPressed = Buttons.pressed_buttons()
         for pressedPin in buttonsPressed:
+            if pressedPin == 27:
+                isRunning = False
             print("Pin: ", pressedPin)
 
     # Turn off the drives and release the GPIO pins
