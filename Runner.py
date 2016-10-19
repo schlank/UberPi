@@ -22,9 +22,9 @@ def local_controls():
     while isRunning:
         buttons_pressed = Buttons.pressed_buttons()
         for pressedPin in buttons_pressed:
-            print("Pin: ", pressedPin)
-            # if pressedPin == 27:
-            #     print("OFF Button Pressed.")
+            # print("Pin: ", pressedPin)
+            if pressedPin == 27:
+                print("OFF Button Pressed.")
                 # isRunning = False
 
 try:
