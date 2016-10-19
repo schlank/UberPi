@@ -22,7 +22,7 @@ try:
     while isRunning:
         buttonsPressed = Buttons.pressed_buttons()
         for pressedPin in buttonsPressed:
-            if pressedPin == 27:
+            if pressedPin == 23:
                 isRunning = False
             print("Pin: ", pressedPin)
 
