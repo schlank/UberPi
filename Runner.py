@@ -1,13 +1,11 @@
 import threading
-import socketserver
-from http import server
 
 from robot.Buttons import Buttons
 from robot.Motors import gpio_cleanup, motor_off
 from robot.ControlsHandler import *
-# import asyncore
 
-portListen = 9038 # What messages to listen for (LEDB on an LCD)
+# What messages to listen for (LEDB on an LCD)
+portListen = 9038
 
 
 def local_controls():
@@ -20,7 +18,7 @@ def local_controls():
         for pressedPin in buttonsPressed:
             if pressedPin == 23:
                 is_running = False
-                # print("Pin: ", pressedPin)
+                print("Pin: ", pressedPin)
 
 try:
     global isRunning
@@ -41,13 +39,10 @@ try:
     local_controls_thread.daemon = True
     local_controls_thread.start()
 
-
+    input('threads running')
 
     # Turn off the drives and release the GPIO pins
-    print('Finished')
-    # Say("System controls offline.")
     motor_off()
-    input('Turn the power off now, press ENTER to continue')
     gpio_cleanup()
 
 except KeyboardInterrupt:
