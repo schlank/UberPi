@@ -20,7 +20,7 @@ try:
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
     remoteKeyBorgServer.server_activate()
 
-    th = threading.Thread(remoteKeyBorgServer.serve_forever)
+    th = threading.Thread(None, remoteKeyBorgServer.handle_request)
     th.daemon = True
     th.start()
 
