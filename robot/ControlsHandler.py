@@ -2,6 +2,7 @@ import pickle
 import socketserver
 import os
 
+from robot.Buttons import Buttons
 from robot.Lights import Lights
 from robot.Motors import Motors
 
@@ -22,8 +23,6 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         pickles = pickle.loads(request)
         robot_wheels = pickles[0]
         Motors.command(robot_wheels)
-
-        Buttons().any_button_pressed()
 
         light_status = pickles[1]
         lights = Lights()

@@ -16,6 +16,11 @@ try:
     # Loop until terminated remotely
     isRunning = True
     while isRunning:
+
+        buttonsPressed = Buttons().pressed_buttons()
+        for pressedPin in buttonsPressed:
+            print("Pin: ", pressedPin)
+
         remoteKeyBorgServer.handle_request()
     # Turn off the drives and release the GPIO pins
     print('Finished')

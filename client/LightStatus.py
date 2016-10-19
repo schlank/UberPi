@@ -1,14 +1,14 @@
-
-
 class LightStatus:
 
-    is_light_on = False
+    on = False
+
+    def __init__(self, on):
+        self.on = on
+        super().__init__()
 
 
 class LightStatusFactory:
 
     @staticmethod
-    def create_lights():
-        lights = LightStatus()
-        lights.is_light_on = True
-        return lights
+    def create_light_status():
+        return LightStatus(True)

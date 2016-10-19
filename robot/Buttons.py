@@ -29,11 +29,10 @@ class Buttons:
     def button_state(button_pin):
         return GPIO.input(button_pin)
 
-    @staticmethod
     def pressed_buttons(self):
         pressed_buttons = []
         for buttonPin in self.buttonPins:
-            if self.button_state(buttonPin) == False:
+            if Buttons.button_state(buttonPin) == False:
                 print('Button Pressed', buttonPin)
                 pressed_buttons.append(buttonPin)
         return pressed_buttons

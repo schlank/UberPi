@@ -64,7 +64,7 @@ try:
         # Handle Inputs from G27 Racing Wheel and pedal
         robotWheels = RacingWheelFactory.createRobotWheels()
 
-        lights = LightStatusFactory.create_lights()
+        lights = LightStatusFactory.create_light_status()
         pickles = [robotWheels, lights]
 
 
