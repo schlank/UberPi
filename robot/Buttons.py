@@ -8,6 +8,10 @@ RED_PIN = 24
 YELLOW_PIN = 18
 YELLOW_2_PIN = 27
 
+buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
+for buttonPin in buttonPins:
+    GPIO.setup(buttonPin, GPIO.IN)
+
 
 class Button:
     on = False
@@ -15,25 +19,12 @@ class Button:
 
 class Buttons:
 
-    buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
-
-    def __init__(self):
-        self.setup_buttons()
-        super().__init__()
-
-    def setup_buttons(self):
-        for buttonPin in self.buttonPins:
-            GPIO.setup(buttonPin, GPIO.IN)
-
     @staticmethod
-    def button_state(button_pin):
-        return GPIO.input(button_pin)
-
     def pressed_buttons(self):
         pressed_buttons = []
-        for buttonPin in self.buttonPins:
-            print('Button Pressed1', buttonPin)
-            if Buttons.button_state(buttonPin) == False:
-                print('Button Pressed2', buttonPin)
-                pressed_buttons.append(buttonPin)
+        for button_pin in buttonPins:
+            print('Button Pressed1', button_pin)
+            if not GPIO.input(button_pin):
+                print('Button Pressed2', button_pin)
+                pressed_buttons.append(button_pin)
         return pressed_buttons
