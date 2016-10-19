@@ -8,7 +8,7 @@ import time
 import pickle
 
 from client import checkwheel
-from client.LightStatus import LightStatusFactory
+from client.LightStatusFactory import LightStatusFactory
 from client.RacingWheelFactory import RacingWheelFactory
 
 DEBUG = True
@@ -43,6 +43,7 @@ def sendWheels(robotWheels):
     pickedWheels = pickle.dumps(robotWheels, -1)
     sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
 
+
 def allStop():
     sendWheels(None)
     print("allStop")
@@ -62,12 +63,12 @@ try:
     while True:
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
-        robotWheels = RacingWheelFactory.createRacingWheel()
+        racingWheel = RacingWheelFactory.createRacingWheel()
 
-        lights = LightStatusFactory.create_light_status()
-        pickles = [robotWheels, lights]
+        lights = LightStatusFactory.create_light_status_from_wheel(racingWheel)
+        pickles = [racingWheel, lights]
 
-        if regularUpdate or robotWheels.has_commands():
+        if regularUpdate or racingWheel.has_commands():
             pickedWheels = pickle.dumps(pickles, -1)
             sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
             # Wait for the interval period

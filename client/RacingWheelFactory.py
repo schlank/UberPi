@@ -23,7 +23,7 @@ class RacingWheelFactory:
 
     @staticmethod
     def createRacingWheel():
-        wheels = RacingWheel()
+        racingWheel = RacingWheel()
 
         for event in pygame.event.get(pygame.JOYAXISMOTION):
             if DEBUG:
@@ -35,21 +35,21 @@ class RacingWheelFactory:
                 # Steering Wheel - Move right
                 if event.value > 0:
                     if power_value < STEERING_DEADZONE:
-                        wheels.moveRight(0)
+                        racingWheel.moveRight(0)
                     else:
-                        wheels.moveRight(event.value)
+                        racingWheel.moveRight(event.value)
                 elif event.value < 0:
                     if power_value < STEERING_DEADZONE:
-                        wheels.moveLeft(0)
+                        racingWheel.moveLeft(0)
                     else:
-                        wheels.moveLeft(event.value)
+                        racingWheel.moveLeft(event.value)
 
             # GAS PEDAL
             elif event.axis == 1 and axis_mode == 1:
                 if event.value * -100 > PEDAL_THRESHOLD:
-                    wheels.moveUp(event.value)
+                    racingWheel.moveUp(event.value)
                 elif event.value * 100 > PEDAL_THRESHOLD:
-                    wheels.moveBack(event.value)
+                    racingWheel.moveBack(event.value)
             elif event.axis == 1 and axis_mode == 2:
                 print(event.value)
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sAxis_mode 2")
@@ -66,7 +66,7 @@ class RacingWheelFactory:
                 print("Clutch")
             else:
                 print("Event", event)
-                wheels.stop()
+                racingWheel.stop()
         for event in pygame.event.get(pygame.JOYBUTTONDOWN):
             if DEBUG:
                 print("Pressed button is", event.button)
@@ -74,8 +74,10 @@ class RacingWheelFactory:
                 print("pressed button 0 - bye...")
                 exit(0)
             elif event.button == 6:
+                racingWheel.rightButton.on = True
                 print("Button", 6)
             elif event.button == 7:
+                racingWheel.leftButton.on = True
                 print("Button", 7)
 
-        return wheels
+        return racingWheel

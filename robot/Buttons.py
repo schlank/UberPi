@@ -12,11 +12,6 @@ buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
 for buttonPin in buttonPins:
     GPIO.setup(buttonPin, GPIO.IN)
 
-
-class Button:
-    on = False
-
-
 class Buttons:
 
     @staticmethod

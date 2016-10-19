@@ -4,7 +4,7 @@ GPIO.setwarnings(False)
 LED_HEAD_LIGHT = 22
 GPIO.setup(LED_HEAD_LIGHT, GPIO.OUT)
 
-DEBUG = False
+DEBUG = True
 
 
 class Lights(object):
@@ -31,5 +31,6 @@ class Lights(object):
     @staticmethod
     def all_off():
         Lights.turn_off_lights()
+
 
 

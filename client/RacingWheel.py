@@ -1,20 +1,16 @@
 from client.Wheel import Wheel
-from robot.Buttons import Button
+from robot.Button import Button
 
 STEERING_TURBO = 0
 
-class RacingWheel(object):
 
-    leftWheel = None
-    rightWheel = None
-    leftButton = None
-    rightButton = None
+class RacingWheel(object):
 
     def __init__(self):
         self.leftWheel = Wheel()
         self.rightWheel = Wheel()
-        self.leftButton = Button()
-        self.rightButton = Button()
+        self.leftButton = Button(False)
+        self.rightButton = Button(False)
         super().__init__()
 
     def moveRight(self, power):

@@ -3,7 +3,7 @@ import threading
 from robot.Buttons import Buttons
 from robot.Fan import Fan
 from robot.Motors import gpio_cleanup, motor_off
-from robot.ControlsHandler import *
+from robot.RemoteControlsHandler import *
 
 # What messages to listen for (LEDB on an LCD)
 portListen = 9038
@@ -39,7 +39,7 @@ try:
     # Say("Controls Initialized")
 
     Fan.start_fan()
-    remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
+    remoteKeyBorgServer = socketserver.UDPServer(('', portListen), RemoteControlsHandler)
 
     remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
     remoteThread.daemon = True

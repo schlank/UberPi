@@ -12,7 +12,7 @@ def getCPUtemperature():
 
 
 # Class used to handle UDP messages
-class ControlsHandler(socketserver.BaseRequestHandler):
+class RemoteControlsHandler(socketserver.BaseRequestHandler):
     # Function called when a new message has been received
     def handle(self):
         global isRunning
@@ -24,6 +24,9 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         Motors.command(racing_wheel)
 
         light_status = pickles[1]
+
+        print(light_status)
+
         Lights.command(light_status)
 
         #cpu_temp = getCPUtemperature()
