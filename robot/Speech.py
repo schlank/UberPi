@@ -1,7 +1,7 @@
 import os
 
 
-class Say:
+class Say(object):
     def __init__(self, something):
         self.say(something)
 

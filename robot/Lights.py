@@ -7,7 +7,7 @@ GPIO.setup(LED_HEAD_LIGHT, GPIO.OUT)
 DEBUG = False
 
 
-class Lights:
+class Lights(object):
 
     @staticmethod
     def command(light_status):

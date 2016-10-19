@@ -18,7 +18,7 @@ GPIO.setup(CAMERA_SERVO_PIN, GPIO.OUT)
 cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
 
 
-class Camera:
+class Camera(object):
     def rotate(direction, start):
         global camerServoPos
         if start == True:

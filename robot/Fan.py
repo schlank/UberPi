@@ -10,6 +10,7 @@ FAN_PIN = 25
 
 GPIO.setup(FAN_PIN, GPIO.OUT)
 
+
 class Fan(object):
 
     @staticmethod
