@@ -23,6 +23,8 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         robot_wheels = pickles[0]
         Motors.command(robot_wheels)
 
+        Buttons().any_button_pressed()
+
         light_status = pickles[1]
         lights = Lights()
         lights.command(light_status)
