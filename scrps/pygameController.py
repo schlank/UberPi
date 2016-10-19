@@ -2,10 +2,10 @@ import RPi.GPIO as GPIO
 import time
 
 INTERVAL = 0.1
-BLUE_PIN = 4
-RED_PIN = 17
-YELLOW_PIN = 22
-YELLOW_2_PIN = 18
+BLUE_PIN = 23
+RED_PIN = 24
+YELLOW_PIN = 18
+YELLOW_2_PIN = 27
 buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
 
 GPIO.setmode(GPIO.BCM)
@@ -33,6 +33,3 @@ while True:
 	while anyButtonPressed() == True:
 		time.sleep(INTERVAL)
 
-		
-			
-		
