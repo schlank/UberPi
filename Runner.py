@@ -12,6 +12,7 @@ def all_off():
     Motors.all_off()
     Lights.all_off()
 
+
 def local_controls():
     global isRunning
     # Loop until terminated remotely
@@ -36,16 +37,13 @@ try:
     # Say("Controls Initialized")
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
 
-    # th = threading.Thread(None, remoteKeyBorgServer.serve_forever)
-    # th.daemon = True
-    # th.start()
+    remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
+    remoteThread.daemon = True
+    remoteThread.start()
 
     local_controls_thread = threading.Thread(None, local_controls)
     local_controls_thread.daemon = True
     local_controls_thread.start()
-
-    while isRunning:
-        remoteKeyBorgServer.handle_request()
 
     input('threads running')
 
