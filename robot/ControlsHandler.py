@@ -25,8 +25,7 @@ class ControlsHandler(socketserver.BaseRequestHandler):
         Motors.command(robot_wheels)
 
         light_status = pickles[1]
-        lights = Lights()
-        lights.command(light_status)
+        Lights.command(light_status)
 
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)
