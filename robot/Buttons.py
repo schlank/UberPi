@@ -32,7 +32,8 @@ class Buttons:
     def pressed_buttons(self):
         pressed_buttons = []
         for buttonPin in self.buttonPins:
+            print('Button Pressed1', buttonPin)
             if Buttons.button_state(buttonPin) == False:
-                print('Button Pressed', buttonPin)
+                print('Button Pressed2', buttonPin)
                 pressed_buttons.append(buttonPin)
         return pressed_buttons
