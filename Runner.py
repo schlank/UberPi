@@ -12,11 +12,9 @@ def local_controls():
     # Loop until terminated remotely
     # Infinite loop that will not end until the user presses the exit key
 
-
-
     while isRunning:
-        buttonsPressed = Buttons.pressed_buttons()
-        for pressedPin in buttonsPressed:
+        buttons_pressed = Buttons.pressed_buttons()
+        for pressedPin in buttons_pressed:
             print("Pin: ", pressedPin)
 
 try:
