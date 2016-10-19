@@ -16,6 +16,8 @@ def local_controls():
         buttons_pressed = Buttons.pressed_buttons()
         for pressedPin in buttons_pressed:
             print("Pin: ", pressedPin)
+            if pressedPin == 27:
+                isRunning = False
 
 try:
     global isRunning
@@ -35,6 +37,9 @@ try:
     local_controls_thread = threading.Thread(None, local_controls)
     local_controls_thread.daemon = True
     local_controls_thread.start()
+
+    while isRunning:
+        remoteKeyBorgServer.handle_request()
 
     input('threads running')
 
