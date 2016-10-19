@@ -1,3 +1,4 @@
+from robot.Buttons import Buttons
 from robot.Motors import gpio_cleanup, motor_off
 from robot.ControlsHandler import *
 
@@ -15,10 +16,12 @@ try:
     # Loop until terminated remotely
     isRunning = True
     # Infinite loop that will not end until the user presses the exit key
+
+    remoteKeyBorgServer.handle_request()
+
     while isRunning:
-        remoteKeyBorgServer.handle_request()
         print("Running")
-        buttonsPressed = Buttons().pressed_buttons()
+        buttonsPressed = Buttons.pressed_buttons()
         for pressedPin in buttonsPressed:
             print("Pin: ", pressedPin)
 
@@ -26,7 +29,7 @@ try:
     print('Finished')
     # Say("System controls offline.")
     motor_off()
-    #raw_input('Turn the power off now, press ENTER to continue')
+    input('Turn the power off now, press ENTER to continue')
     gpio_cleanup()
 
 except KeyboardInterrupt:
@@ -34,5 +37,5 @@ except KeyboardInterrupt:
     print('Terminated')
     # Say("Robot Terminated. Keyboard Interrupt")
     motor_off()
-    # raw_input('Turn the power off now, press ENTER to continue')
+    input('Turn the power off now, press ENTER to continue')
     gpio_cleanup() 

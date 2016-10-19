@@ -2,14 +2,13 @@ import pickle
 import socketserver
 import os
 
-from robot.Buttons import Buttons
 from robot.Lights import Lights
 from robot.Motors import Motors
 
 
 def getCPUtemperature():
     res = os.popen('vcgencmd measure_temp').readline()
-    return(res.replace("temp=","").replace("'C\n",""))
+    return res.replace("temp=", "").replace("'C\n", "")
 
 
 # Class used to handle UDP messages
