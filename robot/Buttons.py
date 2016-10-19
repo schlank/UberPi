@@ -20,8 +20,9 @@ class Button:
 class Buttons:
 
     @staticmethod
-    def pressed_buttons(self):
+    def pressed_buttons():
         pressed_buttons = []
+        print("button check")
         for button_pin in buttonPins:
             print('Button Pressed1', button_pin)
             if not GPIO.input(button_pin):
