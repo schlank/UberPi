@@ -17,8 +17,9 @@ def local_controls():
         for pressedPin in buttons_pressed:
             print("Pin: ", pressedPin)
             if pressedPin == 27:
-                isRunning = False
                 print("OFF Button Pressed.")
+                isRunning = False
+
 
 try:
     global isRunning
@@ -29,7 +30,6 @@ try:
     # Setup the UDP listener
     # Say("Controls Initialized")
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
-    remoteKeyBorgServer.server_activate()
 
     # th = threading.Thread(None, remoteKeyBorgServer.serve_forever)
     # th.daemon = True
