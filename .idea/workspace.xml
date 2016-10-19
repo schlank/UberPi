@@ -38,8 +38,8 @@
       <file leaf-file-name="Runner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Runner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="480">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -60,8 +60,8 @@
       <file leaf-file-name="threading.py" pinned="false" current-in-tab="false">
         <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/threading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="739" column="20" selection-start-line="739" selection-start-column="20" selection-end-line="739" selection-end-column="20" />
+            <state relative-caret-position="377">
+              <caret line="765" column="62" selection-start-line="765" selection-start-column="8" selection-end-line="765" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -499,20 +499,6 @@
       <option name="presentableId" value="Default" />
       <updated>1473129446935</updated>
     </task>
-    <task id="LOCAL-00016" summary="Updates to everything">
-      <created>1476592708192</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1476592708192</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Updates to everything">
-      <created>1476592752743</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1476592752743</updated>
-    </task>
     <task id="LOCAL-00018" summary="Updates to everything">
       <created>1476592841533</created>
       <option name="number" value="00018" />
@@ -842,7 +828,21 @@
       <option name="project" value="LOCAL" />
       <updated>1476848784382</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="testing buttons&#10;">
+      <created>1476849650487</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1476849650487</updated>
+    </task>
+    <task id="LOCAL-00066" summary="testing buttons&#10;">
+      <created>1476849761104</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1476849761104</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1184,8 +1184,8 @@
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/threading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="739" column="20" selection-start-line="739" selection-start-column="20" selection-end-line="739" selection-end-column="20" />
+        <state relative-caret-position="377">
+          <caret line="765" column="62" selection-start-line="765" selection-start-column="8" selection-end-line="765" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1200,8 +1200,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Runner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state relative-caret-position="480">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

@@ -33,7 +33,7 @@ try:
         for pressedPin in buttonsPressed:
             if pressedPin == 23:
                 isRunning = False
-            print("Pin: ", pressedPin)
+            # print("Pin: ", pressedPin)
 
     # Turn off the drives and release the GPIO pins
     print('Finished')
