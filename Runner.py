@@ -1,5 +1,4 @@
 from robot.Motors import gpio_cleanup, motor_off
-from robot.Speech import *
 from robot.ControlsHandler import *
 
 portListen = 9038 # What messages to listen for (LEDB on an LCD)
@@ -15,13 +14,14 @@ try:
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
     # Loop until terminated remotely
     isRunning = True
+    # Infinite loop that will not end until the user presses the exit key
     while isRunning:
+        remoteKeyBorgServer.handle_request()
         print("Running")
         buttonsPressed = Buttons().pressed_buttons()
         for pressedPin in buttonsPressed:
             print("Pin: ", pressedPin)
 
-        remoteKeyBorgServer.handle_request()
     # Turn off the drives and release the GPIO pins
     print('Finished')
     # Say("System controls offline.")
