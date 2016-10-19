@@ -27,7 +27,7 @@ def local_controls():
                 print(pressedPin)
                 # isRunning = False
             elif pressedPin == 24:
-                print(pressedPin)
+                isRunning False
 
 try:
     global isRunning
