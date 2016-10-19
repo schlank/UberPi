@@ -1,6 +1,7 @@
 import threading
 
 from robot.Buttons import Buttons
+from robot.Fan import Fan
 from robot.Motors import gpio_cleanup, motor_off
 from robot.ControlsHandler import *
 
@@ -35,7 +36,7 @@ try:
     # Setup the UDP listener
     # Say("Controls Initialized")
 
-    Fan.startFan()
+    Fan.start_fan()
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
 
     remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
