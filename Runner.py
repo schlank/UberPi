@@ -7,20 +7,21 @@ from robot.ControlsHandler import *
 # What messages to listen for (LEDB on an LCD)
 portListen = 9038
 
-
 def local_controls():
+    global isRunning
     # Loop until terminated remotely
-    is_running = True
     # Infinite loop that will not end until the user presses the exit key
 
-    while is_running:
+
+
+    while isRunning:
         buttonsPressed = Buttons.pressed_buttons()
         for pressedPin in buttonsPressed:
             print("Pin: ", pressedPin)
 
 try:
     global isRunning
-
+    isRunning = True
     # Start by turning all drives off
     motor_off()
     # raw_input('You can now turn on the power, press ENTER to continue')
@@ -29,9 +30,9 @@ try:
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), ControlsHandler)
     remoteKeyBorgServer.server_activate()
 
-    th = threading.Thread(None, remoteKeyBorgServer.serve_forever)
-    th.daemon = True
-    th.start()
+    # th = threading.Thread(None, remoteKeyBorgServer.serve_forever)
+    # th.daemon = True
+    # th.start()
 
     local_controls_thread = threading.Thread(None, local_controls)
     local_controls_thread.daemon = True
