@@ -22,8 +22,10 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         pickles = pickle.loads(request)
         racing_wheel = pickles[0]
         Motors.command(racing_wheel)
+
         light_status = pickles[1]
         Lights.command(light_status)
+
 
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)

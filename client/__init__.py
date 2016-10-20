@@ -1,7 +1,7 @@
 import pygame
 
 
-def checkwheel(wheel_name):
+def check_wheel(wheel_name):
     usewheel = False
     try:
         wheel = None

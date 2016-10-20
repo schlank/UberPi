@@ -7,7 +7,7 @@ import time
 # Settings for the RemoteKeyBorg client
 import pickle
 
-from client import checkwheel
+from client import check_wheel
 from client.LightStatusFactory import LightStatusFactory
 from client.RacingWheelFactory import RacingWheelFactory
 
@@ -54,7 +54,7 @@ try:
     motorsStopped = False
     print('Press [ESC] to quit')
     # Is the racing wheel connected?
-    if checkwheel(WHEEL_NAME):
+    if check_wheel(WHEEL_NAME):
         print("Wheel not found: " + WHEEL_NAME)
         allStop()
         pass
@@ -65,12 +65,19 @@ try:
         # Handle Inputs from G27 Racing Wheel and pedal
         racingWheel = RacingWheelFactory.createRacingWheel()
 
-        lights = LightStatusFactory.create_light_status_from_wheel(racingWheel)
-        pickles = [racingWheel, lights]
+        racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
 
-        if regularUpdate or racingWheel.has_commands():
-            pickedWheels = pickle.dumps(pickles, -1)
-            sender.sendto(pickedWheels, (broadcastIP, broadcastPort))
+        # Keyboard input is used to create the same object as the wheel.
+        keyboardControls = RacingWheelFactory.create_racing_wheel_w_keyboard()
+
+        # LED Headlamp is turned on and off from racing wheel buttons.
+        lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
+
+        pickles = [racingWheel, keyboardControls, lights]
+
+        if regularUpdate or racingWheel.has_commands() or keyboardControls.has_commands():
+            pickled_controls = pickle.dumps(pickles, -1)
+            sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
             # Wait for the interval period
             time.sleep(interval)
 

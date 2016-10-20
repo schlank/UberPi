@@ -17,11 +17,17 @@ horz_servo_pin = 12
 GPIO.setup(CAMERA_SERVO_PIN, GPIO.OUT)
 cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
 
+class ServoFactory(object):
+
+    @staticmethod
+    def create_servo_status():
+        pass
+
 
 class Camera(object):
     def rotate(direction, start):
         global camerServoPos
-        if start == True:
+        if start:
             camerServoPos = STARTING_ROTATION
             cameraServo.start(camerServoPos)
         else:

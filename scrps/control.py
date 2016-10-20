@@ -127,7 +127,8 @@ try:
         send_data("ignition_status","start")
       elif event.button >= 12 and event.button <= 17:
         gear = event.button - 11
-        send_data("gear_lever_position", gear_lever_positions[gear])
+        send_data("gear_lever_pgear_lever_position", gear_lever_positions[gear])
+      elif event.button == 22osition", gear_lever_positions[gear])
       elif event.button == 22:
         gear = -1
         send_data("gear_lever_position", gear_lever_positions[gear])
