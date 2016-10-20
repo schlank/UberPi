@@ -2,6 +2,8 @@ import pickle
 import socketserver
 import os
 
+from client.LightStatus import LightStatus
+from client.RacingWheel import RacingWheel
 from robot.Lights import Lights
 from robot.Motors import Motors
 
@@ -20,19 +22,14 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         request, socket = self.request  # Read who spoke to us and what they said
 
         pickles = pickle.loads(request)
-        racing_wheel = pickles[0]
-        Motors.command(racing_wheel)
 
-        racing_wheel_button_test = pickles[1]
-        Motors.command(racing_wheel_button_test)
-
-        keyboard_controls = pickles[2]
-        Motors.command(keyboard_controls)
-
-        light_status = pickles[3]
-        Lights.command(light_status)
-
-        print(pickles)
+        for pickl in pickles:
+            if type(pickl) is RacingWheel:
+                Motors.command(pickl)
+            elif type(pickl) is LightStatus:
+                Lights.command(pickl)
+            else:
+                print("Unhandled Pickle")
 
 
         #cpu_temp = getCPUtemperature()

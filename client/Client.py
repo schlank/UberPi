@@ -61,21 +61,31 @@ try:
 
     # Loop indefinitely
     while True:
+
+        pickles = []
+
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
         racingWheel = RacingWheelFactory.createRacingWheel()
+        if racingWheel is not None and racingWheel.has_commands():
+            pickles.append(racingWheel)
 
         racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
+        if racingWheelTest is not None and racingWheelTest.has_commands():
+            pickles.append(racingWheelTest)
 
         # Keyboard input is used to create the same object as the wheel.
         keyboardControls = RacingWheelFactory.create_racing_wheel_w_keyboard()
+        if keyboardControls is not None and keyboardControls.has_commands():
+            pickles.append(keyboardControls)
+
 
         # LED Headlamp is turned on and off from racing wheel buttons.
         lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
+        if lights is not None:
+            pickles.append(lights)
 
-        pickles = [racingWheel, racingWheelTest, keyboardControls, lights]
-
-        if regularUpdate or racingWheel.has_commands() or keyboardControls.has_commands():
+        if pickles.count() > 0:
             pickled_controls = pickle.dumps(pickles, -1)
             sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
             # Wait for the interval period
