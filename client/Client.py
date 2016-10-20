@@ -67,23 +67,21 @@ try:
         # Get the currently pressed keys on the keyboard
         # Handle Inputs from G27 Racing Wheel and pedal
         racingWheel = RacingWheelFactory.createRacingWheel()
-        if racingWheel is not None and racingWheel.has_commands():
+        if racingWheel.has_commands():
             pickles.append(racingWheel)
 
+        # LED Headlamp is turned on and off from racing wheel buttons.
+        lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
+        pickles.append(lights)
+
         racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
-        if racingWheelTest is not None and racingWheelTest.has_commands():
+        if racingWheelTest.has_commands():
             pickles.append(racingWheelTest)
 
         # Keyboard input is used to create the same object as the wheel.
         keyboardControls = RacingWheelFactory.create_racing_wheel_w_keyboard()
         if keyboardControls is not None and keyboardControls.has_commands():
             pickles.append(keyboardControls)
-
-
-        # LED Headlamp is turned on and off from racing wheel buttons.
-        lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
-        if lights is not None:
-            pickles.append(lights)
 
         if not pickles:
             pickled_controls = pickle.dumps(pickles, -1)
