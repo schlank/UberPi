@@ -85,7 +85,7 @@ try:
         if lights is not None:
             pickles.append(lights)
 
-        if pickles.count() > 0:
+        if not pickles:
             pickled_controls = pickle.dumps(pickles, -1)
             sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
             # Wait for the interval period

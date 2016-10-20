@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6978719d-5d45-494a-8899-35bce8e748ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/RacingWheelFactory.py" afterPath="$PROJECT_DIR$/client/RacingWheelFactory.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/Client.py" afterPath="$PROJECT_DIR$/client/Client.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/RemoteControlsHandler.py" afterPath="$PROJECT_DIR$/robot/RemoteControlsHandler.py" />
     </list>
     <ignored path="UberPi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,26 +23,27 @@
     <favorites_list name="UberPi" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.632107">
+    <splitter split-orientation="horizontal" split-proportion="0.4755513">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="RemoteControlsHandler.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/robot/RemoteControlsHandler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+                <state relative-caret-position="210">
+                  <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
+                    <marker date="1476941584000" expanded="true" signature="980:981" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Client.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Client.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/client/Client.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="334">
-                  <caret line="70" column="64" selection-start-line="70" selection-start-column="64" selection-end-line="70" selection-end-column="64" />
+                <state relative-caret-position="348">
+                  <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
                   <folding>
                     <element signature="e#56#69#0" expanded="true" />
                   </folding>
@@ -81,14 +83,24 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RacingWheelFactory.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="RacingWheelFactory.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1297">
-                  <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+                <state relative-caret-position="-1583">
+                  <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LightStatusFactory.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/client/LightStatusFactory.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="75">
+                  <caret line="5" column="46" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="46" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -97,7 +109,7 @@
             <entry file="file://$PROJECT_DIR$/client/LightStatus.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -132,8 +144,8 @@
           <file leaf-file-name="RemoteControlsHandler.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/robot/RemoteControlsHandler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
-                  <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+                <state relative-caret-position="300">
+                  <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
                   </folding>
@@ -215,9 +227,9 @@
         <option value="$PROJECT_DIR$/client/__init__.py" />
         <option value="$PROJECT_DIR$/robot/Video.py" />
         <option value="$PROJECT_DIR$/scrps/control.py" />
+        <option value="$PROJECT_DIR$/client/RacingWheelFactory.py" />
         <option value="$PROJECT_DIR$/client/Client.py" />
         <option value="$PROJECT_DIR$/robot/RemoteControlsHandler.py" />
-        <option value="$PROJECT_DIR$/client/RacingWheelFactory.py" />
       </list>
     </option>
   </component>
@@ -542,27 +554,6 @@
       <option name="presentableId" value="Default" />
       <updated>1473129446935</updated>
     </task>
-    <task id="LOCAL-00044" summary="fixing motors">
-      <created>1476676223141</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1476676223141</updated>
-    </task>
-    <task id="LOCAL-00045" summary="fixing motors">
-      <created>1476676367388</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1476676367388</updated>
-    </task>
-    <task id="LOCAL-00046" summary="fixing motors">
-      <created>1476676891259</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1476676891259</updated>
-    </task>
     <task id="LOCAL-00047" summary="fixing motors">
       <created>1476676977571</created>
       <option name="number" value="00047" />
@@ -885,7 +876,28 @@
       <option name="project" value="LOCAL" />
       <updated>1476939221981</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Buttons on wheel">
+      <created>1476939344325</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1476939344325</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Buttons on wheel">
+      <created>1476941213932</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1476941213932</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Buttons on wheel">
+      <created>1476941305827</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1476941305827</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -894,13 +906,13 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09691161" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24049217" sideWeight="0.5250266" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34787473" sideWeight="0.5250266" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24608502" sideWeight="0.46645367" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2852349" sideWeight="0.49574015" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24049217" sideWeight="0.47497338" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34787473" sideWeight="0.47497338" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2662407" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2513312" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.244" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1082,6 +1094,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="1213" column="34" selection-start-line="1213" selection-start-column="34" selection-end-line="1213" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1103,6 +1116,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1117,14 +1131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/LightStatusFactory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1219,11 +1225,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/LightStatus.py">
+    <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-1583">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1231,6 +1239,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="20" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/LightStatus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1243,32 +1259,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/robot/RemoteControlsHandler.py">
+    <entry file="file://$PROJECT_DIR$/client/LightStatusFactory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="75">
+          <caret line="5" column="46" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/Client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="70" column="64" selection-start-line="70" selection-start-column="64" selection-end-line="70" selection-end-column="64" />
+        <state relative-caret-position="348">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="e#56#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/RacingWheelFactory.py">
+    <entry file="file://$PROJECT_DIR$/robot/RemoteControlsHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1297">
-          <caret line="121" column="8" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+        <state relative-caret-position="300">
+          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

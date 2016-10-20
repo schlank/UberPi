@@ -12,6 +12,13 @@ def getCPUtemperature():
     res = os.popen('vcgencmd measure_temp').readline()
     return res.replace("temp=", "").replace("'C\n", "")
 
+def run_pickle(pickl):
+    if type(pickl) is RacingWheel:
+        Motors.command(pickl)
+    elif type(pickl) is LightStatus:
+        Lights.command(pickl)
+    else:
+        print("Unhandled Pickle")
 
 # Class used to handle UDP messages
 class RemoteControlsHandler(socketserver.BaseRequestHandler):
@@ -23,13 +30,12 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
 
         pickles = pickle.loads(request)
 
-        for pickl in pickles:
-            if type(pickl) is RacingWheel:
-                Motors.command(pickl)
-            elif type(pickl) is LightStatus:
-                Lights.command(pickl)
-            else:
-                print("Unhandled Pickle")
+
+        if pickles is not list:
+            run_pickle(pickles)
+        else:
+            for one_pickle in pickles:
+                run_pickle(one_pickle)
 
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)
