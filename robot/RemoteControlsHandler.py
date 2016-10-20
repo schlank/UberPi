@@ -31,7 +31,6 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
             else:
                 print("Unhandled Pickle")
 
-
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)
 
