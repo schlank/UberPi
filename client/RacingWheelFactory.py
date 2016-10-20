@@ -119,6 +119,7 @@ class RacingWheelFactory:
                     racingWheel.leftWheel.power = 0
                     racingWheel.rightWheel.power = 0
                     moveQuit = False
+        return racingWheel
 
 
     @staticmethod
