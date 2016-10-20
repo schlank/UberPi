@@ -23,6 +23,7 @@ def run_pickle(pickl):
     else:
         print("Unhandled Pickle")
 
+
 # Class used to handle UDP messages
 class RemoteControlsHandler(socketserver.BaseRequestHandler):
     # Function called when a new message has been received
@@ -33,15 +34,11 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
 
         pickles = pickle.loads(request)
 
-
-        if pickles is not list:
+        if type(pickles) is not list:
             run_pickle(pickles)
         else:
             for one_pickle in pickles:
                 run_pickle(one_pickle)
 
-        #cpu_temp = getCPUtemperature()
-        # print("CPU", cpu_temp)
-
-
-
+                # cpu_temp = getCPUtemperature()
+                # print("CPU", cpu_temp)
