@@ -156,7 +156,7 @@ class RacingWheelFactory:
                 print(status_buttons[event.button])
             print(event.button)
             print(event)
-            return racingWheel
+        return racingWheel
 
     @staticmethod
     def createRacingWheel():
