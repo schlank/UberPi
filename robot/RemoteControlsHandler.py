@@ -12,7 +12,10 @@ def getCPUtemperature():
     res = os.popen('vcgencmd measure_temp').readline()
     return res.replace("temp=", "").replace("'C\n", "")
 
+
 def run_pickle(pickl):
+    print(type(pickl))
+    print(pickl)
     if type(pickl) is RacingWheel:
         Motors.command(pickl)
     elif type(pickl) is LightStatus:
