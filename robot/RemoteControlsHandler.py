@@ -38,6 +38,8 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
             run_pickle(pickles)
         else:
             for one_pickle in pickles:
+                print(type(one_pickle))
+                print(one_pickle)
                 run_pickle(one_pickle)
 
                 # cpu_temp = getCPUtemperature()
