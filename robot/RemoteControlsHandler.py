@@ -23,7 +23,13 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         racing_wheel = pickles[0]
         Motors.command(racing_wheel)
 
-        light_status = pickles[1]
+        racing_wheel_button_test = pickles[1]
+        Motors.command(racing_wheel_button_test)
+
+        keyboard_controls = pickles[2]
+        Motors.command(keyboard_controls)
+
+        light_status = pickles[3]
         Lights.command(light_status)
 
 

@@ -73,7 +73,7 @@ try:
         # LED Headlamp is turned on and off from racing wheel buttons.
         lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
 
-        pickles = [racingWheel, keyboardControls, lights]
+        pickles = [racingWheel, racingWheelTest, keyboardControls, lights]
 
         if regularUpdate or racingWheel.has_commands() or keyboardControls.has_commands():
             pickled_controls = pickle.dumps(pickles, -1)
