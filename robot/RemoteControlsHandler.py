@@ -32,6 +32,8 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         light_status = pickles[3]
         Lights.command(light_status)
 
+        print(pickles)
+
 
         #cpu_temp = getCPUtemperature()
         # print("CPU", cpu_temp)
