@@ -80,10 +80,10 @@ try:
 
         # Keyboard input is used to create the same object as the wheel.
         keyboardControls = RacingWheelFactory.create_racing_wheel_w_keyboard()
-        if keyboardControls is not None and keyboardControls.has_commands():
+        if keyboardControls.has_commands():
             pickles.append(keyboardControls)
 
-        if not pickles:
+        if len(pickles) > 0:
             pickled_controls = pickle.dumps(pickles, -1)
             sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
             # Wait for the interval period
