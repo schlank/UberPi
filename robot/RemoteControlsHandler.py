@@ -33,18 +33,11 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         global isRunning
 
         request, socket = self.request  # Read who spoke to us and what they said
-
         pickles = pickle.loads(request)
-        print(pickles)
-        print(type(pickles))
         if type(pickles) is list:
             for one_pickle in pickles:
-                print(type(one_pickle))
-                print(one_pickle)
                 run_pickle(one_pickle)
         else:
             run_pickle(pickles)
-
-
                 # cpu_temp = getCPUtemperature()
                 # print("CPU", cpu_temp)
