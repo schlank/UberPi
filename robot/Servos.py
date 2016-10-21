@@ -14,6 +14,7 @@ horz_servo_pin=12
 GPIO.setup(CAMERA_SERVO_PIN, GPIO.OUT)
 cameraServo = GPIO.PWM(CAMERA_SERVO_PIN, 50)
 
+
 def camera_rotate(direction, start):
     global camer_servo_pos
     if start:
@@ -32,7 +33,7 @@ def camera_rotate(direction, start):
             else:
                 camer_servo_pos -= ROTATION_STEP
             cameraServo.ChangeDutyCycle(camer_servo_pos)
-    print(camer_servo_pos)
+    print(direction, camer_servo_pos)
     time.sleep(.5)
     cameraServo.ChangeDutyCycle(0)
 
