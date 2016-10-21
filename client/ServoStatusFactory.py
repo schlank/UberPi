@@ -10,10 +10,8 @@ class ServoStatusFactory:
             direction = "DOWN"
         elif racing_wheel.rightShiftButton.on:
             direction = "UP"
-
         if direction is not None:
-            print(racing_wheel.leftShiftButton.on)
-            print(racing_wheel.rightShiftButton.on)
+            print(direction)
             return ServoStatus(direction)
         return None
 

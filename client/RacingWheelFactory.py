@@ -121,7 +121,6 @@ class RacingWheelFactory:
                     moveQuit = False
         return racingWheel
 
-
     @staticmethod
     def create_racing_wheel_w_buttons():
         racingWheel = RacingWheel()
@@ -220,5 +219,11 @@ class RacingWheelFactory:
             elif event.button == 7:
                 racingWheel.leftButton.on = True
                 print("Button", 7)
+            elif event.button == 4:
+                print("Camera DOWN")
+                racingWheel.rightShiftButton.on = True
+            elif event.button == 5:
+                print("Camera Up")
+                racingWheel.leftShiftButton.on = True
 
         return racingWheel

@@ -81,9 +81,9 @@ try:
         if servoStatus:
             pickles.append(servoStatus)
 
-        racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
-        if racingWheelTest.has_commands():
-            pickles.append(racingWheelTest)
+        # racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
+        # if racingWheelTest.has_commands():
+        #     pickles.append(racingWheelTest)
 
         # Keyboard input is used to create the same object as the wheel.
         keyboardControls = RacingWheelFactory.create_racing_wheel_w_keyboard()
