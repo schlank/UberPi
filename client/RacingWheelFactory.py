@@ -100,7 +100,6 @@ class RacingWheelFactory:
                 # A key has been released, see if it is one we want
                 hadEvent = True
                 if event.key == pygame.K_UP:
-                    print("UP KEYUP")
                     racingWheel.leftWheel.power = 0
                     racingWheel.rightWheel.power = 0
                 elif event.key == pygame.K_DOWN:
@@ -129,7 +128,7 @@ class RacingWheelFactory:
         for event in pygame.event.get(pygame.JOYBUTTONUP):
             if DEBUG:
                 print("Released button is", event.button)
-            if (event.button >= 12 and event.button <= 17) or event.button == 22:
+            if (12 <= event.button <= 17) or event.button == 22:
                 gear = 0
                 print("a Gear")
                 # send_data("gear_lever_position", gear_lever_positions[gear])
@@ -147,7 +146,7 @@ class RacingWheelFactory:
             elif event.button == 11:
                 # send_data("ignition_status", "start")
                 print("Start Button")
-            elif event.button >= 12 and event.button <= 17:
+            elif 12 <= event.button <= 17:
                 gear = event.button - 11
                 print("gear")
                 # send_data("gear_lever_pgear_lever_position", gear_lever_positions[gear])
@@ -168,7 +167,6 @@ class RacingWheelFactory:
         for event in pygame.event.get(pygame.JOYAXISMOTION):
             if DEBUG:
                 print("Motion on axis: ", event.axis)
-
             # WHEEL AXIS
             if event.axis == 0:
                 power_value = abs(event.value) * 100
@@ -183,7 +181,6 @@ class RacingWheelFactory:
                         racingWheel.moveLeft(0)
                     else:
                         racingWheel.moveLeft(event.value)
-
             # GAS PEDAL
             elif event.axis == 1 and axis_mode == 1:
                 if event.value * -100 > PEDAL_THRESHOLD:
@@ -191,39 +188,41 @@ class RacingWheelFactory:
                 elif event.value * 100 > PEDAL_THRESHOLD:
                     racingWheel.moveBack(event.value)
             elif event.axis == 1 and axis_mode == 2:
-                print(event.value)
-                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~sAxis_mode 2")
+                if DEBUG:
+                    print(event.value)
             # BRAKE PEDAL AXIS
             elif event.axis == 2:
-                print("Brake Pedal")
+                if DEBUG:
+                    print("Brake Pedal")
                 if event.value < 0:
-                    print("BRAKE ON")
-                    moveDown = 0
+                    if DEBUG:
+                        print("BRAKE ON")
                 else:
-                    print("BRAKE OFF")
+                    if DEBUG:
+                        print("BRAKE OFF")
             # CLUTCH PEDAL AXIS
             elif event.axis == 3:
-                print("Clutch")
+                if DEBUG:
+                    print("Clutch")
             else:
-                print("Event", event)
+                if DEBUG:
+                    print("Event", event)
                 racingWheel.stop()
         for event in pygame.event.get(pygame.JOYBUTTONDOWN):
             if DEBUG:
-                print("Pressed button is", event.button)
+                if DEBUG:
+                    print("Pressed button is", event.button)
             if event.button == 0:
-                print("pressed button 0 - bye...")
+                if DEBUG:
+                    print("pressed button 0 - bye...")
                 exit(0)
             elif event.button == 6:
                 racingWheel.rightButton.on = True
-                print("Button", 6)
             elif event.button == 7:
                 racingWheel.leftButton.on = True
-                print("Button", 7)
             elif event.button == 4:
-                print("Camera DOWN")
                 racingWheel.rightShiftButton.on = True
             elif event.button == 5:
-                print("Camera Up")
                 racingWheel.leftShiftButton.on = True
 
         return racingWheel
