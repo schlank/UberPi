@@ -28,7 +28,8 @@ def local_controls():
                 print(pressedPin)
                 # isRunning = False
             elif pressedPin == 24:
-                # isRunning = False
+                isRunning = False
+                os.system('sudo shutdown now')
                 print(pressedPin)
 
 try:
