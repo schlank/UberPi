@@ -45,4 +45,4 @@ class Servos(object):
     def command(servo_status):
         if servo_status is not None:
             if servo_status.direction:
-                camera_rotate(servo_status.direction)
+                camera_rotate(servo_status.direction, False)
