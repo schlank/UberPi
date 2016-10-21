@@ -12,6 +12,8 @@ class ServoStatusFactory:
             direction = "UP"
         if direction is not None:
             return ServoStatus(direction)
+        return None
+
 
 
 
