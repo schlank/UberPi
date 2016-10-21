@@ -141,6 +141,10 @@ class RacingWheelFactory:
                 print("pressed button 0 - bye...")
                 # stop()
                 exit(0)
+            elif event.button == 4:
+                print("Camera Up")
+            elif event.button == 5:
+                print("Camera Down")
             elif event.button == 11:
                 # send_data("ignition_status", "start")
                 print("Start Button")

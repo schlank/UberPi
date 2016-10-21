@@ -4,6 +4,8 @@ import os
 
 from client.LightStatus import LightStatus
 from client.RacingWheel import RacingWheel
+from client.ServoStatus import ServoStatus
+from robot.Servos import Servos
 from robot.Lights import Lights
 from robot.Motors import Motors
 
@@ -20,6 +22,8 @@ def run_pickle(pickl):
         Motors.command(pickl)
     elif type(pickl) is LightStatus:
         Lights.command(pickl)
+    elif type(pickl) is ServoStatus:
+        Servos.command(pickl)
     else:
         print("Unhandled Pickle")
 

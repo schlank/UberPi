@@ -11,6 +11,8 @@ class RacingWheel(object):
         self.rightWheel = Wheel()
         self.leftButton = Button(False)
         self.rightButton = Button(False)
+        self.leftShiftButton = Button(False)
+        self.rightShiftButton = Button(False)
         super().__init__()
 
     def moveRight(self, power):

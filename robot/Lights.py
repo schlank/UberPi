@@ -3,7 +3,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 LED_HEAD_LIGHT = 22
 GPIO.setup(LED_HEAD_LIGHT, GPIO.OUT)
-
 DEBUG = True
 
 

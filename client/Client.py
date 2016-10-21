@@ -10,6 +10,7 @@ import pickle
 from client import check_wheel
 from client.LightStatusFactory import LightStatusFactory
 from client.RacingWheelFactory import RacingWheelFactory
+from client.ServoStatusFactory import ServoStatusFactory
 
 DEBUG = True
 WHEEL_NAME = "G27 Racing Wheel"
@@ -71,8 +72,14 @@ try:
             pickles.append(racingWheel)
 
         # LED Headlamp is turned on and off from racing wheel buttons.
+
         lights = LightStatusFactory.create_light_status_from_wheel_buttons(racingWheel)
-        pickles.append(lights)
+        if lights:
+            pickles.append(lights)
+
+        servoStatus = ServoStatusFactory.create_servo_status_w_racing_wheel(racingWheel)
+        if servoStatus:
+            pickles.append(servoStatus)
 
         racingWheelTest = RacingWheelFactory.create_racing_wheel_w_buttons()
         if racingWheelTest.has_commands():

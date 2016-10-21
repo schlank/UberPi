@@ -1,5 +1,5 @@
 class ServoStatus:
 
-    def __init__(self, on):
-        self.on = on
+    def __init__(self, direction):
+        self.direction = direction
         super().__init__()
