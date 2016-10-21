@@ -3,15 +3,15 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 INTERVAL = 0.1
-BLUE_PIN = 23
+# BLUE_PIN = 18
 RED_PIN = 24
-# YELLOW_PIN = 18
+YELLOW_PIN = 23
 # YELLOW_2_PIN = 27
 
 DEBUG = True
 
 # buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
-buttonPins = [BLUE_PIN, RED_PIN]
+buttonPins = [YELLOW_PIN, RED_PIN]
 for buttonPin in buttonPins:
     GPIO.setup(buttonPin, GPIO.IN)
 
