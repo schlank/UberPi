@@ -26,10 +26,11 @@ def local_controls():
             # print("Pin: ", pressedPin)
             if pressedPin == 23:
                 print(pressedPin)
+                os.system('sudo reboot')
                 # isRunning = False
             elif pressedPin == 24:
                 isRunning = False
-                os.system('sudo shutdown now')
+                os.system('sudo poweroff')
                 print(pressedPin)
 
 try:
