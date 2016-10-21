@@ -93,8 +93,9 @@ try:
         if len(pickles) > 0:
             pickled_controls = pickle.dumps(pickles, -1)
             sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
+            print("pickles Sending", len(pickles))
             # Wait for the interval period
-            time.sleep(interval)
+            # time.sleep(interval)
 
     # Inform the server to stop
     allStop()

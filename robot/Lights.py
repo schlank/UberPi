@@ -16,8 +16,6 @@ class Lights(object):
             else:
                 Lights.turn_off_lights()
 
-
-
     @staticmethod
     def turn_on_lights():
         if DEBUG:
