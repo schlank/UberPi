@@ -19,21 +19,21 @@ PEDAL_DEADZONE = .4
 STEERING_DEADZONE = 20
 
 gear_lever_positions = {
-  -1: "reverse",
-  0: "neutral",
-  1: "first",
-  2: "second",
-  3: "third",
-  4: "fourth",
-  5: "fifth",
-  6: "sixth"
+    -1: "reverse",
+    0: "neutral",
+    1: "first",
+    2: "second",
+    3: "third",
+    4: "fourth",
+    5: "fifth",
+    6: "sixth"
 }
 
 status_buttons = {
-  10: "parking_brake_status",
-  1: "headlamp_status",
-  3: "high_beam_status",
-  2: "windshield_wiper_status"
+    10: "parking_brake_status",
+    1: "headlamp_status",
+    3: "high_beam_status",
+    2: "windshield_wiper_status"
 }
 
 gear_lever_position = 0
@@ -44,7 +44,6 @@ windshield_wiper_status = False
 
 
 class RacingWheelFactory:
-
     @staticmethod
     def create_racing_wheel_w_keyboard():
         racingWheel = RacingWheel()
