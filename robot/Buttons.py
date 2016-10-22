@@ -8,12 +8,13 @@ RED_PIN = 24
 YELLOW_PIN = 23
 # YELLOW_2_PIN = 27
 
-DEBUG = True
+DEBUG = False
 
 # buttonPins = [BLUE_PIN, RED_PIN, YELLOW_PIN, YELLOW_2_PIN]
 buttonPins = [YELLOW_PIN, RED_PIN]
 for buttonPin in buttonPins:
     GPIO.setup(buttonPin, GPIO.IN)
+
 
 class Buttons:
 
