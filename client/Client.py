@@ -93,7 +93,6 @@ def check_controls():
 
     send_data(pickles)
 
-
 try:
 
     global motorsStopped

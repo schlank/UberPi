@@ -10,7 +10,7 @@ from robot.Lights import Lights
 from robot.Motors import Motors
 
 
-def getCPUtemperature():
+def get_cpu_temperature():
     res = os.popen('vcgencmd measure_temp').readline()
     return res.replace("temp=", "").replace("'C\n", "")
 
@@ -35,8 +35,8 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
         request, socket = self.request  # Read who spoke to us and what they said
         pickles = pickle.loads(request)
         if type(pickles) is list:
-            for one_pickle in pickles:
-                run_pickle(one_pickle)
+            for current_pickle in pickles:
+                run_pickle(current_pickle)
         else:
             run_pickle(pickles)
                 # cpu_temp = getCPUtemperature()
