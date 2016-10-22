@@ -30,7 +30,7 @@ sayIndex = 4
 cameraServoDrive = 6
 playIndex = 5
 
-interval = 0.3                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
+interval = 0.5                          # Time between keyboard updates in seconds, smaller responds faster but uses more processor time
 regularUpdate = True                    # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
 
 # Setup the connection for sending on
