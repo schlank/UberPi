@@ -50,9 +50,9 @@ try:
     remoteThread.daemon = True
     remoteThread.start()
 
-    local_controls_thread = threading.Thread(None, local_controls, "local_controls")
-    local_controls_thread.daemon = True
-    local_controls_thread.start()
+    # local_controls_thread = threading.Thread(None, local_controls, "local_controls")
+    # local_controls_thread.daemon = True
+    # local_controls_thread.start()
 
     input('threads running')
 
