@@ -50,6 +50,12 @@ try:
     remoteThread.daemon = True
     remoteThread.start()
 
+
+    # "Runner.py", line
+    # 24 in local_controls
+    # File
+    # "/usr/lib/python3.4/threading.pSegmentation fault
+
     # local_controls_thread = threading.Thread(None, local_controls, "local_controls")
     # local_controls_thread.daemon = True
     # local_controls_thread.start()
