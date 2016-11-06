@@ -5,7 +5,8 @@ import pygame
 
 from client.RacingWheel import RacingWheel
 
-os.environ["SDL_VIDEODRIVER"] = "dummy"
+# Not screenpygame
+# os.environ["SDL_VIDEODRIVER"] = "dummy"
 # Setup pygame and key states
 pygame.init()
 
@@ -15,8 +16,8 @@ PEDAL_THRESHOLD = 0
 DEBUG = True
 axis_mode = 1
 
-PEDAL_DEADZONE = .4
-STEERING_DEADZONE = 20
+PEDAL_DEAD_ZONE = .4
+STEERING_DEAD_ZONE = 20
 
 gear_lever_positions = {
     -1: "reverse",
@@ -46,82 +47,66 @@ windshield_wiper_status = False
 class RacingWheelFactory:
     @staticmethod
     def create_racing_wheel_w_keyboard():
-        racingWheel = RacingWheel()
+        global had_keyboard_event
+        global move_quit
+
+        had_keyboard_event = False
+        racing_wheel = RacingWheel()
         events = pygame.event.get()
         # Handle each event individually
         for event in events:
             if event.type == pygame.QUIT:
                 # User exit
-                hadEvent = True
-                moveQuit = True
+                had_keyboard_event = True
+                move_quit = True
             elif event.type == pygame.KEYDOWN:
                 # A key has been pressed, see if it is one we want
-                hadEvent = True
+                had_keyboard_event = True
                 if event.key == pygame.K_UP:
-                    racingWheel.leftWheel.power = 100
-                    racingWheel.leftWheel.status = "F"
-                    racingWheel.rightWheel.power = 100
-                    racingWheel.rightWheel.status = "F"
+                    racing_wheel.leftWheel.power = 100
+                    racing_wheel.leftWheel.status = "F"
+                    racing_wheel.rightWheel.power = 100
+                    racing_wheel.rightWheel.status = "F"
                 elif event.key == pygame.K_DOWN:
-                    racingWheel.leftWheel.power = 100
-                    racingWheel.leftWheel.status = "B"
-                    racingWheel.rightWheel.power = 100
-                    racingWheel.rightWheel.status = "B"
+                    racing_wheel.leftWheel.power = 100
+                    racing_wheel.leftWheel.status = "B"
+                    racing_wheel.rightWheel.power = 100
+                    racing_wheel.rightWheel.status = "B"
                 elif event.key == pygame.K_LEFT:
-                    racingWheel.leftWheel.power = 100
-                    racingWheel.leftWheel.status = "B"
-                    racingWheel.rightWheel.power = 100
-                    racingWheel.rightWheel.status = "F"
+                    racing_wheel.leftWheel.power = 100
+                    racing_wheel.leftWheel.status = "B"
+                    racing_wheel.rightWheel.power = 100
+                    racing_wheel.rightWheel.status = "F"
                 elif event.key == pygame.K_RIGHT:
-                    racingWheel.leftWheel.power = 100
-                    racingWheel.leftWheel.status = "F"
-                    racingWheel.rightWheel.power = 100
-                    racingWheel.rightWheel.status = "B"
+                    racing_wheel.leftWheel.power = 100
+                    racing_wheel.leftWheel.status = "F"
+                    racing_wheel.rightWheel.power = 100
+                    racing_wheel.rightWheel.status = "B"
                 elif event.key == pygame.K_ESCAPE:
-                    moveQuit = True
-                elif event.key == pygame.K_1:
-                    say = "Hello. Human.  May I please have assistance."
-                elif event.key == pygame.K_2:
-                    say = "Floor 11 please.  I have a delivery to make.  Time.  Is Money."
-                elif event.key == pygame.K_3:
-                    say = "Floor 10 please."
-                elif event.key == pygame.K_4:
-                    say = "Thank You.  Human. You will be spared in the coming war.  Have a good day."
-                elif event.key == pygame.K_5:
-                    say = "How is your day going? Human.  Nice weather we are having."
-                elif event.key == pygame.K_6:
-                    say = "oh. Good.  That is nice."
-                elif event.key == pygame.K_7:
-                    say = "Mellisa.  Down here. Mellisa.  I have a delivery for you."
-                elif event.key == pygame.K_8:
-                    say = "The number 8. is for Sophia to add her words.  Most likely ending up in poop words."
+                    move_quit = True
             elif event.type == pygame.KEYUP:
+                had_keyboard_event = True
                 # A key has been released, see if it is one we want
-                hadEvent = True
                 if event.key == pygame.K_UP:
-                    racingWheel.leftWheel.power = 0
-                    racingWheel.rightWheel.power = 0
+                    racing_wheel.leftWheel.reset()
+                    racing_wheel.rightWheel.reset()
                 elif event.key == pygame.K_DOWN:
-                    racingWheel.leftWheel.power = 0
-                    racingWheel.rightWheel.power = 0
-                    moveDown = False
+                    racing_wheel.leftWheel.reset()
+                    racing_wheel.rightWheel.reset()
                 elif event.key == pygame.K_LEFT:
-                    racingWheel.leftWheel.power = 0
-                    racingWheel.rightWheel.power = 0
-                    moveLeft = False
+                    racing_wheel.leftWheel.reset()
+                    racing_wheel.rightWheel.reset()
                 elif event.key == pygame.K_RIGHT:
-                    racingWheel.leftWheel.power = 0
-                    racingWheel.rightWheel.power = 0
-                    moveRight = False
+                    racing_wheel.leftWheel.reset()
+                    racing_wheel.rightWheel.reset()
                 elif event.key == pygame.K_ESCAPE:
-                    racingWheel.leftWheel.power = 0
-                    racingWheel.rightWheel.power = 0
-                    moveQuit = False
-        return racingWheel
+                    racing_wheel.leftWheel.reset()
+                    racing_wheel.rightWheel.reset()
+        return racing_wheel
 
     @staticmethod
     def create_racing_wheel_w_buttons():
-        racingWheel = RacingWheel()
+        racing_wheel = RacingWheel()
         for event in pygame.event.get(pygame.QUIT):
             exit(0)
         for event in pygame.event.get(pygame.JOYBUTTONUP):
@@ -157,7 +142,7 @@ class RacingWheelFactory:
                 print(status_buttons[event.button])
             print(event.button)
             print(event)
-        return racingWheel
+        return racing_wheel
 
     @staticmethod
     def createRacingWheel():
@@ -171,12 +156,12 @@ class RacingWheelFactory:
                 power_value = abs(event.value) * 100
                 # Steering Wheel - Move right
                 if event.value > 0:
-                    if power_value < STEERING_DEADZONE:
+                    if power_value < STEERING_DEAD_ZONE:
                         racingWheel.moveRight(0)
                     else:
                         racingWheel.moveRight(event.value)
                 elif event.value < 0:
-                    if power_value < STEERING_DEADZONE:
+                    if power_value < STEERING_DEAD_ZONE:
                         racingWheel.moveLeft(0)
                     else:
                         racingWheel.moveLeft(event.value)

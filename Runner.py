@@ -8,6 +8,9 @@ from robot.RemoteControlsHandler import *
 # What messages to listen for (LEDB on an LCD)
 portListen = 9038
 
+remoteThread = None
+isRunning = False
+
 
 def all_off():
     Motors.all_off()
@@ -26,11 +29,11 @@ def local_controls():
             # print("Pin: ", pressedPin)
             if pressedPin == 23:
                 print(pressedPin)
-                os.system('sudo reboot')
+                # os.system('sudo reboot')
                 # isRunning = False
             elif pressedPin == 24:
                 isRunning = False
-                os.system('sudo poweroff')
+                # os.system('sudo poweroff')
                 print(pressedPin)
 
 try:

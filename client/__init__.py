@@ -1,5 +1,9 @@
 import pygame
 
+pygame.display.set_mode((640, 300), 0, 32)
+had_keyboard_event = False
+move_quit = False
+
 
 def check_wheel(wheel_name):
     use_wheel = False

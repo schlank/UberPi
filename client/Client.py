@@ -15,12 +15,12 @@ from client.ServoStatusFactory import ServoStatusFactory
 
 DEBUG = True
 WHEEL_NAME = "G27 Racing Wheel"
-USE_WHEEL = True
+USE_WHEEL = False
 axis_mode = 1
-gstreamIP = "10.215.50.46"
+gstreamIP = "10.215.50.56"
 GSTREAM_PORT = "5000"
 START_GSTREAM = False
-broadcastIP = "10.215.50.46"  # IP address to send to, 255 in one or more positions is a broadcast / wild-card
+broadcastIP = "10.215.50.56"  # IP address to send to, 255 in one or more positions is a broadcast / wild-card
 broadcastPort = 9038  # What message number to send with (LEDB on an LCD)
 
 LEFT_DRIVE_REVERSE = 3
@@ -35,19 +35,27 @@ interval = 0.1  # Time between keyboard updates in seconds, smaller responds fas
 regularUpdate = True  # If True we send a command at a regular interval, if False we only send commands when keys are pressed or released
 
 # Setup the connection for sending on
-sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)  # Create the socket3
-sender.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST,
-                  1)  # Enable broadcasting (sending to many IPs based on wild-cards)
-sender.bind(('0.0.0.0',
-             0))  # Set the IP and port number to use locally, IP 0.0.0.0 means all connections and port 0 means assign a number for us (do not care)
+# Create the socket3
+sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 
-global motorsStopped
+# Enable broadcasting (sending to many IPs based on wild-cards)
+sender.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+# Set the IP and port number to use locally, IP 0.0.0.0 means all connections and port 0 means assign a number for us (do not care)
+sender.bind(('0.0.0.0', 0))
+
+global motors_stopped
 global globalWheel
+move_quit = False
+had_keyboard_event = False
+
 
 def all_stop():
+    global motors_stopped
     send_wheels(None)
-    motorsStopped
+    motors_stopped = True
     print("allStop")
+
 
 def send_wheels(robot_wheels):
     if robot_wheels is None:
@@ -60,11 +68,13 @@ def send_data(pickles):
     if len(pickles) > 0 or regularUpdate:
         pickled_controls = pickle.dumps(pickles, -1)
         sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
-        print("pickles Sending", len(pickles))
-        # Wait for the interval period
+        if len(pickles) > 0:
+            print("pickles Sending", len(pickles))
+            print("pickles Sending", pickles)
 
 
 def check_controls():
+    global had_keyboard_event
     pickles = []
     # Get the currently pressed keys on the keyboard
     # Handle Inputs from G27 Racing Wheel and pedal
@@ -88,29 +98,31 @@ def check_controls():
 
     # Keyboard input is used to create the same object as the wheel.
     keyboard_controls = RacingWheelFactory.create_racing_wheel_w_keyboard()
-    if keyboard_controls.has_commands():
+    if keyboard_controls.has_commands() or had_keyboard_event:
         pickles.append(keyboard_controls)
 
     send_data(pickles)
 
 try:
 
-    global motorsStopped
-    motorsStopped = False
+    global motors_stopped
+    motors_stopped = False
     print('Press [ESC] to quit')
     # Is the racing wheel connected?
-    if check_wheel(WHEEL_NAME):
+    if check_wheel(WHEEL_NAME) and USE_WHEEL:
         print("Wheel not found: " + WHEEL_NAME)
         all_stop()
-        pass
-
-    threading.Timer(5.0, check_controls).start()
 
     # Loop indefinitely
-    # while not motorsStopped:
-    #     time.sleep(interval)
+    while not motors_stopped:
+        if move_quit:
+            pass
+        check_controls()
 
-        # Inform the server to stop
+        # threading.Timer(interval, check_controls).start()
+        # time.sleep(interval)
+
+    # Inform the server to stop
     # all_stop()
 except KeyboardInterrupt:
     # CTRL+C exit, inform the server to stop

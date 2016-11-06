@@ -56,6 +56,8 @@ class RacingWheel(object):
     def stop(self):
         self.leftWheel.reset()
         self.rightWheel.reset()
+        self.leftWheel.status = "S"
+        self.rightWheel.status = "S"
 
     def has_commands(self):
         return self.leftWheel.has_command() or self.rightWheel.has_command()

@@ -14,6 +14,10 @@ class Wheel:
         self.status = "X"
         self.power = 0
 
+    def stop(self):
+        self.status = "S"
+        self.power = 0
+
     def has_command(self):
         return self.status != "X"
 

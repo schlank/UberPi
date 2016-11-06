@@ -32,20 +32,20 @@ sender.bind(('0.0.0.0', 0))                                                     
 # make sure pygame doesn't try to open an output window
 # os.environ["SDL_VIDEODRIVER"] = "dummy"
 # Setup pygame and key states
-global hadEvent
+global had_keyboard_event
 global moveUp
 global moveDown
 global moveLeft
 global moveRight
-global moveQuit
+global move_quit
 global say
 global play
-hadEvent = True
+had_keyboard_event = True
 moveUp = False
 moveDown = False
 moveLeft = False
 moveRight = False
-moveQuit = False
+move_quit = False
 say = ""
 play = ""
 pygame.init()
@@ -82,12 +82,12 @@ def pedal_value(value):
 # Function to handle pygame events
 def PygameHandler():
     # Variables accessible outside this function
-    global hadEvent
+    global had_keyboard_event
     global moveUp
     global moveDown
     global moveLeft
     global moveRight
-    global moveQuit
+    global move_quit
     global say
     global play
 
@@ -173,9 +173,9 @@ try:
         # Get the currently pressed keys on the keyboard
         PygameHandler()
 
-        if hadEvent or regularUpdate:
+        if had_keyboard_event or regularUpdate:
             # Keys have changed, generate the command list based on keys
-            hadEvent = False
+            had_keyboard_event = False
             driveCommands = ['X', 'X', 'X', 'X', 'X', 'X']                    # Default to do not change
 
             LEFT_DRIVE_REVERSE = leftDrive - 2;
@@ -183,7 +183,7 @@ try:
             RIGHT_DRIVE_FORWARD = rightDrive - 1;
             RIGHT_DRIVE_REVERSE = rightDrive;
 
-            if moveQuit:
+            if move_quit:
                 break
             elif moveLeft:
                 if moveUp:
