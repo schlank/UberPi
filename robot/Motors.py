@@ -106,8 +106,7 @@ def start_motor(status, power_value_arg, motor_side):
             rightMotorForward.stop()
             if DEBUG:
                 print("rightMotor Stop")
-    # LEFT MOTOR
-    else:
+    else:  # LEFT MOTOR
         if status == FORWARD:
             leftMotorForward.start(power_value)
             if DEBUG:
@@ -120,7 +119,7 @@ def start_motor(status, power_value_arg, motor_side):
             leftMotorReverse.stop()
             leftMotorForward.stop()
             if DEBUG:
-                print("rightMotor Stop")
+                print("leftMotor Stop")
 
 
 def stop_drive(drive_number):
@@ -145,6 +144,10 @@ class Motors:
             # Right Motor
             if racing_wheel.rightWheel.has_command():
                 start_motor(racing_wheel.rightWheel.getStatus(), racing_wheel.rightWheel.getPower(), MOTOR_RIGHT)
+
+            if DEBUG:
+                racing_wheel.rightWheel.log()
+                racing_wheel.leftWheel.log()
 
     @staticmethod
     def all_off():
