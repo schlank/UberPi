@@ -3,6 +3,9 @@ import os
 # make sure pygame doesn't try to open an output window
 import pygame
 
+pygame.display.set_mode((640, 300), 0, 32)
+pygame.init()
+
 from client.RacingWheel import RacingWheel
 
 # Not screenpygame

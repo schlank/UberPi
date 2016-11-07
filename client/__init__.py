@@ -1,8 +1,5 @@
 import pygame
 
-pygame.display.set_mode((640, 300), 0, 32)
-pygame.init()
-
 
 def check_wheel(wheel_name):
     use_wheel = False
