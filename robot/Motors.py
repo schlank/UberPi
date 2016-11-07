@@ -65,6 +65,7 @@ def gpio_cleanup():
 
 
 def start_motor(status, power_value_arg, motor_side):
+    global DEBUG
     # Clean up power value
     power_value = float(power_value_arg)
     power_value = abs(power_value)
