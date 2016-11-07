@@ -49,10 +49,14 @@ try:
     Fan.start_fan()
     remoteKeyBorgServer = socketserver.UDPServer(('', portListen), RemoteControlsHandler)
 
-    remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
-    remoteThread.daemon = True
-    remoteThread.start()
+    # Can't see debug logging.
+    # remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
+    # remoteThread.daemon = True
+    # remoteThread.start()
 
+    isRunning = True
+    while isRunning:
+        remoteKeyBorgServer.handle_request()
 
     # "Runner.py", line
     # 24 in local_controls

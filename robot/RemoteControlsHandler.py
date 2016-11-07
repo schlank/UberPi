@@ -39,5 +39,4 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
                 run_pickle(current_pickle)
         else:
             run_pickle(pickles)
-                # cpu_temp = getCPUtemperature()
-                # print("CPU", cpu_temp)
+
