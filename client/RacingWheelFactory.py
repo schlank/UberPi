@@ -88,20 +88,15 @@ class RacingWheelFactory:
                 had_keyboard_event = True
                 # A key has been released, see if it is one we want
                 if event.key == pygame.K_UP:
-                    racing_wheel.leftWheel.reset()
-                    racing_wheel.rightWheel.reset()
+                    racing_wheel.stop()
                 elif event.key == pygame.K_DOWN:
-                    racing_wheel.leftWheel.reset()
-                    racing_wheel.rightWheel.reset()
+                    racing_wheel.stop()
                 elif event.key == pygame.K_LEFT:
-                    racing_wheel.leftWheel.reset()
-                    racing_wheel.rightWheel.reset()
+                    racing_wheel.stop()
                 elif event.key == pygame.K_RIGHT:
-                    racing_wheel.leftWheel.reset()
-                    racing_wheel.rightWheel.reset()
+                    racing_wheel.stop()
                 elif event.key == pygame.K_ESCAPE:
-                    racing_wheel.leftWheel.reset()
-                    racing_wheel.rightWheel.reset()
+                    racing_wheel.stop()
         return racing_wheel
 
     @staticmethod

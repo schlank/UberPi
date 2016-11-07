@@ -25,6 +25,7 @@ MOTOR_LEFT_FORWARD_PIN = 20
 
 FORWARD = "F"
 BACK = "B"
+STOP = "S"
 MOTOR_LEFT = "LEFT"
 MOTOR_RIGHT = "RIGHT"
 
@@ -99,19 +100,29 @@ def start_motor(status, power_value_arg, motor_side):
             rightMotorReverse.start(power_value)
             if DEBUG:
                 print("rightMotorReverse")
+        elif status == STOP:
+            rightMotorReverse.stop()
+            rightMotorForward.stop()
+            if DEBUG:
+                print("rightMotor Stop")
         else:
-            stop_drive(0)
-            stop_drive(1)
+            rightMotorReverse.stop()
+            rightMotorForward.stop()
     # LEFT MOTOR
     else:
         if status == FORWARD:
             leftMotorForward.start(power_value)
             if DEBUG:
                 print("leftMotorForward")
-        elif status == BACK: # BACK
+        elif status == BACK:
             leftMotorReverse.start(power_value)
             if DEBUG:
                 print("leftMotorReverse")
+        elif status == STOP:
+            leftMotorReverse.stop()
+            leftMotorForward.stop()
+            if DEBUG:
+                print("rightMotor Stop")
         else:
             stop_drive(2)
             stop_drive(3)
