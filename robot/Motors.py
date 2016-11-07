@@ -3,7 +3,7 @@
 # Load library functions we want
 import RPi.GPIO as GPIO
 
-DEBUG = False
+DEBUG = True
 
 GPIO.setmode(GPIO.BCM)
 
