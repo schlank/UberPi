@@ -46,9 +46,6 @@ sender.bind(('0.0.0.0', 0))
 
 global motors_stopped
 global globalWheel
-move_quit = False
-had_keyboard_event = False
-
 
 def all_stop():
     global motors_stopped
@@ -68,9 +65,8 @@ def send_data(pickles):
     if len(pickles) > 0 or regularUpdate:
         pickled_controls = pickle.dumps(pickles, -1)
         sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
-        if len(pickles) > 0:
-            print("pickles Sending", len(pickles))
-            print("pickles Sending", pickles)
+        # if len(pickles) > 0:
+        #     print("pickles Sending", len(pickles))
 
 
 def check_controls():
@@ -98,7 +94,7 @@ def check_controls():
 
     # Keyboard input is used to create the same object as the wheel.
     keyboard_controls = RacingWheelFactory.create_racing_wheel_w_keyboard()
-    if keyboard_controls.has_commands() or had_keyboard_event:
+    if keyboard_controls.has_commands():
         pickles.append(keyboard_controls)
 
     send_data(pickles)
@@ -115,8 +111,6 @@ try:
 
     # Loop indefinitely
     while not motors_stopped:
-        if move_quit:
-            pass
         check_controls()
 
         # threading.Timer(interval, check_controls).start()

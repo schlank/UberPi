@@ -74,21 +74,21 @@ def start_motor(status, power_value_arg, motor_side):
     if DEBUG:
         print(motor_side, status, power_value)
 
-    if status == BACK:
-        if power_value == 0:
-            motor_all_off()
-            return None
-        else:
-            rightMotorForward.stop()
-            leftMotorForward.stop()
-
-    if status == FORWARD:
-        if power_value == 0:
-            motor_all_off()
-            return None
-        else:
-            rightMotorReverse.stop()
-            leftMotorReverse.stop()
+    # if status == BACK:
+    #     if power_value == 0:
+    #         motor_all_off()
+    #         return None
+    #     else:
+    #         rightMotorForward.stop()
+    #         leftMotorForward.stop()
+    #
+    # if status == FORWARD:
+    #     if power_value == 0:
+    #         motor_all_off()
+    #         return None
+    #     else:
+    #         rightMotorReverse.stop()
+    #         leftMotorReverse.stop()
 
     # RIGHT MOTOR
     if motor_side == MOTOR_RIGHT:
@@ -105,9 +105,6 @@ def start_motor(status, power_value_arg, motor_side):
             rightMotorForward.stop()
             if DEBUG:
                 print("rightMotor Stop")
-        else:
-            rightMotorReverse.stop()
-            rightMotorForward.stop()
     # LEFT MOTOR
     else:
         if status == FORWARD:
@@ -123,9 +120,6 @@ def start_motor(status, power_value_arg, motor_side):
             leftMotorForward.stop()
             if DEBUG:
                 print("rightMotor Stop")
-        else:
-            stop_drive(2)
-            stop_drive(3)
 
 
 def stop_drive(drive_number):

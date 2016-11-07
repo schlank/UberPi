@@ -50,21 +50,17 @@ windshield_wiper_status = False
 class RacingWheelFactory:
     @staticmethod
     def create_racing_wheel_w_keyboard():
-        global had_keyboard_event
-        global move_quit
-
-        had_keyboard_event = False
         racing_wheel = RacingWheel()
         events = pygame.event.get()
         # Handle each event individually
         for event in events:
             if event.type == pygame.QUIT:
                 # User exit
-                had_keyboard_event = True
-                move_quit = True
+                racing_wheel.stop()
             elif event.type == pygame.KEYDOWN:
                 # A key has been pressed, see if it is one we want
-                had_keyboard_event = True
+                if DEBUG:
+                    print("key down", event.key)
                 if event.key == pygame.K_UP:
                     racing_wheel.leftWheel.power = 100
                     racing_wheel.leftWheel.status = "F"
@@ -86,9 +82,11 @@ class RacingWheelFactory:
                     racing_wheel.rightWheel.power = 100
                     racing_wheel.rightWheel.status = "B"
                 elif event.key == pygame.K_ESCAPE:
-                    move_quit = True
+                    racing_wheel.stop()
             elif event.type == pygame.KEYUP:
-                had_keyboard_event = True
+                if DEBUG:
+                    if DEBUG:
+                        print("key up", event.key)
                 # A key has been released, see if it is one we want
                 if event.key == pygame.K_UP:
                     racing_wheel.stop()
