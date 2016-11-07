@@ -6,7 +6,7 @@ import pygame
 from client.RacingWheel import RacingWheel
 
 # Not screenpygame
-# os.environ["SDL_VIDEODRIVER"] = "dummy"
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 # Setup pygame and key states
 pygame.init()
 
