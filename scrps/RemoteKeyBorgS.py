@@ -2,7 +2,7 @@
 # coding: Latin-1
 
 # Load library functions we want
-import SocketServer
+import socketserver
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
@@ -36,7 +36,7 @@ portListen = 9038  # What messages to listen for (LEDB on an LCD)
 
 
 # Class used to handle UDP messages
-class PicoBorgHandler(SocketServer.BaseRequestHandler):
+class PicoBorgHandler(socketserver.BaseRequestHandler):
     # Function called when a new message has been received
     def handle(self):
         global isRunning
@@ -85,7 +85,7 @@ try:
     MotorOff()
     input('You can now turn on the power, press ENTER to continue')
     # Setup the UDP listener
-    remoteKeyBorgServer = SocketServer.UDPServer(('', portListen), PicoBorgHandler)
+    remoteKeyBorgServer = socketserver.UDPServer(('', portListen), PicoBorgHandler)
     # Loop until terminated remotely
     isRunning = True
     while isRunning:
