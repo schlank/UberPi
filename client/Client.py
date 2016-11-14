@@ -65,12 +65,11 @@ def send_data(pickles):
     if len(pickles) > 0 or regularUpdate:
         pickled_controls = pickle.dumps(pickles, -1)
         sender.sendto(pickled_controls, (broadcastIP, broadcastPort))
-        # if len(pickles) > 0:
-        #     print("pickles Sending", len(pickles))
+        if len(pickles) > 0:
+            print("pickles Sending", len(pickles))
 
 
 def check_controls():
-    global had_keyboard_event
     pickles = []
     # Get the currently pressed keys on the keyboard
     # Handle Inputs from G27 Racing Wheel and pedal
