@@ -18,6 +18,7 @@ def get_cpu_temperature():
 def run_pickle(pickl):
     if type(pickl) is RacingWheel:
         Motors.command(pickl)
+        print("RacingWheel de-pickle")
     elif type(pickl) is LightStatus:
         Lights.command(pickl)
     elif type(pickl) is ServoStatus:
