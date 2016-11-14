@@ -8,14 +8,14 @@ from robot.RemoteControlsHandler import *
 # What messages to listen for (LEDB on an LCD)
 portListen = 9038
 
-remoteThread = None
+# remoteThread = None
 isRunning = True
 
 
 def all_off():
     Motors.all_off()
     Lights.all_off()
-    remoteThread.stop()
+    # remoteThread.stop()
 
 
 def local_controls():
@@ -39,7 +39,7 @@ def local_controls():
 
 try:
     global isRunning
-    global remoteThread
+    # global remoteThread
     isRunning = True
     # Start by turning all drives off
     motor_off()
@@ -48,7 +48,7 @@ try:
     # Say("Controls Initialized")
 
     Fan.start_fan()
-    remoteKeyBorgServer = socketserver.TCPServer(('', portListen), RemoteControlsHandler)
+    uberSocketServer = socketserver.UDPServer(('', portListen), RemoteControlsHandler)
 
     # Can't see debug logging.
     # remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)
@@ -58,9 +58,9 @@ try:
     print('UberPi Started')
     while isRunning:
         print("Running", isRunning)
-        remoteKeyBorgServer.handle_request()
+        uberSocketServer.handle_request()
 
-    print("Running", isRunning)
+    print("Stopped", isRunning)
     # "Runner.py", line
     # 24 in local_controls
     # File
