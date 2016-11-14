@@ -32,7 +32,7 @@ def local_controls():
                 # os.system('sudo reboot')
                 # isRunning = False
             elif pressedPin == 24:
-                isRunning = False
+                # isRunning = False
                 # os.system('sudo poweroff')
                 print(pressedPin)
 
@@ -55,7 +55,6 @@ try:
     # remoteThread.start()
 
     print('UberPi Started')
-    isRunning = True
     while isRunning:
         print("Running")
         remoteKeyBorgServer.handle_request()

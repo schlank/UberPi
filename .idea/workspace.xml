@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6978719d-5d45-494a-8899-35bce8e748ff" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/RemoteControlsHandler.py" afterPath="$PROJECT_DIR$/robot/RemoteControlsHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Runner.py" afterPath="$PROJECT_DIR$/Runner.py" />
     </list>
     <ignored path="UberPi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +23,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RemoteControlsHandler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RemoteControlsHandler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/robot/RemoteControlsHandler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="574">
@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Runner.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Runner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Runner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="49" column="23" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="262">
+              <caret line="49" column="42" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -180,8 +180,8 @@
         <option value="$PROJECT_DIR$/client/RacingWheelFactory.py" />
         <option value="$PROJECT_DIR$/robot/Motors.py" />
         <option value="$PROJECT_DIR$/client/Client.py" />
-        <option value="$PROJECT_DIR$/Runner.py" />
         <option value="$PROJECT_DIR$/robot/RemoteControlsHandler.py" />
+        <option value="$PROJECT_DIR$/Runner.py" />
       </list>
     </option>
   </component>
@@ -517,20 +517,6 @@
       <option name="presentableId" value="Default" />
       <updated>1473129446935</updated>
     </task>
-    <task id="LOCAL-00080" summary="testing buttons&#10;">
-      <created>1476854111997</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1476854111997</updated>
-    </task>
-    <task id="LOCAL-00081" summary="testing buttons&#10;">
-      <created>1476854155412</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1476854155412</updated>
-    </task>
     <task id="LOCAL-00082" summary="testing buttons&#10;">
       <created>1476854188067</created>
       <option name="number" value="00082" />
@@ -860,7 +846,21 @@
       <option name="project" value="LOCAL" />
       <updated>1479097382225</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="print handle">
+      <created>1479097802863</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1479097802863</updated>
+    </task>
+    <task id="LOCAL-00130" summary="print handle">
+      <created>1479097909606</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1479097909606</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -925,7 +925,8 @@
     <MESSAGE value="buttons!~" />
     <MESSAGE value="testing buttons&#10;" />
     <MESSAGE value="Buttons on wheel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Buttons on wheel" />
+    <MESSAGE value="print handle" />
+    <option name="LAST_COMMIT_MESSAGE" value="print handle" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.5800866" />
   </component>
   <component name="XDebuggerManager">
@@ -1232,16 +1233,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Runner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/RacingWheel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-161">
@@ -1268,6 +1259,16 @@
           <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="49" column="42" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
