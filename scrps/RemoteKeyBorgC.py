@@ -115,7 +115,7 @@ try:
             for driveCommand in driveCommands:
                 command += driveCommand + ','
             command = command[:-1]  # Strip the trailing comma
-            sender.sendto(command, (broadcastIP, broadcastPort))
+            sender.sendto(command.encode(), (broadcastIP, broadcastPort))
         # Wait for the interval period
         time.sleep(interval)
     # Inform the server to stop

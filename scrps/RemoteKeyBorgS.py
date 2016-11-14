@@ -42,6 +42,7 @@ class PicoBorgHandler(SocketServer.BaseRequestHandler):
         global isRunning
 
         request, socket = self.request  # Read who spoke to us and what they said
+        request = request.decode()
         request = request.upper()  # Convert command to upper case
         driveCommands = request.split(',')  # Separate the command into individual drives
         if len(driveCommands) == 1:
