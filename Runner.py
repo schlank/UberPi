@@ -54,8 +54,10 @@ try:
     # remoteThread.daemon = True
     # remoteThread.start()
 
+    print('UberPi Started')
     isRunning = True
     while isRunning:
+        print("Running")
         remoteKeyBorgServer.handle_request()
 
     # "Runner.py", line
