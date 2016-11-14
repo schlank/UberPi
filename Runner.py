@@ -9,7 +9,7 @@ from robot.RemoteControlsHandler import *
 portListen = 9038
 
 remoteThread = None
-isRunning = False
+isRunning = True
 
 
 def all_off():
@@ -34,6 +34,7 @@ def local_controls():
             elif pressedPin == 24:
                 # isRunning = False
                 # os.system('sudo poweroff')
+                print("power Off")
                 print(pressedPin)
 
 try:
