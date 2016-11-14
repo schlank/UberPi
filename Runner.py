@@ -57,7 +57,6 @@ try:
 
     print('UberPi Started')
     while isRunning:
-        print("Running", isRunning)
         uberSocketServer.handle_request()
 
     print("Stopped", isRunning)
