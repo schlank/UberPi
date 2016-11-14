@@ -57,7 +57,7 @@ try:
 
     print('UberPi Started')
     while isRunning:
-        print("Running")
+        print("Running", isRunning)
         remoteKeyBorgServer.handle_request()
 
     # "Runner.py", line
