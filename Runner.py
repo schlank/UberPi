@@ -60,6 +60,7 @@ try:
         print("Running", isRunning)
         remoteKeyBorgServer.handle_request()
 
+    print("Running", isRunning)
     # "Runner.py", line
     # 24 in local_controls
     # File
