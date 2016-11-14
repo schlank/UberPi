@@ -48,7 +48,7 @@ try:
     # Say("Controls Initialized")
 
     Fan.start_fan()
-    uberSocketServer = socketserver.UDPServer(('', portListen), RemoteControlsHandler)
+    uberSocketServer = socketserver.TCPServer(('', portListen), RemoteControlsHandler)
 
     # Can't see debug logging.
     # remoteThread = threading.Thread(None, remoteKeyBorgServer.serve_forever)

@@ -2,8 +2,6 @@
 
 # Load library functions we want
 import socket
-import threading
-import time
 
 # Settings for the RemoteKeyBorg client
 import pickle
