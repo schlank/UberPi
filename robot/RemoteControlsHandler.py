@@ -40,4 +40,5 @@ class RemoteControlsHandler(socketserver.BaseRequestHandler):
                 run_pickle(current_pickle)
         else:
             run_pickle(pickles)
+        print("handle")
 
