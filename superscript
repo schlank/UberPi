@@ -1,7 +1,8 @@
 sleep 10
 cd /home/pi/UberPi
 git pull
-./RemoteKeyBorgS.py &
+#./RemoteKeyBorgS.py &
 sleep 5
-espeak "Stream Starting"
-./startGtream.sh &
+#espeak "Stream Starting"
+#./startGtream.sh &
+/usr/bin/tightvncserver :1
