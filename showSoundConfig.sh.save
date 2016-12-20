@@ -1,0 +1,8 @@
+
+#!/bin/bash
+
+#Grep
+#http://stackoverflow.com/questions/16956810/how-to-find-all-files-containing-specific 
+#http://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x7969.htm
+
+aplay -l

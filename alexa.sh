@@ -5,7 +5,7 @@ RESULT=`ps -a | sed -n /${SERVICE}/p`
 NODE_STARTING=false
 if [ "${RESULT:-null}" = null ]; then
    echo "Starting Node"
-   cd ~/Desktop/alexa-avs-sample-app/samples/companionService
+   cd ~/alexa-avs-sample-app/samples/companionService
    lxterminal\
    --geometry=50x50 \
    --title="Node Alexa Server" \
@@ -20,11 +20,11 @@ echo "Java client trying a start"
 SERVICE="java"
 RESULT=`ps -a | sed -n /${SERVICE}/p`
 if [ "${RESULT:-null}" = null ]; then
-   if NODE_STARTING; then
+   if [ "$NODE_STARTING" = true ]; then
    	sleep 15s;
    fi
    echo "java Client Starting"
-   cd ~/Desktop/alexa-avs-sample-app/samples/javaclient
+   cd ~/alexa-avs-sample-app/samples/javaclient
    lxterminal\
    --title="Alexa Java Client" \
    --geometry=80x50 \
@@ -36,7 +36,7 @@ fi
 
 echo "Starting Wake Word Agent"
 
-cd ~/Desktop/alexa-avs-sample-app/samples/wakeWordAgent/src
+cd ~/alexa-avs-sample-app/samples/wakeWordAgent/src
 
 lxterminal\
    --title="Wake Word Agent" \
